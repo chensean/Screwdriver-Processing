@@ -16,11 +16,11 @@ namespace UnitTestCore
 	{
 	public:
 
-		TEST_METHOD(TestParameter1)
+		TEST_METHOD(TestParameter8)
 		{
-			Logger::WriteMessage("Test parameter1");
+			Logger::WriteMessage("Test parameter8");
 
-			TM::parameter1 tm("tm1");
+			TM::parameter8 tm("tm1");
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 0);
@@ -29,11 +29,11 @@ namespace UnitTestCore
 			Assert::AreEqual( std::string("170"),tm.get_val_text());
 		}
 
-		TEST_METHOD(TestDoubleParameter1)
+		TEST_METHOD(TestDoubleParameter8)
 		{
-			Logger::WriteMessage("Test double_parameter1");
+			Logger::WriteMessage("Test double_parameter8");
 
-			TM::double_parameter1 tm("tm1"
+			TM::double_parameter8 tm("tm1"
 				,[](uint64_t code){return code*0.02;}
 			,[](uint64_t code){return std::to_string(code*0.02);});
 			std::vector<unsigned char> buf;
@@ -44,13 +44,13 @@ namespace UnitTestCore
 			//Assert::AreEqual( std::string("3.4"),tm.get_val_text());
 		}
 
-		TEST_METHOD(TestDoubleParameter1_polynomial)
+		TEST_METHOD(TestDoubleParameter8_polynomial)
 		{
-			Logger::WriteMessage("Test double_parameter1 polynomial");
+			Logger::WriteMessage("Test double_parameter8 polynomial");
 			std::vector<double> coefficient;
 			coefficient += 0.1, 0.02,0.01;
 			std::shared_ptr<polynomial> pl(new polynomial(coefficient));
-			TM::double_parameter1 tm("tm1"
+			TM::double_parameter8 tm("tm1"
 				,std::bind(&polynomial::code_to_val,pl,_1)
 				,[&pl](uint64_t code){return boost::lexical_cast<std::string>(pl->code_to_val(code));});
 			std::vector<unsigned char> buf;
@@ -63,11 +63,11 @@ namespace UnitTestCore
 			Assert::AreEqual(code,tm.get_code());
 		}
 
-		TEST_METHOD(TestParameter2)
+		TEST_METHOD(TestParameter16)
 		{
-			Logger::WriteMessage("Test big_endian_parameter2");
+			Logger::WriteMessage("Test big_endian_parameter16");
 
-			TM::big_endian_parameter2 tm("tm2");
+			TM::big_endian_parameter16 tm("tm2");
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 0);
@@ -75,11 +75,23 @@ namespace UnitTestCore
 			Assert::AreEqual(val, 0xaabb);
 		}
 
-		TEST_METHOD(TestDoubleParameter8)
+		TEST_METHOD(TestParameter24)
 		{
-			Logger::WriteMessage("Test double_parameter8");
+			Logger::WriteMessage("Test big_endian_parameter24");
 
-			TM::big_endian_double_parameter8 tm("tm1"
+			TM::big_endian_parameter24 tm("tm24");
+			std::vector<unsigned char> buf;
+			buf+=0xaa,0xbb,0xcc,0xdd,0xee;
+			tm.read_form_buffer(buf, 1);
+			int val = boost::get<uint32_t>(tm.get_val());
+			Assert::AreEqual(val, 0xbbccdd);
+		}
+
+		TEST_METHOD(TestDoubleParameter64)
+		{
+			Logger::WriteMessage("Test double_parameter64");
+
+			TM::big_endian_double_parameter64 tm("tm1"
 				,&utilities::men_copy_convert<double,uint64_t>
 				,[](uint64_t code){return std::to_string(utilities::men_copy_convert<double>(code));});
 			double expVal=-3.156;

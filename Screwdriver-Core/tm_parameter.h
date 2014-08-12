@@ -4,6 +4,7 @@
 #include <boost/noncopyable.hpp>
 #include <boost/variant.hpp>
 #include <boost/mpl/if.hpp>
+#include <boost/mpl/comparison.hpp>
 #include "digit_utilities.h"
 
 namespace TM
@@ -21,19 +22,23 @@ namespace TM
 		virtual std::string get_val_text() const =0;
 		virtual std::vector<uint8_t> get_data() const = 0;
 		virtual uint64_t get_code() const = 0;
-		virtual void read_form_buffer(const std::vector<uint8_t>& buffer,uint32_t start_idx) = 0;
+		virtual void read_form_buffer(const std::vector<uint8_t>& buffer,uint32_t start_idx,uint32_t bit_idx=0) = 0;
 	};
 	typedef boost::shared_ptr<tm_parameter>  tm_parameter_ptr;
 
 
 
-	template <int BYTE_COUNT>
+	template <int BIT_COUNT>
 	struct big_endian_read
 	{
-		typedef typename boost::mpl::if_c<BYTE_COUNT==8,uint64_t,typename boost::mpl::if_c<BYTE_COUNT==2,uint16_t,uint32_t>::type >::type val_type;
+		typedef  boost::mpl::int_<BIT_COUNT> i_bits_t;
+		typedef  boost::mpl::int_<std::numeric_limits<uint32_t>::digits> i32_t;
+		typedef  boost::mpl::int_<std::numeric_limits<uint16_t>::digits> i16_t;
+		typedef typename boost::mpl::if_< boost::mpl::greater<i_bits_t,i32_t>,uint64_t,typename boost::mpl::if_<boost::mpl::greater<i_bits_t,i16_t>,uint32_t,uint16_t>::type >::type val_type;
 
 		static uint64_t read_code(const std::vector<uint8_t>& buffer, uint32_t start_idx)
 		{
+			static_assert(BIT_COUNT%std::numeric_limits<uint8_t>::digits==0,"bits is not bytes");
 			return utilities::array_to_big_endian_val<val_type>(buffer, start_idx);
 		}
 
@@ -42,7 +47,7 @@ namespace TM
 	};
 
 	template <>
-	struct big_endian_read < 1 >
+	struct big_endian_read < std::numeric_limits<uint8_t>::digits >
 	{
 		static uint64_t read_code(const std::vector<uint8_t>& buffer, uint32_t start_idx)
 		{
@@ -54,7 +59,7 @@ namespace TM
 	};
 
 	template <>
-	struct big_endian_read<3>
+	struct big_endian_read<std::numeric_limits<uint8_t>::digits*3>
 	{
 		static uint64_t read_code(const std::vector<uint8_t>& buffer, uint32_t start_idx)
 		{
@@ -72,22 +77,26 @@ namespace TM
 		~big_endian_read(void){}
 	};
 
-	template <int BYTE_COUNT>
+	template <int BIT_COUNT>
 	struct little_endian_read
 	{
-		typedef typename boost::mpl::if_c<BYTE_COUNT==8,uint64_t,typename boost::mpl::if_c<BYTE_COUNT==2,uint16_t,uint32_t>::type >::type val_type;
+		typedef  boost::mpl::int_<BIT_COUNT> i_bits_t;
+		typedef  boost::mpl::int_<std::numeric_limits<uint32_t>::digits> i32_t;
+		typedef  boost::mpl::int_<std::numeric_limits<uint16_t>::digits> i16_t;
+		typedef typename boost::mpl::if_< boost::mpl::greater<i_bits_t,i32_t>,uint64_t,typename boost::mpl::if_<boost::mpl::greater<i_bits_t,i16_t>,uint32_t,uint16_t>::type >::type val_type;
 
 		static uint64_t read_code(const std::vector<uint8_t>& buffer, uint32_t start_idx)
 		{
+			static_assert(BIT_COUNT%std::numeric_limits<uint8_t>::digits==0,"bits is not bytes");
 			return utilities::array_to_little_endian_val<val_type>(buffer, start_idx);
 		}
-
+		
 	protected:
 		~little_endian_read(void){}
 	};
 
 	template <>
-	struct little_endian_read < 1 >
+	struct little_endian_read <std::numeric_limits<uint8_t>::digits >
 	{
 		static uint64_t read_code(const std::vector<uint8_t>& buffer, uint32_t start_idx)
 		{
@@ -99,7 +108,7 @@ namespace TM
 	};
 
 	template <>
-	struct little_endian_read<3>
+	struct little_endian_read<std::numeric_limits<uint8_t>::digits*3 >
 	{
 		static uint64_t read_code(const std::vector<uint8_t>& buffer, uint32_t start_idx)
 		{
@@ -120,12 +129,12 @@ namespace TM
 
 	template
 		<
-		int BYTE_COUNT
+		int BIT_COUNT
 		,typename ValT
 		,template<int> class ReadPolicy = big_endian_read
 		>
 	class base_tm_parameter 
-		:public ReadPolicy<BYTE_COUNT>
+		:public ReadPolicy<BIT_COUNT>
 		,public tm_parameter
 		,private boost::noncopyable
 	{
@@ -136,14 +145,16 @@ namespace TM
 			:name_(name)
 			,time_(0)
 			, code_(0)
-			, data_(BYTE_COUNT)
+			, data_(get_bytes_count())
 			,code_to_val_fun_(fun1)
 			,code_to_val_text_fun_(fun2)
 		{
+			static_assert(BIT_COUNT%std::numeric_limits<uint8_t>::digits==0,"bits is not bytes");
 		}
 
 		~base_tm_parameter(void){}
-		int32_t get_byte_count() const{ return BYTE_COUNT; }
+		int32_t get_bits_count() const{ return BIT_COUNT; }
+		int32_t get_bytes_count() const{ return  BIT_COUNT/std::numeric_limits<uint8_t>::digits;  }
 		virtual std::string get_name() const { return name_; }
 		virtual tm_val_type get_val() const 
 		{
@@ -158,10 +169,10 @@ namespace TM
 		virtual void set_time(double time){ time_ = time; }
 		virtual std::vector<uint8_t> get_data() const { return data_; }
 		virtual uint64_t get_code() const { return code_; }
-		virtual void read_form_buffer(const std::vector<uint8_t>& buffer, uint32_t start_idx)
+		virtual void read_form_buffer(const std::vector<uint8_t>& buffer, uint32_t start_idx,uint32_t bit_idx=0)
 		{
 			code_ = read_code(buffer, start_idx);
-			std::copy(buffer.begin() + start_idx, buffer.begin() + start_idx + BYTE_COUNT, data_.begin());
+			std::copy(buffer.begin() + start_idx, buffer.begin() + start_idx + get_bytes_count(), data_.begin());
 		}
 
 		virtual std::string get_val_text() const
@@ -183,21 +194,21 @@ namespace TM
 	};
 
 
-	typedef base_tm_parameter<1, uint8_t> parameter1;
-	typedef base_tm_parameter<1, double> double_parameter1;
-	typedef base_tm_parameter<2, uint16_t> big_endian_parameter2;
-	typedef base_tm_parameter<2, double> big_endian_double_parameter2;
-	typedef base_tm_parameter<3, uint32_t> big_endian_parameter3;
-	typedef base_tm_parameter<4, uint32_t> big_endian_parameter4;
-	typedef base_tm_parameter<4, float> big_endian_float_parameter4;
-	typedef base_tm_parameter<4, double> big_endian_double_parameter4;
-	typedef base_tm_parameter<8, uint64_t> big_endian_parameter8;
-	typedef base_tm_parameter<8, double> big_endian_double_parameter8;
-	typedef base_tm_parameter<2, uint16_t, little_endian_read> little_endian_parameter2;
-	typedef base_tm_parameter<2, double, little_endian_read> little_endian_double_parameter2;
-	typedef base_tm_parameter<3, uint32_t, little_endian_read> little_endian_parameter3;
-	typedef base_tm_parameter<4, double, little_endian_read> little_endian_double_parameter4;
-	typedef base_tm_parameter<4, float, little_endian_read> little_endian_float_parameter4;
-	typedef base_tm_parameter<8, uint64_t, little_endian_read> little_endian_parameter8;
-	typedef base_tm_parameter<8, double, little_endian_read> little_endian_double_parameter8;
+	typedef base_tm_parameter<8, uint8_t> parameter8;
+	typedef base_tm_parameter<8, double> double_parameter8;
+	typedef base_tm_parameter<16, uint16_t> big_endian_parameter16;
+	typedef base_tm_parameter<16, double> big_endian_double_parameter16;
+	typedef base_tm_parameter<24, uint32_t> big_endian_parameter24;
+	typedef base_tm_parameter<32, uint32_t> big_endian_parameter32;
+	typedef base_tm_parameter<32, float> big_endian_float_parameter32;
+	typedef base_tm_parameter<32, double> big_endian_double_parameter32;
+	typedef base_tm_parameter<64, uint64_t> big_endian_parameter64;
+	typedef base_tm_parameter<64, double> big_endian_double_parameter64;
+	typedef base_tm_parameter<16, uint16_t, little_endian_read> little_endian_parameter16;
+	typedef base_tm_parameter<16, double, little_endian_read> little_endian_double_parameter16;
+	typedef base_tm_parameter<24, uint32_t, little_endian_read> little_endian_parameter24;
+	typedef base_tm_parameter<32, double, little_endian_read> little_endian_double_parameter32;
+	typedef base_tm_parameter<32, float, little_endian_read> little_endian_float_parameter32;
+	typedef base_tm_parameter<64, uint64_t, little_endian_read> little_endian_parameter64;
+	typedef base_tm_parameter<64, double, little_endian_read> little_endian_double_parameter64;
 }

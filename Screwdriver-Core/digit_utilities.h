@@ -4,33 +4,34 @@
 #include <limits>
 #include <iomanip>
 #include <algorithm>
+#include <boost/numeric/conversion/cast.hpp>
 
 namespace utilities
 {
 
-	template <int BITCOUNT, typename T1, typename T2> void set_bits_value(T1& source_data, size_t start_idx, T2 val)
+	template <int BIT_COUNT, typename T1, typename T2> void set_bits_value(T1& source_data, size_t bit_start_idx, T2 val)
 	{
 		std::bitset<std::numeric_limits<T1>::digits> source_bitset(static_cast<int>(source_data));
-		std::bitset<BITCOUNT> valueBitset(static_cast<int>(val));
-		for (int i = 0; i<BITCOUNT; ++i)
+		std::bitset<BIT_COUNT> valueBitset(boost::numeric_cast<int>(val));
+		for (int i = 0; i<BIT_COUNT; ++i)
 		{
 			source_bitset[startIdx + i] = valueBitset[i];
 		}
-		source_data = static_cast<T1>(source_bitset.to_ulong());
+		source_data = boost::numeric_cast<T1>(source_bitset.to_ulong());
 	}
 
-	template <int BITCOUNT, typename T1, typename T2>  T1 get_bits_value(T2 source_data, size_t startIdx)
+	template <int BIT_COUNT, typename T1, typename T2>  T1 get_bits_value(T2 source_data, size_t bit_start_idx)
 	{
-		std::bitset<BITCOUNT> codeBitset;
+		std::bitset<BIT_COUNT> codeBitset;
 		codeBitset.set();
-		return static_cast<T1>((source_data >> startIdx)&codeBitset.to_ulong());
+		return boost::numeric_cast<T1>((source_data >> bit_start_idx)&codeBitset.to_ulong());
 	}
 
 	template <typename T1, typename T2> void set_single_bit(T1& source_data, size_t index, T2 val)
 	{
 		std::bitset<std::numeric_limits<T1>::digits> source_bitset(static_cast<int>(source_data));
 		source_bitset[index] = val == 1;
-		source_data = static_cast<T1>(source_bitset.to_ulong());
+		source_data = boost::numeric_cast<T1>(source_bitset.to_ulong());
 	}
 
 	template <typename T> bool get_single_bit(T source_data, size_t index)
