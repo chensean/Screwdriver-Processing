@@ -23,7 +23,10 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="unittest1.cpp">
+    <ClCompile Include="test_bits_tm_parameter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="test_tm_parameter.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

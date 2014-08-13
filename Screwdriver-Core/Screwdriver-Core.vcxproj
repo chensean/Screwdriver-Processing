@@ -155,6 +155,7 @@
     <ClCompile Include="tm_parameter.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bits_tm_parameter.h" />
     <ClInclude Include="digit_utilities.h" />
     <ClInclude Include="polynomial.h" />
     <ClInclude Include="Screwdriver-Core.h" />

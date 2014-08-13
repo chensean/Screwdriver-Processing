@@ -11,10 +11,11 @@ using namespace boost::assign;
 using namespace std::placeholders;
 
 namespace UnitTestCore
-{		
-	TEST_CLASS(UnitTest1)
+{
+	TEST_CLASS(test_tm_parameter)
 	{
 	public:
+
 
 		TEST_METHOD(TestParameter8)
 		{
@@ -103,6 +104,7 @@ namespace UnitTestCore
 			Assert::AreEqual(expVal,val,0.0001);
 			Assert::AreEqual( std::to_string(expVal),tm.get_val_text());
 		}
+
 
 	};
 }
