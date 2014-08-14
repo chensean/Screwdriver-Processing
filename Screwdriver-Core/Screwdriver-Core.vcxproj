@@ -151,15 +151,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="base_tm_parameter.cpp" />
+    <ClCompile Include="data_buffer.cpp" />
     <ClCompile Include="polynomial.cpp" />
     <ClCompile Include="tm_parameter.cpp" />
+    <ClCompile Include="tm_parameter_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="base_tm_parameter.h" />
     <ClInclude Include="bits_tm_parameter.h" />
+    <ClInclude Include="data_buffer.h" />
     <ClInclude Include="digit_utilities.h" />
     <ClInclude Include="polynomial.h" />
+    <ClInclude Include="read_policy.h" />
+    <ClInclude Include="safe_singleton.h" />
     <ClInclude Include="Screwdriver-Core.h" />
     <ClInclude Include="tm_parameter.h" />
+    <ClInclude Include="tm_parameter_manager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

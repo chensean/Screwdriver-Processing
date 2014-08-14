@@ -1,6 +1,10 @@
 #ifndef SCREWDRIVER_CORE_HPP
 #define SCREWDRIVER_CORE_HPP
 
+#if defined(_MSC_VER)
+# pragma once
+#endif
+
 #include <boost/config.hpp>
 
 #if defined(SCREWDRIVER_CORE_LINK_DYNAMIC)

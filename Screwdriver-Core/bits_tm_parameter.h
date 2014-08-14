@@ -1,4 +1,9 @@
+#ifndef BITS_TM_PARAMETER_HPP
+#define BITS_TM_PARAMETER_HPP
+
+#include <boost/lexical_cast.hpp>
 #include "tm_parameter.h"
+#include "read_policy.h"
 
 namespace TM
 {
@@ -19,8 +24,9 @@ namespace TM
 		typedef typename boost::mpl::if_< boost::mpl::greater<i_bits_t,i32_t>,uint64_t,typename boost::mpl::if_<boost::mpl::greater<i_bits_t,i16_t>,uint32_t,typename boost::mpl::if_<boost::mpl::greater<i_bits_t,i8_t>,uint16_t,uint8_t>::type >::type >::type code_type;
 		typedef std::function<value_type(code_type)>  code_to_val_fun_t;
 		typedef std::function< std::string(code_type)> code_to_val_text_fun_t;
-		bits_tm_parameter(const std::string& name,code_to_val_fun_t fun1=nullptr,code_to_val_text_fun_t fun2=nullptr) 
+		bits_tm_parameter(const std::string& name,uint32_t bit_start_idx=0,code_to_val_fun_t fun1=nullptr,code_to_val_text_fun_t fun2=nullptr) 
 			:name_(name)
+			,bit_start_idx_(bit_start_idx)
 			,time_(0)
 			, code_(0)
 			, data_(sizeof(container_type))
@@ -42,15 +48,25 @@ namespace TM
 			return tm_val_type(boost::numeric_cast<value_type>(code_)); 
 		}
 
+		virtual double get_val_f() const 
+		{
+			if (code_to_val_fun_ != nullptr)
+			{
+				return boost::numeric_cast<double>(code_to_val_fun_(code_));
+			}
+			return boost::numeric_cast<double>(code_); 
+		}
+
 		virtual double get_time() const { return time_; }
 		virtual void set_time(double time){ time_ = time; }
 		virtual std::vector<uint8_t> get_data() const { return data_; }
 		virtual uint64_t get_code() const { return code_; }
-		virtual void read_form_buffer(const std::vector<uint8_t>& buffer, uint32_t start_idx,uint32_t bit_idx=0)
+		virtual void read_form_buffer(const std::vector<uint8_t>& buffer, uint32_t start_idx)
 		{
 			container_type code = read_code(buffer, start_idx);
-			code_=utilities::get_bits_value<BIT_COUNT,code_type>(code,bit_idx);
+			code_=utilities::get_bits_value<BIT_COUNT,code_type>(code,bit_start_idx_);
 			std::copy(buffer.begin() + start_idx, buffer.begin() + start_idx + sizeof(container_type), data_.begin());
+			code_charged_(this);
 		}
 
 		virtual std::string get_val_text() const
@@ -62,13 +78,20 @@ namespace TM
 			return boost::lexical_cast<std::string>(get_code());
 		}
 
+		virtual boost::signals2::connection connect_signal(const code_charged_signal_t::slot_type& slot)
+		{
+			return code_charged_.connect(slot);
+		}
+
 	private:
 		std::string name_;
+		uint32_t bit_start_idx_;
 		double time_;
 		std::vector<uint8_t> data_;
 		code_type code_;
 		code_to_val_fun_t code_to_val_fun_;
 		code_to_val_text_fun_t code_to_val_text_fun_;
+		code_charged_signal_t code_charged_;
 	};
 
 	typedef bits_tm_parameter<1, uint8_t> bits8_parameter1;
@@ -153,3 +176,5 @@ namespace TM
 	typedef bits_tm_parameter<30, uint32_t, uint32_t, little_endian_read> little_endian_bits32_parameter30;
 	typedef bits_tm_parameter<31, uint32_t, uint32_t, little_endian_read> little_endian_bits32_parameter31;
 }
+
+#endif // BITS_TM_PARAMETER_HPP

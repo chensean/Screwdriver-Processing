@@ -4,28 +4,43 @@
 #include <boost/assign.hpp>
 #include <boost/lexical_cast.hpp>
 #include "tm_parameter.h"
+#include "base_tm_parameter.h"
 #include "polynomial.h"
+#include "slot_test.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace boost::assign;
-using namespace std::placeholders;
-
+using namespace TM;
 namespace UnitTestCore
 {
 	TEST_CLASS(test_tm_parameter)
 	{
 	public:
 
-
 		TEST_METHOD(TestParameter8)
 		{
 			Logger::WriteMessage("Test parameter8");
 
 			TM::parameter8 tm("tm1");
+			boost::shared_ptr<slot_test> slot(new slot_test);
+			tm.connect_signal(code_charged_signal_t::slot_type(&slot_test::receive_signal,slot.get(),_1).track(slot));
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 0);
 			int val = boost::get<uint8_t>(tm.get_val());
+
+			Assert::AreEqual(0xaa,val );
+			Assert::AreEqual( std::string("170"),tm.get_val_text());
+			
+			Assert::AreEqual(170.,slot->Val_f() );
+			Assert::AreEqual( std::string("170"),slot->Val_string());
+			tm.read_form_buffer(buf, 1);
+			Assert::AreEqual(187.,slot->Val_f() );
+			Assert::AreEqual( std::string("187"),slot->Val_string());
+			slot.reset();
+			tm.read_form_buffer(buf, 0);
+			val = boost::get<uint8_t>(tm.get_val());
+
 			Assert::AreEqual(0xaa,val );
 			Assert::AreEqual( std::string("170"),tm.get_val_text());
 		}
@@ -52,7 +67,7 @@ namespace UnitTestCore
 			coefficient += 0.1, 0.02,0.01;
 			std::shared_ptr<polynomial> pl(new polynomial(coefficient));
 			TM::double_parameter8 tm("tm1"
-				,std::bind(&polynomial::code_to_val,pl,_1)
+				,boost::bind(&polynomial::code_to_val,pl,_1)
 				,[&pl](uint64_t code){return boost::lexical_cast<std::string>(pl->code_to_val(code));});
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;

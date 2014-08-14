@@ -1,4 +1,10 @@
-#pragma once
+#ifndef DIGIT_UTILITIES_HPP
+#define DIGIT_UTILITIES_HPP
+
+#if defined(_MSC_VER)
+# pragma once
+#endif
+
 #include <vector>
 #include <bitset>
 #include <limits>
@@ -90,3 +96,5 @@ namespace utilities
 		return retVal;
 	}
 }
+
+#endif // DIGIT_UTILITIES_HPP

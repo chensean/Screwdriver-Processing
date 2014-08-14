@@ -1,11 +1,11 @@
 #include "polynomial.h"
-struct polynomial::polynomial_imp
+struct polynomial::polynomial_imp_t
 {
 	std::vector<double> coefficient;
 };
 
 polynomial::polynomial(const std::vector<double>& coefficient)
-	:imp_(new polynomial_imp)
+	:imp_(new polynomial_imp_t)
 {
 	imp_->coefficient = coefficient;
 }
