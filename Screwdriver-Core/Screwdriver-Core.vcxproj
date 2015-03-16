@@ -27,7 +27,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -68,6 +68,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <TargetName>$(ProjectName)_d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -91,6 +92,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImportLibrary>$(SolutionDir)lib\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -126,6 +128,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <ImportLibrary>$(SolutionDir)lib\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -154,6 +157,7 @@
     <ClCompile Include="base_tm_parameter.cpp" />
     <ClCompile Include="data_buffer.cpp" />
     <ClCompile Include="polynomial.cpp" />
+    <ClCompile Include="sub_buffer.cpp" />
     <ClCompile Include="tm_parameter.cpp" />
     <ClCompile Include="tm_parameter_manager.cpp" />
   </ItemGroup>
@@ -162,10 +166,12 @@
     <ClInclude Include="bits_tm_parameter.h" />
     <ClInclude Include="data_buffer.h" />
     <ClInclude Include="digit_utilities.h" />
+    <ClInclude Include="object_factories.h" />
     <ClInclude Include="polynomial.h" />
     <ClInclude Include="read_policy.h" />
     <ClInclude Include="safe_singleton.h" />
     <ClInclude Include="Screwdriver-Core.h" />
+    <ClInclude Include="sub_buffer.h" />
     <ClInclude Include="tm_parameter.h" />
     <ClInclude Include="tm_parameter_manager.h" />
   </ItemGroup>

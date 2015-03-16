@@ -30,6 +30,9 @@
     <ClCompile Include="base_tm_parameter.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="sub_buffer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tm_parameter.h">
@@ -60,6 +63,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="read_policy.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="sub_buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="object_factories.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

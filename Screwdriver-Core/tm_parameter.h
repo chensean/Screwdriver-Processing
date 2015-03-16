@@ -9,6 +9,10 @@
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/variant.hpp>
 #include <boost/signals2.hpp>
+#include <loki/Factory.h>
+#include <loki/Functor.h>
+#include <loki/Sequence.h>
+
 
 namespace TM
 {
@@ -32,6 +36,19 @@ namespace TM
 		virtual boost::signals2::connection connect_signal(const code_charged_signal_t::slot_type& slot)  = 0;
 		virtual void read_form_buffer(const std::vector<uint8_t>& buffer,uint32_t start_idx) = 0;
 	};
+
+	typedef boost::function< tm_parameter*() > tm_parameter_factory;
+
+	using namespace Loki;
+	typedef SingletonHolder
+		<
+		Factory< tm_parameter, std::string, Seq< int, int > >,
+		CreateUsingNew,
+		Loki::LongevityLifetime::DieAsSmallObjectChild
+		>
+		PFactory;
+
+
 }
 
 #endif // TM_PARAMETER_HPP
