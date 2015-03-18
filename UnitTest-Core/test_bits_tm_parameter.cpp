@@ -300,8 +300,7 @@ namespace UnitTestCore
 			std::shared_ptr<polynomial> pl(new polynomial(coefficient));
 			TM::big_endian_bits16_double_parameter10 tm("tm1"
 				, 3
-				, boost::bind(&polynomial::code_to_val, pl, _1)
-				, [&pl](uint64_t code){return boost::lexical_cast<std::string>(pl->code_to_val(code)); });
+				, boost::bind(&polynomial::code_to_val, pl, _1));
 			std::vector<unsigned char> buf;
 			buf += 0,0xaa, 0xbb, 0xcc,0xdd;
 			tm.read_form_buffer(buf, 1);

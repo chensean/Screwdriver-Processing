@@ -1,16 +1,19 @@
 #include "data_buffer.h"
-
+#include "parameter_position_table.h"
+#include "embedded_message_position_table.h"
 
 namespace TM
 {
-	typedef std::pair<uint32_t,tm_parameter_ptr> parameter_position_t;
-	typedef std::map<uint32_t,tm_parameter_ptr> parameter_container_t;
-	typedef std::pair<uint32_t,sub_buffer_ptr> sub_buffer_position_t;
-	typedef std::map<uint32_t,sub_buffer_ptr> sub_buffer_container_t;
 	struct data_buffer::data_buffer_imp_t
 	{
-		parameter_container_t parameters;
-		sub_buffer_container_t sub_buffers;
+		data_buffer_imp_t():
+			parameter_position_table_(new parameter_position_table),
+			sub_buffer_position_table_(new embedded_message_position_table)
+		{
+		}
+
+		boost::shared_ptr<parameter_position_table> parameter_position_table_;
+		boost::shared_ptr<embedded_message_position_table> sub_buffer_position_table_;
 	};
 
 	data_buffer::data_buffer(void)
@@ -23,29 +26,25 @@ namespace TM
 	{
 	}
 
-	void data_buffer::add_parameter( const tm_parameter_ptr& param,uint32_t start_idx )
+	void data_buffer::add_parameter(const tm_parameter_ptr& param, uint32_t start_idx)
 	{
-		imp_->parameters[start_idx]=param;
+		imp_->parameter_position_table_->add_parameter(param, start_idx);
 	}
 
-	void data_buffer::add_sub_buffer( const sub_buffer_ptr& sub_buffer,uint32_t start_idx )
+	void data_buffer::add_sub_buffer(const sub_buffer_ptr& sub_buffer, uint32_t start_idx, uint32_t length)
 	{
-		imp_->sub_buffers[start_idx]=sub_buffer;
+		imp_->sub_buffer_position_table_->add_sub_buffer(sub_buffer, start_idx, length);
 	}
 
 
-	void data_buffer::update_buffer( const std::vector<uint8_t>& data )
+	void data_buffer::read_from_buffer(const std::vector<uint8_t>& data)
 	{
-		std::for_each(imp_->parameters.begin(),imp_->parameters.end()
-			,[&data](const parameter_position_t& param_pos)
-			{
-				param_pos.second->read_form_buffer(data,param_pos.first);
-		});
-		std::for_each(imp_->sub_buffers.begin(),imp_->sub_buffers.end()
-			,[&data](const sub_buffer_position_t& sub_buffer_pos)
-		{
-			sub_buffer_pos.second->add_data(data,sub_buffer_pos.first);
-		});
+		read_from_buffer(data, 0);
 	}
 
+	void data_buffer::read_from_buffer(const std::vector<uint8_t>& data, uint32_t offset)
+	{
+		imp_->parameter_position_table_->read_from_buffer(data, offset);
+		imp_->sub_buffer_position_table_->read_from_buffer(data, offset);
+	}
 }

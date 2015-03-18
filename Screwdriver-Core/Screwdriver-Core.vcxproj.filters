@@ -30,7 +30,13 @@
     <ClCompile Include="base_tm_parameter.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="sub_buffer.cpp">
+    <ClCompile Include="parameter_position_table.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="embedded_message.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="embedded_message_position_table.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,19 +62,31 @@
     <ClInclude Include="tm_parameter_manager.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="data_buffer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="base_tm_parameter.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="read_policy.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="sub_buffer.h">
+    <ClInclude Include="object_factories.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="object_factories.h">
+    <ClInclude Include="bounded_buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="bounded_buffer_space_optimized.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="parameter_position_table.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="data_buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded_message.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="embedded_message_position_table.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

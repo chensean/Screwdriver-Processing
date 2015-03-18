@@ -17,3 +17,4 @@
 # define SCREWDRIVER_CORE_API
 #endif
 #endif // SCREWDRIVER_CORE_HPP
+

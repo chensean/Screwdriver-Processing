@@ -50,8 +50,7 @@ namespace UnitTestCore
 			Logger::WriteMessage("Test double_parameter8");
 
 			TM::double_parameter8 tm("tm1"
-				,[](uint64_t code){return code*0.02;}
-			,[](uint64_t code){return std::to_string(code*0.02);});
+				,[](uint64_t code){return code*0.02;});
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 0);
@@ -67,8 +66,7 @@ namespace UnitTestCore
 			coefficient += 0.1, 0.02,0.01;
 			std::shared_ptr<polynomial> pl(new polynomial(coefficient));
 			TM::double_parameter8 tm("tm1"
-				,boost::bind(&polynomial::code_to_val,pl,_1)
-				,[&pl](uint64_t code){return boost::lexical_cast<std::string>(pl->code_to_val(code));});
+				,boost::bind(&polynomial::code_to_val,pl,_1));
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 0);
@@ -109,7 +107,7 @@ namespace UnitTestCore
 
 			TM::big_endian_double_parameter64 tm("tm1"
 				,&utilities::men_copy_convert<double,uint64_t>
-				,[](uint64_t code){return std::to_string(utilities::men_copy_convert<double>(code));});
+				,[](tm_parameter* param){return std::to_string(param->get_val_f());});
 			double expVal=-3.156;
 			std::vector<unsigned char> buf(8);
 			memcpy(buf.data(),&expVal,buf.size());

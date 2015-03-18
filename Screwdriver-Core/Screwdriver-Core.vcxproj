@@ -156,22 +156,28 @@
   <ItemGroup>
     <ClCompile Include="base_tm_parameter.cpp" />
     <ClCompile Include="data_buffer.cpp" />
+    <ClCompile Include="parameter_position_table.cpp" />
     <ClCompile Include="polynomial.cpp" />
-    <ClCompile Include="sub_buffer.cpp" />
+    <ClCompile Include="embedded_message.cpp" />
+    <ClCompile Include="embedded_message_position_table.cpp" />
     <ClCompile Include="tm_parameter.cpp" />
     <ClCompile Include="tm_parameter_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base_tm_parameter.h" />
     <ClInclude Include="bits_tm_parameter.h" />
+    <ClInclude Include="bounded_buffer.h" />
+    <ClInclude Include="bounded_buffer_space_optimized.h" />
     <ClInclude Include="data_buffer.h" />
     <ClInclude Include="digit_utilities.h" />
     <ClInclude Include="object_factories.h" />
+    <ClInclude Include="parameter_position_table.h" />
     <ClInclude Include="polynomial.h" />
     <ClInclude Include="read_policy.h" />
     <ClInclude Include="safe_singleton.h" />
     <ClInclude Include="Screwdriver-Core.h" />
-    <ClInclude Include="sub_buffer.h" />
+    <ClInclude Include="embedded_message.h" />
+    <ClInclude Include="embedded_message_position_table.h" />
     <ClInclude Include="tm_parameter.h" />
     <ClInclude Include="tm_parameter_manager.h" />
   </ItemGroup>

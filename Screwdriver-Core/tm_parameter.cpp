@@ -1,4 +1,3 @@
-
 #include "tm_parameter.h"
 
 //namespace TM
@@ -22,4 +21,4 @@ namespace
 	//const bool registered6=TM::regist_tm_parameter("hex_tm_parameter2",&Loki::CreateUsingNew<TM::hex_tm_parameter2>::Create);
 	//const bool registered7=TM::regist_tm_parameter("hex_tm_parameter3",&Loki::CreateUsingNew<TM::hex_tm_parameter3>::Create);
 	//const bool registered8=TM::regist_tm_parameter("hex_tm_parameter4",&Loki::CreateUsingNew<TM::hex_tm_parameter4>::Create);
-}						 
+}

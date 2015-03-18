@@ -14,7 +14,7 @@ class __declspec(dllexport) polynomial
 {
 public:
 	explicit polynomial(const std::vector<double>& coefficient);
-	~polynomial(void); 
+	~polynomial(void);
 	double code_to_val(uint64_t code);
 private:
 	struct polynomial_imp_t;
@@ -22,3 +22,4 @@ private:
 };
 
 #endif // POLYNOMIAL_HPP
+
