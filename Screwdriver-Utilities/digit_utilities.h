@@ -5,6 +5,7 @@
 # pragma once
 #endif
 
+#define BOOST_ALL_DYN_LINK
 #include <vector>
 #include <bitset>
 #include <limits>
@@ -21,7 +22,7 @@ namespace utilities
 		std::bitset<BIT_COUNT> valueBitset(boost::numeric_cast<int>(val));
 		for (int i = 0; i < BIT_COUNT; ++i)
 		{
-			source_bitset[startIdx + i] = valueBitset[i];
+			source_bitset[bit_start_idx + i] = valueBitset[i];
 		}
 		source_data = boost::numeric_cast<T1>(source_bitset.to_ulong());
 	}

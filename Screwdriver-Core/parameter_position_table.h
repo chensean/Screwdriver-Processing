@@ -12,7 +12,7 @@
 
 namespace TM
 {
-	class parameter_position_table
+	class __declspec(dllexport) parameter_position_table
 		:private boost::noncopyable
 	{
 	public:

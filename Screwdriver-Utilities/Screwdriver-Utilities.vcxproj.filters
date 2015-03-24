@@ -15,7 +15,27 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="processing.cpp">
+    <ClInclude Include="bounded_buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="bounded_buffer_space_optimized.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="digit_utilities.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="filesystem_utilities.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="string_utilities.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="filesystem_utilities.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="string_utilities.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

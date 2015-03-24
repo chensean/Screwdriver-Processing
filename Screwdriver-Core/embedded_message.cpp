@@ -49,13 +49,13 @@ namespace TM
 
 	void embedded_message::parse()
 	{
-		if(imp_->message_buffer_.size()>=imp_->message_length_)
+		if (imp_->message_buffer_.size() >= imp_->message_length_)
 		{
-			auto iter=std::search(imp_->message_buffer_.begin(),imp_->message_buffer_.end(),imp_->synchro_word_.begin(),imp_->synchro_word_.end());
-			if (iter!=imp_->message_buffer_.end() && std::distance(iter,imp_->message_buffer_.end())>=imp_->message_length_)
+			auto iter = std::search(imp_->message_buffer_.begin(), imp_->message_buffer_.end(), imp_->synchro_word_.begin(), imp_->synchro_word_.end());
+			if (iter != imp_->message_buffer_.end() && std::distance(iter, imp_->message_buffer_.end()) >= imp_->message_length_)
 			{
-				std::copy(iter,iter+imp_->message_length_,imp_->message_.begin());
-				imp_->message_buffer_.erase(imp_->message_buffer_.begin(),iter+imp_->message_length_);
+				std::copy(iter, iter + imp_->message_length_, imp_->message_.begin());
+				imp_->message_buffer_.erase(imp_->message_buffer_.begin(), iter + imp_->message_length_);
 				imp_->data_buffer_->read_from_buffer(imp_->message_);
 			}
 		}

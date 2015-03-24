@@ -44,9 +44,6 @@
     <ClInclude Include="tm_parameter.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="digit_utilities.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="polynomial.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -56,9 +53,6 @@
     <ClInclude Include="bits_tm_parameter.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="safe_singleton.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="tm_parameter_manager.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -66,15 +60,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="read_policy.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="object_factories.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="bounded_buffer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="bounded_buffer_space_optimized.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="parameter_position_table.h">

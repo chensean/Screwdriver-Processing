@@ -4,6 +4,7 @@
 #if defined(_MSC_VER)
 # pragma once
 #endif
+#define BOOST_ALL_DYN_LINK
 # pragma warning( push )
 # pragma warning(disable:4913)
 # pragma warning(disable:4172)

@@ -13,7 +13,7 @@ namespace TM
 {
 	class data_buffer;
 
-	class embedded_message
+	class __declspec(dllexport) embedded_message
 		:private boost::noncopyable
 	{
 	public:

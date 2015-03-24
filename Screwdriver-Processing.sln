@@ -1,19 +1,28 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Screwdriver-Processing", "Screwdriver-Processing\Screwdriver-Processing.vcxproj", "{AE764FE1-BA9B-4067-87AC-72351B052CDC}"
 	ProjectSection(ProjectDependencies) = postProject
+		{9D127F00-7065-4D70-BF48-4171B135A917} = {9D127F00-7065-4D70-BF48-4171B135A917}
 		{C171A967-F9CD-4DA0-A939-FD3A4EC65B32} = {C171A967-F9CD-4DA0-A939-FD3A4EC65B32}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Screwdriver-Core", "Screwdriver-Core\Screwdriver-Core.vcxproj", "{C171A967-F9CD-4DA0-A939-FD3A4EC65B32}"
+	ProjectSection(ProjectDependencies) = postProject
+		{86B148C7-66CB-436F-8C7E-760B309D70D5} = {86B148C7-66CB-436F-8C7E-760B309D70D5}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTest-Core", "UnitTest-Core\UnitTest-Core.vcxproj", "{2BC990CE-0544-42CB-9C4D-F993C34F929B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C171A967-F9CD-4DA0-A939-FD3A4EC65B32} = {C171A967-F9CD-4DA0-A939-FD3A4EC65B32}
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Screwdriver-Context", "Screwdriver-Context\Screwdriver-Context.vcxproj", "{9D127F00-7065-4D70-BF48-4171B135A917}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C171A967-F9CD-4DA0-A939-FD3A4EC65B32} = {C171A967-F9CD-4DA0-A939-FD3A4EC65B32}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Screwdriver-Utilities", "Screwdriver-Utilities\Screwdriver-Utilities.vcxproj", "{86B148C7-66CB-436F-8C7E-760B309D70D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +35,7 @@ Global
 		{AE764FE1-BA9B-4067-87AC-72351B052CDC}.Debug|Win32.ActiveCfg = Debug|Win32
 		{AE764FE1-BA9B-4067-87AC-72351B052CDC}.Debug|Win32.Build.0 = Debug|Win32
 		{AE764FE1-BA9B-4067-87AC-72351B052CDC}.Debug|x64.ActiveCfg = Debug|x64
+		{AE764FE1-BA9B-4067-87AC-72351B052CDC}.Debug|x64.Build.0 = Debug|x64
 		{AE764FE1-BA9B-4067-87AC-72351B052CDC}.Release|Win32.ActiveCfg = Release|Win32
 		{AE764FE1-BA9B-4067-87AC-72351B052CDC}.Release|Win32.Build.0 = Release|Win32
 		{AE764FE1-BA9B-4067-87AC-72351B052CDC}.Release|x64.ActiveCfg = Release|x64
@@ -45,6 +55,22 @@ Global
 		{2BC990CE-0544-42CB-9C4D-F993C34F929B}.Release|Win32.Build.0 = Release|Win32
 		{2BC990CE-0544-42CB-9C4D-F993C34F929B}.Release|x64.ActiveCfg = Release|x64
 		{2BC990CE-0544-42CB-9C4D-F993C34F929B}.Release|x64.Build.0 = Release|x64
+		{9D127F00-7065-4D70-BF48-4171B135A917}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9D127F00-7065-4D70-BF48-4171B135A917}.Debug|Win32.Build.0 = Debug|Win32
+		{9D127F00-7065-4D70-BF48-4171B135A917}.Debug|x64.ActiveCfg = Debug|x64
+		{9D127F00-7065-4D70-BF48-4171B135A917}.Debug|x64.Build.0 = Debug|x64
+		{9D127F00-7065-4D70-BF48-4171B135A917}.Release|Win32.ActiveCfg = Release|Win32
+		{9D127F00-7065-4D70-BF48-4171B135A917}.Release|Win32.Build.0 = Release|Win32
+		{9D127F00-7065-4D70-BF48-4171B135A917}.Release|x64.ActiveCfg = Release|x64
+		{9D127F00-7065-4D70-BF48-4171B135A917}.Release|x64.Build.0 = Release|x64
+		{86B148C7-66CB-436F-8C7E-760B309D70D5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{86B148C7-66CB-436F-8C7E-760B309D70D5}.Debug|Win32.Build.0 = Debug|Win32
+		{86B148C7-66CB-436F-8C7E-760B309D70D5}.Debug|x64.ActiveCfg = Debug|x64
+		{86B148C7-66CB-436F-8C7E-760B309D70D5}.Debug|x64.Build.0 = Debug|x64
+		{86B148C7-66CB-436F-8C7E-760B309D70D5}.Release|Win32.ActiveCfg = Release|Win32
+		{86B148C7-66CB-436F-8C7E-760B309D70D5}.Release|Win32.Build.0 = Release|Win32
+		{86B148C7-66CB-436F-8C7E-760B309D70D5}.Release|x64.ActiveCfg = Release|x64
+		{86B148C7-66CB-436F-8C7E-760B309D70D5}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

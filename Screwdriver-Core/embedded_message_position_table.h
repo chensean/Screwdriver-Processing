@@ -12,7 +12,7 @@
 
 namespace TM
 {
-	class embedded_message_position_table
+	class __declspec(dllexport) embedded_message_position_table
 		:private boost::noncopyable
 	{
 	public:
