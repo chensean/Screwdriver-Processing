@@ -39,6 +39,9 @@
     <ClCompile Include="embedded_message_position_table.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="bits_tm_parameter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tm_parameter.h">

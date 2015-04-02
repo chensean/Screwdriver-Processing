@@ -20,20 +20,26 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="context_global.h" />
+    <ClInclude Include="fcc_minor_frame.h" />
+    <ClInclude Include="irig_frame.h" />
     <ClInclude Include="rtr_data_parser.h" />
     <ClInclude Include="rtr_monitor_client.h" />
     <ClInclude Include="rtr_tm_client.h" />
     <ClInclude Include="save_file.h" />
     <ClInclude Include="Screwdriver-Context.h" />
+    <ClInclude Include="sfid_minor_frame.h" />
     <ClInclude Include="tcp_client.h" />
     <ClInclude Include="test_context.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="context_global.cpp" />
+    <ClCompile Include="fcc_minor_frame.cpp" />
+    <ClCompile Include="irig_frame.cpp" />
     <ClCompile Include="rtr_data_parser.cpp" />
     <ClCompile Include="rtr_monitor_client.cpp" />
     <ClCompile Include="rtr_tm_client .cpp" />
     <ClCompile Include="save_file.cpp" />
+    <ClCompile Include="sfid_minor_frame.cpp" />
     <ClCompile Include="tcp_client.cpp" />
     <ClCompile Include="test_context.cpp" />
   </ItemGroup>

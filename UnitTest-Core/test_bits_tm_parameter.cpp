@@ -39,6 +39,18 @@ namespace UnitTestCore
 			Assert::AreEqual( std::string("3"),tm.get_val_text());
 		}
 
+		TEST_METHOD(Test_Create_bits8_parameter2)
+		{
+			Logger::WriteMessage("Test Create bits8_parameter2");
+			auto tm=TM::create_bits_tm_parameter("bits8_parameter2","tm1",4);
+			std::vector<unsigned char> buf;
+			buf+=0xaa,0xbb,0xcc;
+			tm->read_form_buffer(buf, 1);
+			int val = boost::get<uint8_t>(tm->get_val());
+			Assert::AreEqual(3,val );
+			Assert::AreEqual( std::string("3"),tm->get_val_text());
+		}
+
 		TEST_METHOD(Test_bits8_parameter3)
 		{
 			Logger::WriteMessage("Test bits8_parameter3");

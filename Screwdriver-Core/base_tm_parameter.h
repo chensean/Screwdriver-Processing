@@ -145,6 +145,19 @@ namespace TM
 	typedef base_tm_parameter<32, float, little_endian_read> little_endian_float_parameter32;
 	typedef base_tm_parameter<64, uint64_t, little_endian_read> little_endian_parameter64;
 	typedef base_tm_parameter<64, double, little_endian_read> little_endian_double_parameter64;
+	
+    template <class T> struct create_with_name
+    {
+        static T* create(const std::string& name)
+        {
+	        return new T(name);
+        }        
+    };
+
+	typedef boost::function<tm_parameter*(const std::string&)> base_tm_parameter_creator;
+	bool regist_base_tm_parameter(const std::string& tm_parameter_type,base_tm_parameter_creator creator);
+	bool unregist_base_tm_parameter(const std::string& tm_parameter_type);
+	__declspec(dllexport) tm_parameter_ptr create_base_tm_parameter(const std::string& tm_parameter_type,const std::string& tm_parameter_name);
 }
 
 #endif // BASE_TM_PARAMETER_HPP

@@ -44,6 +44,33 @@ namespace UnitTestCore
 			Assert::AreEqual(0xaa,val );
 			Assert::AreEqual( std::string("170"),tm.get_val_text());
 		}
+		
+		TEST_METHOD(TestCreateParameter8)
+		{
+			Logger::WriteMessage("Test Create parameter8");
+			auto tm =TM::create_base_tm_parameter("parameter8","tm1");
+			boost::shared_ptr<slot_test> slot(new slot_test);
+			tm->connect_signal(code_charged_signal_t::slot_type(&slot_test::receive_signal,slot.get(),_1).track(slot));
+			std::vector<unsigned char> buf;
+			buf+=0xaa,0xbb,0xcc;
+			tm->read_form_buffer(buf, 0);
+			int val = boost::get<uint8_t>(tm->get_val());
+
+			Assert::AreEqual(0xaa,val );
+			Assert::AreEqual( std::string("170"),tm->get_val_text());
+			
+			Assert::AreEqual(170.,slot->Val_f() );
+			Assert::AreEqual( std::string("170"),slot->Val_string());
+			tm->read_form_buffer(buf, 1);
+			Assert::AreEqual(187.,slot->Val_f() );
+			Assert::AreEqual( std::string("187"),slot->Val_string());
+			slot.reset();
+			tm->read_form_buffer(buf, 0);
+			val = boost::get<uint8_t>(tm->get_val());
+
+			Assert::AreEqual(0xaa,val );
+			Assert::AreEqual( std::string("170"),tm->get_val_text());
+		}
 
 		TEST_METHOD(TestDoubleParameter8)
 		{

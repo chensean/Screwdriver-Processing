@@ -202,6 +202,19 @@ namespace TM
 	typedef bits_tm_parameter<29, uint32_t, uint32_t, little_endian_read> little_endian_bits32_parameter29;
 	typedef bits_tm_parameter<30, uint32_t, uint32_t, little_endian_read> little_endian_bits32_parameter30;
 	typedef bits_tm_parameter<31, uint32_t, uint32_t, little_endian_read> little_endian_bits32_parameter31;
+
+    template <class T> struct create_with_name_and_position
+    {
+        static T* create(const std::string& name, uint32_t bit_start_idx)
+        {
+	        return new T(name,bit_start_idx);
+        }        
+    };
+
+	typedef boost::function<tm_parameter*(const std::string&,uint32_t)> bits_tm_parameter_creator;
+	bool regist_bits_tm_parameter(const std::string& tm_parameter_type,bits_tm_parameter_creator creator);
+	bool unregist_bits_tm_parameter(const std::string& tm_parameter_type);
+	__declspec(dllexport) tm_parameter_ptr create_bits_tm_parameter(const std::string& tm_parameter_type,const std::string& tm_parameter_name, uint32_t bit_start_idx);
 }
 
 #endif // BITS_TM_PARAMETER_HPP

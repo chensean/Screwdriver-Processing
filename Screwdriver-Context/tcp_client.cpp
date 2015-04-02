@@ -61,20 +61,20 @@ namespace screwdriver
 			if (ec)
 			{
 				std::cerr << ec.message() << std::endl;
-				return true;
+				return false;
 			}
 		}
 		catch (std::exception& e)
 		{
 			std::cerr << e.what() << std::endl;
-			return true;
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 	void tcp_client::start()
 	{
-		if (connect_server()) return;
+		if (!connect_server()) return;
 		start_receive();
 		imp_->thread_ = boost::shared_ptr<boost::thread>(new boost::thread(boost::bind(&boost::asio::io_service::run, &imp_->ios_)));
 	}

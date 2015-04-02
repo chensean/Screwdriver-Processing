@@ -17,12 +17,14 @@ void exit_command()
 
 int main()
 {
-	std::string config_path("data");
+	std::string config_path("config");
 	auto dir = utilities::get_directorty_path(config_path);
 	if (dir)
 	{
-		screwdriver::create_rtr_tm_client("127.0.0.1",dir->generic_string());
-		screwdriver::start_rtr_tm();
+		config_path=dir->generic_string()+"/cfg.xml";
+		screwdriver::load_irig_config(config_path);
+		//screwdriver::create_rtr_tm_client("127.0.0.1",dir->generic_string());
+		//screwdriver::start_rtr_tm();
 		exit_command();
 	}
 	return 0;

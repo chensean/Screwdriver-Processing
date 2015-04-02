@@ -17,4 +17,9 @@ namespace screwdriver
 	{
 		single_test_context::Instance().stop_rtr_tm();
 	}
+
+	void load_irig_config(const std::string& file_name)
+	{
+		single_test_context::Instance().load_irig_config(file_name);
+	}
 }

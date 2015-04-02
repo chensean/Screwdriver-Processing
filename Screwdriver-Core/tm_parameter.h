@@ -45,16 +45,6 @@ namespace TM
 		virtual void read_form_buffer(const std::vector<uint8_t>& buffer, uint32_t start_idx) = 0;
 	};
 
-	typedef boost::function<tm_parameter*()> tm_parameter_factory;
-
-	using namespace Loki;
-	typedef SingletonHolder
-	<
-		Factory<tm_parameter, std::string, Seq<int, int>>,
-		CreateUsingNew,
-		Loki::LongevityLifetime::DieAsSmallObjectChild
-	>
-	PFactory;
 }
 
 #endif // TM_PARAMETER_HPP

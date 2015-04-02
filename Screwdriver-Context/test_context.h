@@ -9,6 +9,7 @@
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 #include <loki/Singleton.h>
+#include <boost/property_tree/exceptions.hpp>
 
 namespace screwdriver
 {
@@ -20,9 +21,11 @@ namespace screwdriver
 		void create_rtr_tm_client(const std::string& ip, const std::string& folder);
 		void start_rtr_tm();
 		void stop_rtr_tm();
+		void load_irig_config(const std::string& file_name);
 	private:
 		test_context(void);
 		~test_context(void);
+		void config_irig_frame(const boost::property_tree::ptree& pt);
 	private:
 		struct test_context_imp_t;
 		boost::shared_ptr<test_context_imp_t> imp_;

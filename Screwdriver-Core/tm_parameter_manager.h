@@ -10,7 +10,7 @@
 
 namespace TM
 {
-	class tm_parameter_manager
+	class __declspec(dllexport) tm_parameter_manager
 		:private boost::noncopyable
 	{
 	public:

@@ -5,6 +5,9 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/date_time/gregorian/gregorian.hpp>
 # pragma warning( pop )
+#include <boost/algorithm/string/regex.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/regex_fwd.hpp>
 
 using namespace boost::posix_time;
 using namespace boost::gregorian;
@@ -26,5 +29,12 @@ namespace utilities
 		}
 		timeString = timeString.substr(0, TIME_STRING_LENGTH);
 		return timeString;
+	}
+	std::vector<std::string> separate_string_by_separator(const std::string& str,const std::string& separator/*=SEPARATOR*/)
+	{
+		std::vector<std::string> strList;
+		boost::split_regex(strList,str,boost::regex(separator));
+		strList.erase(std::remove(strList.begin(),strList.end(),""),strList.end());
+		return strList;		
 	}
 }

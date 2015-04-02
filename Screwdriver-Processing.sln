@@ -24,6 +24,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Screwdriver-Context", "Scre
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Screwdriver-Utilities", "Screwdriver-Utilities\Screwdriver-Utilities.vcxproj", "{86B148C7-66CB-436F-8C7E-760B309D70D5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{235D0C47-BD6B-4B9B-B750-6A7005FFD031}"
+	ProjectSection(SolutionItems) = preProject
+		config\cfg.xml = config\cfg.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32

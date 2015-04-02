@@ -39,6 +39,15 @@
     <ClInclude Include="context_global.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="irig_frame.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="sfid_minor_frame.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="fcc_minor_frame.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="save_file.cpp">
@@ -60,6 +69,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="context_global.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="irig_frame.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="sfid_minor_frame.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="fcc_minor_frame.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
