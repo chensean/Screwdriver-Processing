@@ -18,9 +18,6 @@
     <ClCompile Include="tm_parameter.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="polynomial.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="tm_parameter_manager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -42,12 +39,15 @@
     <ClCompile Include="bits_tm_parameter.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="polynomial_conversion.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="linear_conversion.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tm_parameter.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="polynomial.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Screwdriver-Core.h">
@@ -62,9 +62,6 @@
     <ClInclude Include="base_tm_parameter.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="read_policy.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="parameter_position_table.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -75,6 +72,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="embedded_message_position_table.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="extract_policy.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="polynomial_conversion.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="linear_conversion.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

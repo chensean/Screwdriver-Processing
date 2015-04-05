@@ -169,8 +169,9 @@
     <ClCompile Include="base_tm_parameter.cpp" />
     <ClCompile Include="bits_tm_parameter.cpp" />
     <ClCompile Include="data_buffer.cpp" />
+    <ClCompile Include="linear_conversion.cpp" />
     <ClCompile Include="parameter_position_table.cpp" />
-    <ClCompile Include="polynomial.cpp" />
+    <ClCompile Include="polynomial_conversion.cpp" />
     <ClCompile Include="embedded_message.cpp" />
     <ClCompile Include="embedded_message_position_table.cpp" />
     <ClCompile Include="tm_parameter.cpp" />
@@ -180,9 +181,10 @@
     <ClInclude Include="base_tm_parameter.h" />
     <ClInclude Include="bits_tm_parameter.h" />
     <ClInclude Include="data_buffer.h" />
+    <ClInclude Include="linear_conversion.h" />
     <ClInclude Include="parameter_position_table.h" />
-    <ClInclude Include="polynomial.h" />
-    <ClInclude Include="read_policy.h" />
+    <ClInclude Include="polynomial_conversion.h" />
+    <ClInclude Include="extract_policy.h" />
     <ClInclude Include="Screwdriver-Core.h" />
     <ClInclude Include="embedded_message.h" />
     <ClInclude Include="embedded_message_position_table.h" />

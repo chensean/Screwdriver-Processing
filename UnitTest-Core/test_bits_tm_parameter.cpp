@@ -4,7 +4,7 @@
 #include <boost/assign.hpp>
 #include <boost/lexical_cast.hpp>
 #include "bits_tm_parameter.h"
-#include "polynomial.h"
+#include "polynomial_conversion.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace boost::assign;
@@ -22,7 +22,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 0);
-			int val = boost::get<uint8_t>(tm.get_val());
+			int val = boost::numeric_cast<uint8_t>(tm.get_val());
 			Assert::AreEqual(1,val );
 			Assert::AreEqual( std::string("1"),tm.get_val_text());
 		}
@@ -34,7 +34,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 1);
-			int val = boost::get<uint8_t>(tm.get_val());
+			int val = boost::numeric_cast<uint8_t>(tm.get_val());
 			Assert::AreEqual(3,val );
 			Assert::AreEqual( std::string("3"),tm.get_val_text());
 		}
@@ -46,7 +46,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm->read_form_buffer(buf, 1);
-			int val = boost::get<uint8_t>(tm->get_val());
+			int val = boost::numeric_cast<uint8_t>(tm->get_val());
 			Assert::AreEqual(3,val );
 			Assert::AreEqual( std::string("3"),tm->get_val_text());
 		}
@@ -58,7 +58,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 1);
-			int val = boost::get<uint8_t>(tm.get_val());
+			int val = boost::numeric_cast<uint8_t>(tm.get_val());
 			Assert::AreEqual(5,val );
 			Assert::AreEqual( std::string("5"),tm.get_val_text());
 		}
@@ -70,7 +70,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 2);
-			int val = boost::get<uint8_t>(tm.get_val());
+			int val = boost::numeric_cast<uint8_t>(tm.get_val());
 			Assert::AreEqual(12,val );
 			Assert::AreEqual( std::string("12"),tm.get_val_text());
 		}
@@ -83,7 +83,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 1);
-			int val = boost::get<uint8_t>(tm.get_val());
+			int val = boost::numeric_cast<uint8_t>(tm.get_val());
 			Assert::AreEqual(27,val );
 			Assert::AreEqual( std::string("27"),tm.get_val_text());
 		}
@@ -95,7 +95,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 1);
-			int val = boost::get<uint8_t>(tm.get_val());
+			int val = boost::numeric_cast<uint8_t>(tm.get_val());
 			Assert::AreEqual(27+32,val );
 			Assert::AreEqual( std::string("59"),tm.get_val_text());
 		}
@@ -107,7 +107,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 1);
-			int val = boost::get<uint8_t>(tm.get_val());
+			int val = boost::numeric_cast<uint8_t>(tm.get_val());
 			Assert::AreEqual(93,val );
 			Assert::AreEqual( std::string("93"),tm.get_val_text());
 		}
@@ -119,7 +119,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 0);
-			int val = boost::get<uint8_t>(tm.get_val());
+			int val = boost::numeric_cast<uint8_t>(tm.get_val());
 			Assert::AreEqual(3,val );
 			Assert::AreEqual( std::string("3"),tm.get_val_text());
 		}
@@ -131,7 +131,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf += 0xaa, 0xbb, 0xcc;
 			tm.read_form_buffer(buf, 0);
-			int val = boost::get<uint8_t>(tm.get_val());
+			int val = boost::numeric_cast<uint8_t>(tm.get_val());
 			Assert::AreEqual(1, val);
 			Assert::AreEqual(std::string("1"), tm.get_val_text());
 		}
@@ -143,7 +143,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 0);
-			int val = boost::get<uint8_t>(tm.get_val());
+			int val = boost::numeric_cast<uint8_t>(tm.get_val());
 			Assert::AreEqual(5,val );
 			Assert::AreEqual( std::string("5"),tm.get_val_text());
 		}
@@ -155,7 +155,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 0);
-			int val = boost::get<uint8_t>(tm.get_val());
+			int val = boost::numeric_cast<uint8_t>(tm.get_val());
 			Assert::AreEqual(5,val );
 			Assert::AreEqual( std::string("5"),tm.get_val_text());
 		}
@@ -167,7 +167,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 1);
-			int val = boost::get<uint8_t>(tm.get_val());
+			int val = boost::numeric_cast<uint8_t>(tm.get_val());
 			Assert::AreEqual(12,val );
 			Assert::AreEqual( std::string("12"),tm.get_val_text());
 		}
@@ -179,7 +179,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 1);
-			int val = boost::get<uint8_t>(tm.get_val());
+			int val = boost::numeric_cast<uint8_t>(tm.get_val());
 			Assert::AreEqual(14,val );
 			Assert::AreEqual( std::string("14"),tm.get_val_text());
 		}
@@ -191,7 +191,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 0);
-			int val = boost::get<uint8_t>(tm.get_val());
+			int val = boost::numeric_cast<uint8_t>(tm.get_val());
 			Assert::AreEqual(27,val );
 			Assert::AreEqual( std::string("27"),tm.get_val_text());
 		}
@@ -203,7 +203,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 0);
-			int val = boost::get<uint8_t>(tm.get_val());
+			int val = boost::numeric_cast<uint8_t>(tm.get_val());
 			Assert::AreEqual(21,val );
 			Assert::AreEqual( std::string("21"),tm.get_val_text());
 		}
@@ -215,7 +215,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 0);
-			int val = boost::get<uint8_t>(tm.get_val());
+			int val = boost::numeric_cast<uint8_t>(tm.get_val());
 			Assert::AreEqual(27+32,val );
 			Assert::AreEqual( std::string("59"),tm.get_val_text());
 		}
@@ -227,7 +227,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf += 0xaa, 0xbb, 0xcc;
 			tm.read_form_buffer(buf, 0);
-			int val = boost::get<uint8_t>(tm.get_val());
+			int val = boost::numeric_cast<uint8_t>(tm.get_val());
 			Assert::AreEqual(43, val);
 			Assert::AreEqual(std::string("43"), tm.get_val_text());
 		}
@@ -239,7 +239,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 0);
-			int val = boost::get<uint8_t>(tm.get_val());
+			int val = boost::numeric_cast<uint8_t>(tm.get_val());
 			Assert::AreEqual(93,val );
 			Assert::AreEqual( std::string("93"),tm.get_val_text());
 		}
@@ -251,7 +251,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 0);
-			int val = boost::get<uint8_t>(tm.get_val());
+			int val = boost::numeric_cast<uint8_t>(tm.get_val());
 			Assert::AreEqual(0x57,val );
 			Assert::AreEqual( std::string("87"),tm.get_val_text());
 		}
@@ -263,7 +263,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf += 0xaa, 0xbb, 0xcc;
 			tm.read_form_buffer(buf, 0);
-			int val = boost::get<uint8_t>(tm.get_val());
+			int val = boost::numeric_cast<uint8_t>(tm.get_val());
 			Assert::AreEqual(0xab, val);
 			Assert::AreEqual(std::string("171"), tm.get_val_text());
 		}
@@ -275,7 +275,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf += 0xaa, 0xbb, 0xcc;
 			tm.read_form_buffer(buf, 0);
-			int val = boost::get<uint16_t>(tm.get_val());
+			int val = boost::numeric_cast<uint16_t>(tm.get_val());
 			Assert::AreEqual(0x2bb, val);
 			Assert::AreEqual(std::string("699"), tm.get_val_text());
 		}
@@ -287,7 +287,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf += 0,0xaa, 0xbb, 0xcc;
 			tm.read_form_buffer(buf, 0);
-			int val = boost::get<uint16_t>(tm.get_val());
+			int val = boost::numeric_cast<uint16_t>(tm.get_val());
 			Assert::AreEqual(0x3bcc, val);
 			Assert::AreEqual(std::string("15308"), tm.get_val_text());
 		}
@@ -299,7 +299,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf += 0,0xaa, 0xbb, 0xcc,0xdd;
 			tm.read_form_buffer(buf, 1);
-			int val = boost::get<uint32_t>(tm.get_val());
+			int val = boost::numeric_cast<uint32_t>(tm.get_val());
 			Assert::AreEqual(0x157799B, val);
 			Assert::AreEqual(std::string("22509979"), tm.get_val_text());
 		}
@@ -309,14 +309,14 @@ namespace UnitTestCore
 			Logger::WriteMessage("Test big_endian_bits16_double_parameter10");
 			std::vector<double> coefficient;
 			coefficient += -20.15, 0.02, 0.01;
-			std::shared_ptr<polynomial> pl(new polynomial(coefficient));
-			TM::big_endian_bits16_double_parameter10 tm("tm1"
+			std::shared_ptr<polynomial_conversion> pl(new polynomial_conversion(coefficient));
+			TM::big_endian_bits16_parameter10 tm("tm1"
 				, 3
-				, boost::bind(&polynomial::code_to_val, pl, _1));
+				, boost::bind(&polynomial_conversion::convert, pl, _1));
 			std::vector<unsigned char> buf;
 			buf += 0,0xaa, 0xbb, 0xcc,0xdd;
 			tm.read_form_buffer(buf, 1);
-			double val = boost::get<double>(tm.get_val());
+			double val = tm.get_val();
 			Assert::AreEqual(1163.2, val);
 			Assert::AreEqual(std::string("1163.2"), tm.get_val_text());
 		}
@@ -329,7 +329,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm.read_form_buffer(buf, 0);
-			int val = boost::get<uint8_t>(tm.get_val());
+			int val = boost::numeric_cast<uint8_t>(tm.get_val());
 			Assert::AreEqual(29,val );
 			Assert::AreEqual( std::string("29"),tm.get_val_text());
 		}
@@ -341,7 +341,7 @@ namespace UnitTestCore
 			std::vector<unsigned char> buf;
 			buf += 0,0xaa, 0xbb, 0xcc;
 			tm.read_form_buffer(buf, 0);
-			int val = boost::get<uint32_t>(tm.get_val());
+			int val = boost::numeric_cast<uint32_t>(tm.get_val());
 			Assert::AreEqual(0x2EA80, val);
 			Assert::AreEqual(std::string("191104"), tm.get_val_text());
 		}

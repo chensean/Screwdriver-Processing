@@ -52,6 +52,7 @@ namespace TM
 		if (imp_->message_buffer_.size() >= imp_->message_length_)
 		{
 			auto iter = std::search(imp_->message_buffer_.begin(), imp_->message_buffer_.end(), imp_->synchro_word_.begin(), imp_->synchro_word_.end());
+
 			if (iter != imp_->message_buffer_.end() && std::distance(iter, imp_->message_buffer_.end()) >= imp_->message_length_)
 			{
 				std::copy(iter, iter + imp_->message_length_, imp_->message_.begin());

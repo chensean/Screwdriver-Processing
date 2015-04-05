@@ -11,7 +11,7 @@ public:
 	void receive_signal(TM::tm_parameter* param)
 	{
 		assert(param!=nullptr);
-		val_f_=param->get_val_f();
+		val_f_=param->get_val();
 		val_string_=param->get_val_text();
 	}
 private:

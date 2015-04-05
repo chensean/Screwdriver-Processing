@@ -50,7 +50,7 @@ namespace screwdriver
 		if (imp_->sfid_tm_parameter_)
 		{
 			imp_->sfid_tm_parameter_->read_form_buffer(*tm_data,offset+imp_->sfid_pos_);
-			return boost::numeric_cast<int32_t>(imp_->sfid_tm_parameter_->get_code());
+			return boost::numeric_cast<int32_t>(imp_->sfid_tm_parameter_->get_val());
 		}
 		return 0;
 	}

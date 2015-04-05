@@ -76,7 +76,6 @@ namespace
 	const bool registered41=TM::regist_bits_tm_parameter("big_endian_bits32_parameter29",&TM::create_with_name_and_position<TM::big_endian_bits32_parameter29>::create);
 	const bool registered42=TM::regist_bits_tm_parameter("big_endian_bits32_parameter30",&TM::create_with_name_and_position<TM::big_endian_bits32_parameter30>::create);
 	const bool registered43=TM::regist_bits_tm_parameter("big_endian_bits32_parameter31",&TM::create_with_name_and_position<TM::big_endian_bits32_parameter31>::create);
-	const bool registered44=TM::regist_bits_tm_parameter("big_endian_bits16_double_parameter10",&TM::create_with_name_and_position<TM::big_endian_bits16_double_parameter10>::create);
 	const bool registered45=TM::regist_bits_tm_parameter("little_endian_bits16_parameter2",&TM::create_with_name_and_position<TM::little_endian_bits16_parameter2>::create);
 	const bool registered46=TM::regist_bits_tm_parameter("little_endian_bits16_parameter3",&TM::create_with_name_and_position<TM::little_endian_bits16_parameter3>::create);
 	const bool registered47=TM::regist_bits_tm_parameter("little_endian_bits16_parameter4",&TM::create_with_name_and_position<TM::little_endian_bits16_parameter4>::create);
