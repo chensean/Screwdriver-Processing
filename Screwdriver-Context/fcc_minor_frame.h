@@ -11,11 +11,12 @@
 namespace screwdriver
 {
 	typedef boost::shared_ptr<std::vector<uint8_t>> tm_data_ptr;
+
 	class fcc_minor_frame
 		:private boost::noncopyable
 	{
 	public:
-		fcc_minor_frame(uint32_t sync_location,uint32_t minor_frames,const std::vector<uint8_t>& frame_sync_pattern);
+		fcc_minor_frame(uint32_t sync_location, uint32_t minor_frames, const std::vector<uint8_t>& frame_sync_pattern);
 		~fcc_minor_frame(void);
 		int32_t get_minor_frame_id(const tm_data_ptr& tm_data, uint32_t offset);
 	private:

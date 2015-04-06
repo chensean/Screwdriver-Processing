@@ -45,6 +45,9 @@
     <ClCompile Include="linear_conversion.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="irig_b_time.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tm_parameter.h">
@@ -81,6 +84,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="linear_conversion.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tm_time.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="irig_b_time.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

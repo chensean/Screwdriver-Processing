@@ -12,6 +12,8 @@ const size_t BOUNDED_BUFFER_SIZE = 8 * 1024 * 1024;
 const size_t PARSER_BUFFER_SIZE = 8 * 1024 * 1024;
 const int HEAD = 1234567890;
 const int TAIL = -1234567890;
+const uint32_t TIME_OFFSET = 3;
+const uint32_t FRAME_OFFSET = 14;
 
 namespace screwdriver
 {
@@ -34,6 +36,8 @@ namespace screwdriver
 		parser_buffer_type parser_buffer_;
 		boost::shared_ptr<boost::thread> thread_;
 		save_file save_file_;
+		parse_frame_fun_t parse_frame_data_fun_;
+		parse_frame_fun_t parse_frame_time_fun_;
 	};
 
 	rtr_data_parser::rtr_data_parser(const std::string& folder)
@@ -69,7 +73,14 @@ namespace screwdriver
 						{
 							tm_data_ptr data_ptr(new std::vector<unsigned char>(head, tail + imp_->tail_.size()));
 							save2file(data_ptr);
-							//
+							if (imp_->parse_frame_time_fun_)
+							{
+								imp_->parse_frame_time_fun_(data_ptr, TIME_OFFSET * sizeof(int32_t));
+							}
+							if (imp_->parse_frame_data_fun_)
+							{
+								imp_->parse_frame_data_fun_(data_ptr, FRAME_OFFSET * sizeof(int32_t));
+							}
 							index = tail - imp_->parser_buffer_.begin() + imp_->tail_.size();
 						}
 						else
@@ -96,5 +107,15 @@ namespace screwdriver
 	void rtr_data_parser::receive(iterator_type begin, iterator_type end)
 	{
 		imp_->tm_data_buffer_.push_back_array(begin, end);
+	}
+
+	void rtr_data_parser::set_parse_frame_data_fun(parse_frame_fun_t fun)
+	{
+		imp_->parse_frame_data_fun_ = fun;
+	}
+
+	void rtr_data_parser::set_parse_frame_time_fun(parse_frame_fun_t fun)
+	{
+		imp_->parse_frame_time_fun_ = fun;
 	}
 }

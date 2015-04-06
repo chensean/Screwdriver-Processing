@@ -2,6 +2,7 @@
 #include <iostream>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
+#include <boost/algorithm/string.hpp>
 #include "rtr_tm_client.h"
 #include "rtr_monitor_client.h"
 #include "tm_parameter_manager.h"
@@ -12,6 +13,9 @@
 #include "digit_utilities.h"
 #include "base_tm_parameter.h"
 #include "bits_tm_parameter.h"
+#include "linear_conversion.h"
+#include "polynomial_conversion.h"
+#include <tm_time.h>
 
 namespace screwdriver
 {
@@ -26,6 +30,7 @@ namespace screwdriver
 		boost::shared_ptr<rtr_tm_client> rtr_tm_client_;
 		boost::shared_ptr<rtr_monitor_client> rtr_monitor_client_;
 		boost::shared_ptr<irig_frame> irig_frame_;
+		TM::tm_time_ptr tm_time_;
 	};
 
 	test_context::test_context(void)
@@ -105,45 +110,133 @@ namespace screwdriver
 		}
 		config_irig_frame(pt);
 
-
+		if (!imp_->irig_frame_)
+		{
+			return;
+		}
 		auto irig_pt = pt.get_child("CFG.ACQ_SYS.SOURCE.IRIG.IRIGFrameStruc");
 		auto word_length = irig_pt.get<uint32_t>("<xmlattr>.WordLength");
 		auto bytes = word_length / std::numeric_limits<uint8_t>::digits;
 		auto minor_frames = irig_pt.get<uint32_t>("<xmlattr>.MinorFrames");
 		auto sync_location = irig_pt.get<uint32_t>("<xmlattr>.SyncLocation");
-		auto parameter = pt.get_child("CFG.ACQ_SYS.SOURCE.Parameters");
-		std::for_each(parameter.begin(), parameter.end(),
+		auto parameters = pt.get_child("CFG.ACQ_SYS.SOURCE.Parameters");
+		std::for_each(parameters.begin(), parameters.end(),
 		              [=](ptree::value_type parameter_pt)
 		              {
 			              auto name = parameter_pt.second.get<std::string>("<xmlattr>.IDENT");
 
 			              auto format_type = parameter_pt.second.get<std::string>("Extraction.<xmlattr>.FormatType");
-			              auto nb_words = parameter_pt.second.get<uint32_t>("Gernal.<xmlattr>.NbWords");
-			              auto nb_bits = parameter_pt.second.get<uint32_t>("Gernal.<xmlattr>.NbBits");
-			              auto lsb_pos_bit = parameter_pt.second.get<uint32_t>("Gernal.<xmlattr>.Lsbposbit");
+			              auto nb_words = parameter_pt.second.get<uint32_t>("Extraction.<xmlattr>.NbWords");
+			              auto nb_bits = parameter_pt.second.get<uint32_t>("Extraction.<xmlattr>.NbBits");
+			              auto lsb_pos_bit = parameter_pt.second.get<uint32_t>("Extraction.<xmlattr>.Lsbposbit");
 			              TM::tm_parameter_ptr parameter_ptr;
 			              if (nb_words * word_length == nb_bits)
 			              {
-				              std::string type = "double_parameter" + boost::lexical_cast<std::string>(nb_bits);
+				              std::string type = boost::to_lower_copy(format_type) + "_parameter" + boost::lexical_cast<std::string>(nb_bits);
 				              if (nb_bits > 8)
 				              {
 					              type = "big_endian_" + type;
 				              }
-				              parameter_ptr = TM::create_base_tm_parameter(type, name);
+				              parameter_ptr = TM::create_base_tm_parameter(
+					              type, name);
 			              }
 			              else
 			              {
-				              std::string type = "bits" + boost::lexical_cast<std::string>(nb_words * word_length) + "_double_parameter" + boost::lexical_cast<std::string>(nb_bits);
+				              std::string type = "bits" + boost::lexical_cast<std::string>(nb_words * word_length) + "_parameter" + boost::lexical_cast<std::string>(nb_bits);
 				              if (nb_words * word_length > 8)
 				              {
 					              type = "big_endian_" + type;
 				              }
-				              parameter_ptr = TM::create_bits_tm_parameter(type, name,lsb_pos_bit);
+				              parameter_ptr = TM::create_bits_tm_parameter(type, name, lsb_pos_bit);
+			              }
+			              auto A0 = parameter_pt.second.get<double>("Conversion.<xmlattr>.A0");
+			              auto A1 = parameter_pt.second.get<double>("Conversion.<xmlattr>.A1");
+			              if (A0 != 0 || A1 != 1)
+			              {
+				              std::shared_ptr<linear_conversion> conversion(new linear_conversion(A1, A0));
+				              parameter_ptr->set_primary_conversion(boost::bind(&linear_conversion::convert, conversion, _1));
+			              }
+			              auto conv_type = parameter_pt.second.get<std::string>("Conversion.<xmlattr>.ConvType");
+			              if (conv_type == "Liner")
+			              {
+				              auto B0 = parameter_pt.second.get<double>("Conversion.<xmlattr>.B0");
+				              auto B1 = parameter_pt.second.get<double>("Conversion.<xmlattr>.B1");
+				              std::shared_ptr<linear_conversion> conversion(new linear_conversion(B1, B0));
+				              parameter_ptr->set_secondary_conversion(boost::bind(&linear_conversion::convert, conversion, _1));
+			              }
+			              else if (conv_type == "Parabolic")
+			              {
+				              std::vector<double> coefficient;
+				              for (size_t i = 0; i < 3; ++i)
+				              {
+					              auto B = parameter_pt.second.get<double>("Conversion.<xmlattr>.B" + boost::lexical_cast<std::string>(i));
+					              coefficient.push_back(B);
+				              }
+				              std::shared_ptr<polynomial_conversion> conversion(new polynomial_conversion(coefficient));
+				              parameter_ptr->set_secondary_conversion(boost::bind(&polynomial_conversion::convert, conversion, _1));
+			              }
+			              else if (conv_type == "Polynomial")
+			              {
+				              std::vector<double> coefficient;
+				              for (size_t i = 0; i < 9; ++i)
+				              {
+					              auto B = parameter_pt.second.get<double>("Conversion.<xmlattr>.B" + boost::lexical_cast<std::string>(i));
+					              coefficient.push_back(B);
+				              }
+				              std::shared_ptr<polynomial_conversion> conversion(new polynomial_conversion(coefficient));
+				              parameter_ptr->set_secondary_conversion(boost::bind(&polynomial_conversion::convert, conversion, _1));
 			              }
 
 			              auto comm_type = parameter_pt.second.get<std::string>("Gernal.<xmlattr>.CommType");
 			              auto major_pos = parameter_pt.second.get<uint32_t>("Gernal.<xmlattr>.MajorPos");
 			              auto position = parameter_pt.second.get<uint32_t>("Gernal.<xmlattr>.Position");
+			              auto recurence = parameter_pt.second.get<uint32_t>("Gernal.<xmlattr>.Recurence");
+			              if (sync_location != 0)
+			              {
+				              position -= 1;
+			              }
+			              if (comm_type == "Com")
+			              {
+				              for (uint32_t i = 0; i < minor_frames; ++i)
+				              {
+					              imp_->irig_frame_->add_parameter(parameter_ptr, i, position * bytes);
+				              }
+			              }
+			              else if (comm_type == "SubCom")
+			              {
+				              for (uint32_t i = major_pos; i < minor_frames; i += recurence)
+				              {
+					              imp_->irig_frame_->add_parameter(parameter_ptr, i, position * bytes);
+				              }
+			              }
+			              else if (comm_type == "SuperCom")
+			              {
+				              for (uint32_t i = 0; i < minor_frames; ++i)
+				              {
+					              for (uint32_t j = 0; j < minor_frames; j += recurence)
+					              {
+						              imp_->irig_frame_->add_parameter(parameter_ptr, i, (position + j) * bytes);
+					              }
+				              }
+			              }
+			              else if (comm_type == "Free")
+			              {
+				              auto positions = parameter_pt.second.get_child("Gernal");
+				              std::for_each(positions.begin(), positions.end(),
+				                            [=](ptree::value_type pos_pt)
+				                            {
+					                            if (pos_pt.first == "Pos")
+					                            {
+						                            auto free_major_pos = pos_pt.second.get<uint32_t>("<xmlattr>.MajorPos");
+						                            auto free_minor_pos = pos_pt.second.get<uint32_t>("<xmlattr>.MinorPos");
+						                            if (sync_location != 0)
+						                            {
+							                            free_minor_pos -= 1;
+						                            }
+						                            imp_->irig_frame_->add_parameter(parameter_ptr, free_major_pos, free_minor_pos * bytes);
+					                            }
+				                            });
+			              }
 		              });
 	}
 }

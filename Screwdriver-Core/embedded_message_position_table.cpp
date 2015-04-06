@@ -2,7 +2,7 @@
 
 namespace TM
 {
-	typedef std::tuple<sub_buffer_ptr, uint32_t, uint32_t> sub_buffer_position_t;
+	typedef std::tuple<embedded_message_ptr, uint32_t, uint32_t> sub_buffer_position_t;
 	typedef std::vector<sub_buffer_position_t> sub_buffer_container_t;
 
 	struct embedded_message_position_table::sub_buffer_position_table_imp_t
@@ -19,7 +19,7 @@ namespace TM
 	{
 	}
 
-	void embedded_message_position_table::add_sub_buffer(const sub_buffer_ptr& sub_buffer, uint32_t start_idx, uint32_t length)
+	void embedded_message_position_table::add_sub_buffer(const embedded_message_ptr& sub_buffer, uint32_t start_idx, uint32_t length)
 	{
 		imp_->sub_buffers.push_back(std::make_tuple(sub_buffer, start_idx, length));
 	}

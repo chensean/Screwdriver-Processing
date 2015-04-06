@@ -31,7 +31,7 @@ namespace TM
 		imp_->parameter_position_table_->add_parameter(param, start_idx);
 	}
 
-	void data_buffer::add_sub_buffer(const sub_buffer_ptr& sub_buffer, uint32_t start_idx, uint32_t length)
+	void data_buffer::add_sub_buffer(const embedded_message_ptr& sub_buffer, uint32_t start_idx, uint32_t length)
 	{
 		imp_->sub_buffer_position_table_->add_sub_buffer(sub_buffer, start_idx, length);
 	}

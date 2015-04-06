@@ -18,7 +18,7 @@ namespace TM
 	public:
 		embedded_message_position_table(void);
 		~embedded_message_position_table(void);
-		void add_sub_buffer(const sub_buffer_ptr& sub_buffer, uint32_t start_idx, uint32_t length);
+		void add_sub_buffer(const embedded_message_ptr& sub_buffer, uint32_t start_idx, uint32_t length);
 		void read_from_buffer(const std::vector<uint8_t>& data);
 		void read_from_buffer(const std::vector<uint8_t>& data, uint32_t offset);
 	private:

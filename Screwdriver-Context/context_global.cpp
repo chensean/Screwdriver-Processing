@@ -5,7 +5,7 @@ namespace screwdriver
 {
 	void create_rtr_tm_client(const std::string& ip, const std::string& folder)
 	{
-		single_test_context::Instance().create_rtr_tm_client(ip,folder);
+		single_test_context::Instance().create_rtr_tm_client(ip, folder);
 	}
 
 	void start_rtr_tm()

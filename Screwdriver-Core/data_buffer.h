@@ -13,6 +13,8 @@
 
 namespace TM
 {
+	class data_buffer;
+	typedef boost::shared_ptr<data_buffer> data_buffer_ptr;
 	class __declspec(dllexport) data_buffer
 		:private boost::noncopyable
 	{
@@ -20,7 +22,7 @@ namespace TM
 		data_buffer(void);
 		~data_buffer(void);
 		void add_parameter(const tm_parameter_ptr& param, uint32_t start_idx);
-		void add_sub_buffer(const sub_buffer_ptr& sub_buffer, uint32_t start_idx, uint32_t length);
+		void add_sub_buffer(const embedded_message_ptr& sub_buffer, uint32_t start_idx, uint32_t length);
 		void read_from_buffer(const std::vector<uint8_t>& data);
 		void read_from_buffer(const std::vector<uint8_t>& data, uint32_t offset);
 	private:

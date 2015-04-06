@@ -169,6 +169,7 @@
     <ClCompile Include="base_tm_parameter.cpp" />
     <ClCompile Include="bits_tm_parameter.cpp" />
     <ClCompile Include="data_buffer.cpp" />
+    <ClCompile Include="irig_b_time.cpp" />
     <ClCompile Include="linear_conversion.cpp" />
     <ClCompile Include="parameter_position_table.cpp" />
     <ClCompile Include="polynomial_conversion.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="base_tm_parameter.h" />
     <ClInclude Include="bits_tm_parameter.h" />
     <ClInclude Include="data_buffer.h" />
+    <ClInclude Include="irig_b_time.h" />
     <ClInclude Include="linear_conversion.h" />
     <ClInclude Include="parameter_position_table.h" />
     <ClInclude Include="polynomial_conversion.h" />
@@ -190,6 +192,7 @@
     <ClInclude Include="embedded_message_position_table.h" />
     <ClInclude Include="tm_parameter.h" />
     <ClInclude Include="tm_parameter_manager.h" />
+    <ClInclude Include="tm_time.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

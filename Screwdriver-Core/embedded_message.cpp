@@ -4,11 +4,11 @@
 
 namespace TM
 {
-	struct embedded_message::sub_buffer_imp_t
+	struct embedded_message::embedded_message_imp_t
 	{
 		typedef boost::circular_buffer<uint8_t> buffer_type;
 
-		sub_buffer_imp_t(uint32_t message_length, std::vector<uint8_t> synchro_word):
+		embedded_message_imp_t(uint32_t message_length, std::vector<uint8_t> synchro_word):
 			message_length_(message_length),
 			message_buffer_(message_length * 10),
 			synchro_word_(synchro_word),
@@ -22,10 +22,11 @@ namespace TM
 		std::vector<uint8_t> synchro_word_;
 		std::vector<uint8_t> message_;
 		boost::shared_ptr<data_buffer> data_buffer_;
+		embedded_message_extract_signal_t embedded_message_extract_signal_;
 	};
 
 	embedded_message::embedded_message(uint32_t message_length, std::vector<uint8_t> synchro_word)
-		:imp_(new sub_buffer_imp_t(message_length, synchro_word))
+		:imp_(new embedded_message_imp_t(message_length, synchro_word))
 	{
 	}
 
@@ -58,7 +59,15 @@ namespace TM
 				std::copy(iter, iter + imp_->message_length_, imp_->message_.begin());
 				imp_->message_buffer_.erase(imp_->message_buffer_.begin(), iter + imp_->message_length_);
 				imp_->data_buffer_->read_from_buffer(imp_->message_);
+				//tm_data_ptr data_ptr(new std::vector<unsigned char>(imp_->message_.begin(), imp_->message_.end()));
+
+				//imp_->embedded_message_extract_signal_();
 			}
 		}
+	}
+
+	boost::signals2::connection embedded_message::connect_embedded_message_extract_signal(const embedded_message_extract_signal_t::slot_type& slot)
+	{
+		return imp_->embedded_message_extract_signal_.connect(slot);
 	}
 }
