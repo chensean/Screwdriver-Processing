@@ -22,4 +22,14 @@ namespace screwdriver
 	{
 		single_test_context::Instance().load_irig_config(file_name);
 	}
+
+	parameter_ptr get_parameter(const std::string& name)
+	{
+		return single_test_context::Instance().get_parameter(name);
+	}
+
+	std::vector<parameter_ptr> get_all_parameters()
+	{
+		return single_test_context::Instance().get_all_parameters();
+	}
 }

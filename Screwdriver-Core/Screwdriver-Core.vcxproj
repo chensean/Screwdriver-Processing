@@ -87,9 +87,9 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;SCREWDRIVERCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <AdditionalIncludeDirectories>../Screwdriver-Utilities</AdditionalIncludeDirectories>
-      <DisableSpecificWarnings>4275;4251</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4275;4251;4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -105,8 +105,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;SCREWDRIVERCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
-      <DisableSpecificWarnings>4275;4251</DisableSpecificWarnings>
+      <SDLCheck>false</SDLCheck>
+      <DisableSpecificWarnings>4275;4251;4996</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>../Screwdriver-Utilities</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -129,9 +129,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;SCREWDRIVERCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <AdditionalIncludeDirectories>../Screwdriver-Utilities</AdditionalIncludeDirectories>
-      <DisableSpecificWarnings>4275;4251</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4275;4251;4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -151,9 +151,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;SCREWDRIVERCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <DisableSpecificWarnings>4275;4251</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4275;4251;4996</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>../Screwdriver-Utilities</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>

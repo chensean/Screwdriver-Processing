@@ -4,8 +4,6 @@
 #if defined(_MSC_VER)
 # pragma once
 #endif
-
-#include <boost/unordered_map.hpp>
 #include "tm_parameter.h"
 
 namespace TM
@@ -20,8 +18,8 @@ namespace TM
 		void add_tm_parameter(const std::string& name, const tm_parameter_ptr& param);
 		void remove_tm_parameter(const std::string& name);
 	private:
-		typedef boost::unordered_map<std::string, tm_parameter_ptr> parameter_container_t;
-		parameter_container_t parameter_container_;
+		struct tm_parameter_manager_imp_t;
+		boost::shared_ptr<tm_parameter_manager_imp_t> imp_;
 	};
 }
 

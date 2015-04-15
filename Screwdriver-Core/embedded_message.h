@@ -14,7 +14,8 @@ namespace TM
 {
 	class data_buffer;	
 	typedef boost::shared_ptr<std::vector<uint8_t>> tm_data_ptr;	
-	typedef boost::signals2::signal<void()> embedded_message_extract_signal_t;
+	typedef boost::signals2::signal<void(const tm_data_ptr&)> embedded_message_extract_signal_t;
+	typedef embedded_message_extract_signal_t::slot_type embedded_message_extract_slot_t;
 
 	class __declspec(dllexport) embedded_message
 		:private boost::noncopyable
@@ -25,7 +26,7 @@ namespace TM
 		boost::shared_ptr<data_buffer> get_data_buffer() const;
 		void add_data(const std::vector<uint8_t>& data, uint32_t start_idx, uint32_t length);
 		void parse();
-		boost::signals2::connection connect_embedded_message_extract_signal(const embedded_message_extract_signal_t::slot_type& slot);
+		boost::signals2::connection connect_embedded_message_extract_signal(const embedded_message_extract_slot_t& slot);
 
 	private:
 		struct embedded_message_imp_t;

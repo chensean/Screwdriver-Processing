@@ -59,9 +59,8 @@ namespace TM
 				std::copy(iter, iter + imp_->message_length_, imp_->message_.begin());
 				imp_->message_buffer_.erase(imp_->message_buffer_.begin(), iter + imp_->message_length_);
 				imp_->data_buffer_->read_from_buffer(imp_->message_);
-				//tm_data_ptr data_ptr(new std::vector<unsigned char>(imp_->message_.begin(), imp_->message_.end()));
-
-				//imp_->embedded_message_extract_signal_();
+				tm_data_ptr data_ptr(new std::vector<unsigned char>(imp_->message_.begin(), imp_->message_.end()));
+				imp_->embedded_message_extract_signal_(data_ptr);
 			}
 		}
 	}

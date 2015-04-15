@@ -15,6 +15,7 @@ namespace TM
 	class tm_parameter;
 	typedef boost::shared_ptr<tm_parameter> tm_parameter_ptr;
 	typedef boost::signals2::signal<void(tm_parameter*)> val_charged_signal_t;
+	typedef val_charged_signal_t::slot_type val_charged_slot_t;
 	typedef std::function<double(double)> primary_conversion_fun_t;
 	typedef std::function<double(double)> secondary_conversion_fun_t;
 	typedef std::function<std::string(double)> text_conversion_fun_t;
@@ -37,7 +38,7 @@ namespace TM
 		virtual double get_extraction_val() const = 0;
 		virtual std::string get_val_text() const =0;
 		virtual std::vector<uint8_t> get_data() const = 0;
-		virtual boost::signals2::connection connect_val_charged_signal(const val_charged_signal_t::slot_type& slot) = 0;
+		virtual boost::signals2::connection connect_val_charged_signal(const val_charged_slot_t& slot) = 0;
 		virtual void read_form_buffer(const std::vector<uint8_t>& buffer, uint32_t start_idx) = 0;
 		virtual void set_primary_conversion(primary_conversion_fun_t primary_conversion) = 0;
 		virtual void set_secondary_conversion(secondary_conversion_fun_t secondary_conversion) = 0;

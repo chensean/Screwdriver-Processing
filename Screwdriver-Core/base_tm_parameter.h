@@ -119,7 +119,7 @@ namespace TM
 			return boost::lexical_cast<std::string>(get_val());
 		}
 
-		virtual boost::signals2::connection connect_val_charged_signal(const val_charged_signal_t::slot_type& slot)
+		virtual boost::signals2::connection connect_val_charged_signal(const val_charged_slot_t& slot)
 		{
 			return val_charged_.connect(slot);
 		}

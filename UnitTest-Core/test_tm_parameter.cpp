@@ -23,7 +23,7 @@ namespace UnitTestCore
 			Logger::WriteMessage("Test Create uint_parameter8");
 			auto tm =TM::create_base_tm_parameter("uint_parameter8","tm1");
 			boost::shared_ptr<slot_test> slot(new slot_test);
-			tm->connect_val_charged_signal(val_charged_signal_t::slot_type(&slot_test::receive_signal,slot.get(),_1).track(slot));
+			tm->connect_val_charged_signal(val_charged_slot_t(&slot_test::receive_signal,slot.get(),_1).track(slot));
 			std::vector<unsigned char> buf;
 			buf+=0xaa,0xbb,0xcc;
 			tm->read_form_buffer(buf, 0);

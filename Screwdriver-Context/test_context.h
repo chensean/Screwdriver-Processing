@@ -10,9 +10,11 @@
 #include <boost/shared_ptr.hpp>
 #include <loki/Singleton.h>
 #include <boost/property_tree/exceptions.hpp>
+#include "parameter.h"
 
 namespace screwdriver
 {
+	
 	class test_context
 		:private boost::noncopyable
 	{
@@ -22,6 +24,8 @@ namespace screwdriver
 		void start_rtr_tm();
 		void stop_rtr_tm();
 		void load_irig_config(const std::string& file_name);
+		parameter_ptr get_parameter(const std::string& name);
+		std::vector<parameter_ptr> get_all_parameters();
 	private:
 		test_context(void);
 		~test_context(void);

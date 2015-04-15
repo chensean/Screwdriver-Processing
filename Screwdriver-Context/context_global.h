@@ -6,6 +6,7 @@
 #endif
 
 #include <string>
+#include "parameter.h"
 
 namespace screwdriver
 {
@@ -13,6 +14,8 @@ namespace screwdriver
 	__declspec(dllexport) void start_rtr_tm();
 	__declspec(dllexport) void stop_rtr_tm();
 	__declspec(dllexport) void load_irig_config(const std::string& file_name);
+	__declspec(dllexport) parameter_ptr get_parameter(const std::string& name);
+	__declspec(dllexport) std::vector<parameter_ptr> get_all_parameters();
 }
 
 #endif // CONTEXT_GLOBAL_HPP
