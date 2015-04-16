@@ -14,7 +14,6 @@
 
 namespace screwdriver
 {
-	
 	class test_context
 		:private boost::noncopyable
 	{

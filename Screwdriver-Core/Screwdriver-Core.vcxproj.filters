@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="tm_parameter.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="tm_parameter_manager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>

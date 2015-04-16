@@ -1,198 +1,208 @@
 <?xml version='1.0' encoding='utf-8'?>
+
 <CFG>
-    <ACQ_SYS>
-        <SOURCE Port="3070" SoftSync="No" DataSource="RTR_Network" TMChannel="2" IPAddr="192.168.1.1" BitRate="1024000" TYPE="CORTEX_TM" IPType="TCP" NAME="CORTEX RTR_1">
-            <IRIG>
-                <IRIGFrameStruc SFIDPosition="0" SyncLength="16" WordLength="16" MinorFrameWords="128" SFIDBits="16" SyncLocation="Begin" SyncPattern="EB90" FrameMode="SFID" MinorFrames="16" SFIDDirection="0" SyncMask="FFFF" FirstSFIDValue="0" SFIDLSBBit="0" BitRate="1024000"/>
-            </IRIG>
-            <Parameters>
-                <Default IDENT="Default">
-                    <Gernal Recurence="0" RTenable="1" MajorPos="0" CommType="Com" Position="0"/>
-                    <Auxiliary Ymax="0" Ymin="0" Unit=""/>
-                    <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int"/>
-                    <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0"/>
-                </Default>
-                <ELEMENT IDENT="A">
-                    <Gernal Recurence="0" RTenable="1" MajorPos="0" CommType="Com" Position="10"/>
-                    <Auxiliary Ymax="0" Ymin="0" Unit=""/>
-                    <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="UInt"/>
-                    <Conversion ConvType="Liner" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0"/>
-                </ELEMENT>
-                <ELEMENT IDENT="B">
-                    <Gernal Recurence="2" RTenable="1" MajorPos="1" CommType="SubCom" Position="1"/>
-                    <Auxiliary Ymax="0" Ymin="0" Unit=""/>
-                    <Extraction NbBits="32" Lsbposbit="0" NbWords="2" FormatType="Float"/>
-                    <Conversion ConvType="Polynomial" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0"/>
-                </ELEMENT>
-                <ELEMENT IDENT="C">
-                    <Gernal Recurence="8" RTenable="1" MajorPos="0" CommType="SuperCom" Position="2"/>
-                    <Auxiliary Ymax="0" Ymin="0" Unit=""/>
-                    <Extraction NbBits="64" Lsbposbit="0" NbWords="4" FormatType="Double"/>
-                    <Conversion ConvType="Parabolic" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0"/>
-                </ELEMENT>
-                <ELEMENT IDENT="D">
-                    <Gernal Recurence="0" RTenable="1" MajorPos="0" CommType="Free" Position="0">
-                        <Pos MajorPos="1" MinorPos="5" Num="1"/>
-                        <Pos MajorPos="2" MinorPos="5" Num="2"/>
-                        <Pos MajorPos="3" MinorPos="5" Num="3"/>
-                        <Pos MajorPos="4" MinorPos="5" Num="4"/>
-                        <Pos MajorPos="5" MinorPos="5" Num="5"/>
-                        <Pos MajorPos="6" MinorPos="5" Num="6"/>
-                        <Pos MajorPos="7" MinorPos="5" Num="7"/>
-                        <Pos MajorPos="8" MinorPos="5" Num="8"/>
-                    </Gernal>
-                    <Auxiliary Ymax="0" Ymin="0" Unit=""/>
-                    <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int"/>
-                    <Conversion ConvType="Hyperbolic" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0"/>
-                </ELEMENT>
-                <ELEMENT IDENT="H">
-                    <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0"/>
-                    <Auxiliary Ymax="0" Ymin="0" Unit=""/>
-                    <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int"/>
-                    <Conversion ConvType="Boolean" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0"/>
-                </ELEMENT>
-                <ELEMENT IDENT="I">
-                    <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0"/>
-                    <Auxiliary Ymax="0" Ymin="0" Unit=""/>
-                    <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int"/>
-                    <Conversion ConvType="Thermocouple" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0"/>
-                </ELEMENT>
-                <ELEMENT IDENT="H">
-                    <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0"/>
-                    <Auxiliary Ymax="0" Ymin="0" Unit=""/>
-                    <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int"/>
-                    <Conversion ConvType="Boolean" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0"/>
-                </ELEMENT>
-            </Parameters>
-            <Embedded>
-                <ELEMENT NAME="E1">
-					<Pos MajorPos="1" MinorPos="5" Num="1"/>
-                    <Pos MajorPos="2" MinorPos="5" Num="2"/>
-                    <Pos MajorPos="3" MinorPos="5" Num="3"/>
-                    <Pos MajorPos="4" MinorPos="5" Num="4"/>
-					<Pos MajorPos="5" MinorPos="5" Num="5"/>
-					<Pos MajorPos="6" MinorPos="5" Num="6"/>
-                    <Pos MajorPos="7" MinorPos="5" Num="7"/>
-                    <Pos MajorPos="8" MinorPos="5" Num="8"/>
-				</ELEMENT>
-                <ELEMENT NAME="E2">
-					<Pos MajorPos="1" MinorPos="5" Num="1"/>
-                    <Pos MajorPos="2" MinorPos="5" Num="2"/>
-                    <Pos MajorPos="3" MinorPos="5" Num="3"/>
-                    <Pos MajorPos="4" MinorPos="5" Num="4"/>
-				</ELEMENT>
-                <ELEMENT NAME="E3">
-					<Pos MajorPos="1" MinorPos="5" Num="1"/>
-                    <Pos MajorPos="2" MinorPos="5" Num="2"/>
-                    <Pos MajorPos="3" MinorPos="5" Num="3"/>
-                    <Pos MajorPos="4" MinorPos="5" Num="4"/>
-					<Pos MajorPos="5" MinorPos="5" Num="5"/>
-					<Pos MajorPos="6" MinorPos="5" Num="6"/>
-                    <Pos MajorPos="7" MinorPos="5" Num="7"/>
-                    <Pos MajorPos="8" MinorPos="5" Num="8"/>
-					<Pos MajorPos="9" MinorPos="5" Num="9"/>
-					<Pos MajorPos="10" MinorPos="5" Num="10"/>
-                    <Pos MajorPos="11" MinorPos="5" Num="11"/>
-                    <Pos MajorPos="12" MinorPos="5" Num="12"/>
-				</ELEMENT>
-            </Embedded>
-            <SOURCE TYPE="EMBEDDED_MSG" NAME="E1">
-				<Definition  ExtractType="0" EmLength="10" SyncBits="24" SyncPattern="7e7e7e" SyncPos="Begin" />
-                <Parameters>
-                    <ELEMENT IDENT="Default">
-                        <Gernal Recurence="0" RTenable="1" MajorPos="0" CommType="Com" Position="0"/>
-                        <Auxiliary Ymax="0" Ymin="0" Unit=""/>
-                        <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int"/>
-                        <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0"/>
-                    </ELEMENT>
-                </Parameters>
-            </SOURCE>
-            <SOURCE TYPE="EMBEDDED_MSG" NAME="E2">
-				<Definition  ExtractType="0" EmLength="10" SyncBits="24" SyncPattern="7e7e7e" SyncPos="Begin" />
-                <Parameters>
-                    <ELEMENT IDENT="F">
-                        <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0"/>
-                        <Auxiliary Ymax="0" Ymin="0" Unit=""/>
-                        <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int"/>
-                        <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0"/>
-                    </ELEMENT>
-                    <ELEMENT IDENT="F">
-                        <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0"/>
-                        <Auxiliary Ymax="0" Ymin="0" Unit=""/>
-                        <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int"/>
-                        <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0"/>
-                    </ELEMENT>
-                    <ELEMENT IDENT="F">
-                        <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0"/>
-                        <Auxiliary Ymax="0" Ymin="0" Unit=""/>
-                        <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int"/>
-                        <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0"/>
-                    </ELEMENT>
-                </Parameters>
-            </SOURCE>
-            <SOURCE TYPE="EMBEDDED_MSG" NAME="E3">
-				<Definition  ExtractType="0" EmLength="10" SyncBits="24" SyncPattern="7e7e7e" SyncPos="Begin" />
-                <Parameters>
-                    <ELEMENT IDENT="G">
-                        <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0"/>
-                        <Auxiliary Ymax="0" Ymin="0" Unit=""/>
-                        <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int"/>
-                        <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0"/>
-                    </ELEMENT>
-                    <ELEMENT IDENT="Param1">
-                        <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0"/>
-                        <Auxiliary Ymax="0" Ymin="0" Unit=""/>
-                        <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int"/>
-                        <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0"/>
-                    </ELEMENT>
-                    <ELEMENT IDENT="Param2">
-                        <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0"/>
-                        <Auxiliary Ymax="0" Ymin="0" Unit=""/>
-                        <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int"/>
-                        <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0"/>
-                    </ELEMENT>
-                    <ELEMENT IDENT="Param3">
-                        <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0"/>
-                        <Auxiliary Ymax="0" Ymin="0" Unit=""/>
-                        <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int"/>
-                        <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0"/>
-                    </ELEMENT>
-                    <ELEMENT IDENT="Param4">
-                        <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0"/>
-                        <Auxiliary Ymax="0" Ymin="0" Unit=""/>
-                        <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int"/>
-                        <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0"/>
-                    </ELEMENT>
-                    <ELEMENT IDENT="Param5">
-                        <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0"/>
-                        <Auxiliary Ymax="0" Ymin="0" Unit=""/>
-                        <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int"/>
-                        <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0"/>
-                    </ELEMENT>
-                </Parameters>
-            </SOURCE>
-        </SOURCE>
-        <SOURCE Port="3070" SoftSync="No" DataSource="RTR_Network" TMChannel="2" IPAddr="192.168.1.1" BitRate="1024000" TYPE="CORTEX_TM" IPType="TCP" NAME="CORTEX RTR_2">
-            <IRIG>
-                <IRIGFrameStruc SFIDPosition="0" SyncLength="16" WordLength="16" MinorFrameWords="128" SFIDBits="16" SyncLocation="Begin" SyncPattern="EB90" FrameMode="SFID" MinorFrames="16" SFIDDirection="0" SyncMask="FFFF" FirstSFIDValue="0" SFIDLSBBit="0" BitRate="1024000"/>
-            </IRIG>
-            <Parameters>
-                <Default IDENT="Default">
-                    <Gernal Recurence="0" RTenable="1" MajorPos="0" CommType="Com" Position="0"/>
-                    <Auxiliary Ymax="0" Ymin="0" Unit=""/>
-                    <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int"/>
-                    <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0"/>
-                </Default>
-                <ELEMENT IDENT="A">
-                    <Gernal Recurence="0" RTenable="1" MajorPos="0" CommType="Com" Position="10"/>
-                    <Auxiliary Ymax="0" Ymin="0" Unit=""/>
-                    <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="UInt"/>
-                    <Conversion ConvType="Liner" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0"/>
-                </ELEMENT>
-            </Parameters>
-            <Embedded/>
-        </SOURCE>
-    </ACQ_SYS>
-    <DISPLAY/>
-    <TOPOLOGY/>
+  <ACQ_SYS>
+    <SOURCE Port="3070" SoftSync="No" DataSource="RTR_Network" TMChannel="2" IPAddr="192.168.1.1" BitRate="1024000"
+            TYPE="CORTEX_TM" IPType="TCP" NAME="CORTEX RTR_1">
+      <IRIG>
+        <IRIGFrameStruc SFIDPosition="0" SyncLength="16" WordLength="16" MinorFrameWords="128" SFIDBits="16"
+                        SyncLocation="Begin" SyncPattern="EB90" FrameMode="SFID" MinorFrames="16" SFIDDirection="0"
+                        SyncMask="FFFF" FirstSFIDValue="0" SFIDLSBBit="0" BitRate="1024000" />
+      </IRIG>
+      <Parameters>
+        <Default IDENT="Default">
+          <Gernal Recurence="0" RTenable="1" MajorPos="0" CommType="Com" Position="0" />
+          <Auxiliary Ymax="0" Ymin="0" Unit="" />
+          <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int" />
+          <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
+        </Default>
+        <ELEMENT IDENT="A">
+          <Gernal Recurence="0" RTenable="1" MajorPos="0" CommType="Com" Position="10" />
+          <Auxiliary Ymax="0" Ymin="0" Unit="" />
+          <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="UInt" />
+          <Conversion ConvType="Liner" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
+        </ELEMENT>
+        <ELEMENT IDENT="B">
+          <Gernal Recurence="2" RTenable="1" MajorPos="1" CommType="SubCom" Position="1" />
+          <Auxiliary Ymax="0" Ymin="0" Unit="" />
+          <Extraction NbBits="32" Lsbposbit="0" NbWords="2" FormatType="Float" />
+          <Conversion ConvType="Polynomial" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0"
+                      A0="0" />
+        </ELEMENT>
+        <ELEMENT IDENT="C">
+          <Gernal Recurence="8" RTenable="1" MajorPos="0" CommType="SuperCom" Position="2" />
+          <Auxiliary Ymax="0" Ymin="0" Unit="" />
+          <Extraction NbBits="64" Lsbposbit="0" NbWords="4" FormatType="Double" />
+          <Conversion ConvType="Parabolic" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
+        </ELEMENT>
+        <ELEMENT IDENT="D">
+          <Gernal Recurence="0" RTenable="1" MajorPos="0" CommType="Free" Position="0">
+            <Pos MajorPos="1" MinorPos="5" Num="1" />
+            <Pos MajorPos="2" MinorPos="5" Num="2" />
+            <Pos MajorPos="3" MinorPos="5" Num="3" />
+            <Pos MajorPos="4" MinorPos="5" Num="4" />
+            <Pos MajorPos="5" MinorPos="5" Num="5" />
+            <Pos MajorPos="6" MinorPos="5" Num="6" />
+            <Pos MajorPos="7" MinorPos="5" Num="7" />
+            <Pos MajorPos="8" MinorPos="5" Num="8" />
+          </Gernal>
+          <Auxiliary Ymax="0" Ymin="0" Unit="" />
+          <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int" />
+          <Conversion ConvType="Hyperbolic" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0"
+                      A0="0" />
+        </ELEMENT>
+        <ELEMENT IDENT="H">
+          <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0" />
+          <Auxiliary Ymax="0" Ymin="0" Unit="" />
+          <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int" />
+          <Conversion ConvType="Boolean" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
+        </ELEMENT>
+        <ELEMENT IDENT="I">
+          <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0" />
+          <Auxiliary Ymax="0" Ymin="0" Unit="" />
+          <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int" />
+          <Conversion ConvType="Thermocouple" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0"
+                      A0="0" />
+        </ELEMENT>
+        <ELEMENT IDENT="H">
+          <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0" />
+          <Auxiliary Ymax="0" Ymin="0" Unit="" />
+          <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int" />
+          <Conversion ConvType="Boolean" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
+        </ELEMENT>
+      </Parameters>
+      <Embedded>
+        <ELEMENT NAME="E1">
+          <Pos MajorPos="1" MinorPos="5" Num="1" />
+          <Pos MajorPos="2" MinorPos="5" Num="2" />
+          <Pos MajorPos="3" MinorPos="5" Num="3" />
+          <Pos MajorPos="4" MinorPos="5" Num="4" />
+          <Pos MajorPos="5" MinorPos="5" Num="5" />
+          <Pos MajorPos="6" MinorPos="5" Num="6" />
+          <Pos MajorPos="7" MinorPos="5" Num="7" />
+          <Pos MajorPos="8" MinorPos="5" Num="8" />
+        </ELEMENT>
+        <ELEMENT NAME="E2">
+          <Pos MajorPos="1" MinorPos="5" Num="1" />
+          <Pos MajorPos="2" MinorPos="5" Num="2" />
+          <Pos MajorPos="3" MinorPos="5" Num="3" />
+          <Pos MajorPos="4" MinorPos="5" Num="4" />
+        </ELEMENT>
+        <ELEMENT NAME="E3">
+          <Pos MajorPos="1" MinorPos="5" Num="1" />
+          <Pos MajorPos="2" MinorPos="5" Num="2" />
+          <Pos MajorPos="3" MinorPos="5" Num="3" />
+          <Pos MajorPos="4" MinorPos="5" Num="4" />
+          <Pos MajorPos="5" MinorPos="5" Num="5" />
+          <Pos MajorPos="6" MinorPos="5" Num="6" />
+          <Pos MajorPos="7" MinorPos="5" Num="7" />
+          <Pos MajorPos="8" MinorPos="5" Num="8" />
+          <Pos MajorPos="9" MinorPos="5" Num="9" />
+          <Pos MajorPos="10" MinorPos="5" Num="10" />
+          <Pos MajorPos="11" MinorPos="5" Num="11" />
+          <Pos MajorPos="12" MinorPos="5" Num="12" />
+        </ELEMENT>
+      </Embedded>
+      <SOURCE TYPE="EMBEDDED_MSG" NAME="E1">
+        <Definition ExtractType="0" EmLength="10" SyncBits="24" SyncPattern="7e7e7e" SyncPos="Begin" />
+        <Parameters>
+          <ELEMENT IDENT="Default">
+            <Gernal Recurence="0" RTenable="1" MajorPos="0" CommType="Com" Position="0" />
+            <Auxiliary Ymax="0" Ymin="0" Unit="" />
+            <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int" />
+            <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
+          </ELEMENT>
+        </Parameters>
+      </SOURCE>
+      <SOURCE TYPE="EMBEDDED_MSG" NAME="E2">
+        <Definition ExtractType="0" EmLength="10" SyncBits="24" SyncPattern="7e7e7e" SyncPos="Begin" />
+        <Parameters>
+          <ELEMENT IDENT="F">
+            <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0" />
+            <Auxiliary Ymax="0" Ymin="0" Unit="" />
+            <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int" />
+            <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
+          </ELEMENT>
+          <ELEMENT IDENT="F">
+            <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0" />
+            <Auxiliary Ymax="0" Ymin="0" Unit="" />
+            <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int" />
+            <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
+          </ELEMENT>
+          <ELEMENT IDENT="F">
+            <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0" />
+            <Auxiliary Ymax="0" Ymin="0" Unit="" />
+            <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int" />
+            <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
+          </ELEMENT>
+        </Parameters>
+      </SOURCE>
+      <SOURCE TYPE="EMBEDDED_MSG" NAME="E3">
+        <Definition ExtractType="0" EmLength="10" SyncBits="24" SyncPattern="7e7e7e" SyncPos="Begin" />
+        <Parameters>
+          <ELEMENT IDENT="G">
+            <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0" />
+            <Auxiliary Ymax="0" Ymin="0" Unit="" />
+            <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int" />
+            <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
+          </ELEMENT>
+          <ELEMENT IDENT="Param1">
+            <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0" />
+            <Auxiliary Ymax="0" Ymin="0" Unit="" />
+            <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int" />
+            <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
+          </ELEMENT>
+          <ELEMENT IDENT="Param2">
+            <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0" />
+            <Auxiliary Ymax="0" Ymin="0" Unit="" />
+            <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int" />
+            <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
+          </ELEMENT>
+          <ELEMENT IDENT="Param3">
+            <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0" />
+            <Auxiliary Ymax="0" Ymin="0" Unit="" />
+            <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int" />
+            <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
+          </ELEMENT>
+          <ELEMENT IDENT="Param4">
+            <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0" />
+            <Auxiliary Ymax="0" Ymin="0" Unit="" />
+            <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int" />
+            <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
+          </ELEMENT>
+          <ELEMENT IDENT="Param5">
+            <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0" />
+            <Auxiliary Ymax="0" Ymin="0" Unit="" />
+            <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int" />
+            <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
+          </ELEMENT>
+        </Parameters>
+      </SOURCE>
+    </SOURCE>
+    <SOURCE Port="3070" SoftSync="No" DataSource="RTR_Network" TMChannel="2" IPAddr="192.168.1.1" BitRate="1024000"
+            TYPE="CORTEX_TM" IPType="TCP" NAME="CORTEX RTR_2">
+      <IRIG>
+        <IRIGFrameStruc SFIDPosition="0" SyncLength="16" WordLength="16" MinorFrameWords="128" SFIDBits="16"
+                        SyncLocation="Begin" SyncPattern="EB90" FrameMode="SFID" MinorFrames="16" SFIDDirection="0"
+                        SyncMask="FFFF" FirstSFIDValue="0" SFIDLSBBit="0" BitRate="1024000" />
+      </IRIG>
+      <Parameters>
+        <Default IDENT="Default">
+          <Gernal Recurence="0" RTenable="1" MajorPos="0" CommType="Com" Position="0" />
+          <Auxiliary Ymax="0" Ymin="0" Unit="" />
+          <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int" />
+          <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
+        </Default>
+        <ELEMENT IDENT="A">
+          <Gernal Recurence="0" RTenable="1" MajorPos="0" CommType="Com" Position="10" />
+          <Auxiliary Ymax="0" Ymin="0" Unit="" />
+          <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="UInt" />
+          <Conversion ConvType="Liner" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
+        </ELEMENT>
+      </Parameters>
+      <Embedded />
+    </SOURCE>
+  </ACQ_SYS>
+  <DISPLAY />
+  <TOPOLOGY />
 </CFG>

@@ -24,5 +24,5 @@ linear_conversion::~linear_conversion(void)
 
 double linear_conversion::convert(double pre_val)
 {
-	return imp_->a1_*pre_val+imp_->a0_;
+	return imp_->a1_ * pre_val + imp_->a0_;
 }

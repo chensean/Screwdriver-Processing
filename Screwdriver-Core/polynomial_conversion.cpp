@@ -25,4 +25,3 @@ double polynomial_conversion::convert(double pre_val)
 	}
 	return val;
 }
-

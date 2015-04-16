@@ -25,7 +25,7 @@ namespace screwdriver
 	{
 		test_context_imp_t()
 			:parameter_manager_(new parameter_manager),
-			tm_parameter_manager_(new TM::tm_parameter_manager)
+			 tm_parameter_manager_(new TM::tm_parameter_manager)
 		{
 		}
 

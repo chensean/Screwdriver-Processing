@@ -30,11 +30,12 @@ namespace utilities
 		timeString = timeString.substr(0, TIME_STRING_LENGTH);
 		return timeString;
 	}
-	std::vector<std::string> separate_string_by_separator(const std::string& str,const std::string& separator/*=SEPARATOR*/)
+
+	std::vector<std::string> separate_string_by_separator(const std::string& str, const std::string& separator/*=SEPARATOR*/)
 	{
 		std::vector<std::string> strList;
-		boost::split_regex(strList,str,boost::regex(separator));
-		strList.erase(std::remove(strList.begin(),strList.end(),""),strList.end());
-		return strList;		
+		boost::split_regex(strList, str, boost::regex(separator));
+		strList.erase(std::remove(strList.begin(), strList.end(), ""), strList.end());
+		return strList;
 	}
 }

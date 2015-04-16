@@ -49,12 +49,12 @@ namespace TM
 			return BIT_COUNT / std::numeric_limits<uint8_t>::digits;
 		}
 
-		virtual std::string get_name() const
+		virtual std::string get_name() const override
 		{
 			return name_;
 		}
 
-		virtual double get_val() const
+		virtual double get_val() const override
 		{
 			double val = extraction_val_;
 			if (primary_conversion_fun_ != nullptr)
@@ -68,49 +68,49 @@ namespace TM
 			return val;
 		}
 
-		virtual double get_extraction_val() const
+		virtual double get_extraction_val() const override
 		{
 			return extraction_val_;
 		}
 
-		virtual double get_time() const
+		virtual double get_time() const override
 		{
 			return time_;
 		}
 
-		virtual void set_time(double time)
+		virtual void set_time(double time) override
 		{
 			time_ = time;
 		}
 
-		virtual std::vector<uint8_t> get_data() const
+		virtual std::vector<uint8_t> get_data() const override
 		{
 			return data_;
 		}
 
-		virtual void set_primary_conversion(primary_conversion_fun_t primary_conversion)
+		virtual void set_primary_conversion(primary_conversion_fun_t primary_conversion) override
 		{
 			primary_conversion_fun_ = primary_conversion;
 		}
 
-		virtual void set_secondary_conversion(secondary_conversion_fun_t secondary_conversion)
+		virtual void set_secondary_conversion(secondary_conversion_fun_t secondary_conversion) override
 		{
 			secondary_conversion_fun_ = secondary_conversion;
 		}
 
-		virtual void set_text_conversion(text_conversion_fun_t text_conversion)
+		virtual void set_text_conversion(text_conversion_fun_t text_conversion) override
 		{
 			text_conversion_fun_ = text_conversion;
 		}
 
-		virtual void read_form_buffer(const std::vector<uint8_t>& buffer, uint32_t start_idx)
+		virtual void read_form_buffer(const std::vector<uint8_t>& buffer, uint32_t start_idx) override
 		{
-			extraction_val_ =boost::numeric_cast<double>(extract_val(buffer, start_idx)) ;
+			extraction_val_ = boost::numeric_cast<double>(extract_val(buffer, start_idx)) ;
 			std::copy(buffer.begin() + start_idx, buffer.begin() + start_idx + get_bytes_count(), data_.begin());
 			val_charged_(this);
 		}
 
-		virtual std::string get_val_text() const
+		virtual std::string get_val_text() const override
 		{
 			if (text_conversion_fun_ != nullptr)
 			{
@@ -119,7 +119,7 @@ namespace TM
 			return boost::lexical_cast<std::string>(get_val());
 		}
 
-		virtual boost::signals2::connection connect_val_charged_signal(const val_charged_slot_t& slot)
+		virtual boost::signals2::connection connect_val_charged_signal(const val_charged_slot_t& slot) override
 		{
 			return val_charged_.connect(slot);
 		}
@@ -134,7 +134,7 @@ namespace TM
 		text_conversion_fun_t text_conversion_fun_;
 		val_charged_signal_t val_charged_;
 	};
-	
+
 
 	template <class T>
 	struct create_with_name

@@ -15,6 +15,7 @@ namespace TM
 {
 	class data_buffer;
 	typedef boost::shared_ptr<data_buffer> data_buffer_ptr;
+
 	class __declspec(dllexport) data_buffer
 		:private boost::noncopyable
 	{

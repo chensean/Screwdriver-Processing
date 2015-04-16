@@ -13,6 +13,7 @@
 #include <boost/filesystem/operations.hpp>
 # pragma warning( pop )
 #include <boost/algorithm/string.hpp>
+#include <boost/make_shared.hpp>
 #include "bounded_buffer_space_optimized.h"
 #include "string_utilities.h"
 
@@ -53,7 +54,7 @@ namespace screwdriver
 	void save_file::start()
 	{
 		open_file();
-		imp_->thread_ = boost::shared_ptr<boost::thread>(new boost::thread(
+		imp_->thread_ = boost::make_shared<boost::thread>(
 			[=]()
 			{
 				while (!boost::this_thread::interruption_requested() || imp_->tm_data_buffer_.is_not_empty())
@@ -62,7 +63,7 @@ namespace screwdriver
 					imp_->tm_data_buffer_.pop_back(&data);
 					save2file(data);
 				}
-			}));
+			});
 	}
 
 	void save_file::stop()

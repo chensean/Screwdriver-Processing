@@ -4,7 +4,7 @@
 namespace TM
 {
 	typedef boost::unordered_map<std::string, tm_parameter_ptr> parameter_container_t;
-		
+
 	struct tm_parameter_manager::tm_parameter_manager_imp_t
 	{
 		parameter_container_t parameter_container_;

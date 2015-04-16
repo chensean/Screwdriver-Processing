@@ -1,5 +1,5 @@
-#ifndef BOUNDED_BUFFER_HPP
-#define BOUNDED_BUFFER_HPP
+#ifndef BOUNDED_BUFFER_SPACE_OPTIMIZED_HPP
+#define BOUNDED_BUFFER_SPACE_OPTIMIZED_HPP
 
 #if defined(_MSC_VER)
 # pragma once
@@ -82,5 +82,5 @@ private:
 	//boost::condition not_full_;
 };
 
-#endif // BOUNDED_BUFFER_HPP
+#endif // BOUNDED_BUFFER_SPACE_OPTIMIZED_HPP
 

@@ -6,6 +6,7 @@
 #include <boost/thread/thread.hpp>
 # pragma warning( pop )
 #include <boost/asio.hpp>
+#include <boost/make_shared.hpp>
 
 class tcp_client;
 const size_t BUFFER_MAX_SIZE = 8 * 1024 * 1024;
@@ -76,7 +77,7 @@ namespace screwdriver
 	{
 		if (!connect_server()) return;
 		start_receive();
-		imp_->thread_ = boost::shared_ptr<boost::thread>(new boost::thread(boost::bind(&boost::asio::io_service::run, &imp_->ios_)));
+		imp_->thread_ = boost::make_shared<boost::thread>(boost::bind(&boost::asio::io_service::run, &imp_->ios_));
 	}
 
 	void tcp_client::stop()

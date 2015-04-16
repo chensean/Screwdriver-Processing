@@ -12,8 +12,8 @@
 
 namespace TM
 {
-	class data_buffer;	
-	typedef boost::shared_ptr<std::vector<uint8_t>> tm_data_ptr;	
+	class data_buffer;
+	typedef boost::shared_ptr<std::vector<uint8_t>> tm_data_ptr;
 	typedef boost::signals2::signal<void(const tm_data_ptr&)> embedded_message_extract_signal_t;
 	typedef embedded_message_extract_signal_t::slot_type embedded_message_extract_slot_t;
 

@@ -37,13 +37,13 @@ namespace screwdriver
 	{
 		return imp_->time_;
 	}
-	
+
 	double parameter::get_value() const
 	{
 		return imp_->value_;
 	}
 
-	void parameter::set_value(double time,double val)
+	void parameter::set_value(double time, double val)
 	{
 		imp_->time_ = time;
 		imp_->value_ = val;

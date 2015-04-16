@@ -155,7 +155,7 @@ namespace TM
 		{
 		}
 	};
-	
+
 	template <int BIT_COUNT>
 	struct little_endian_int_extract
 	{
@@ -187,11 +187,10 @@ namespace TM
 		{
 		}
 	};
-	
+
 	template <int BIT_COUNT>
 	struct big_endian_float_extract
 	{
-
 		static float extract_val(const std::vector<uint8_t>& buffer, uint32_t start_idx)
 
 		{
@@ -208,7 +207,6 @@ namespace TM
 	template <int BIT_COUNT>
 	struct big_endian_double_extract
 	{
-
 		static double extract_val(const std::vector<uint8_t>& buffer, uint32_t start_idx)
 		{
 			static_assert(BIT_COUNT == 64,"bits is not double");
@@ -221,11 +219,10 @@ namespace TM
 		}
 	};
 
-	
+
 	template <int BIT_COUNT>
 	struct little_endian_float_extract
 	{
-
 		static float extract_val(const std::vector<uint8_t>& buffer, uint32_t start_idx)
 		{
 			static_assert(BIT_COUNT == 32,"bits is not float");
@@ -241,7 +238,6 @@ namespace TM
 	template <int BIT_COUNT>
 	struct little_endian_double_extract
 	{
-
 		static double extract_val(const std::vector<uint8_t>& buffer, uint32_t start_idx)
 		{
 			static_assert(BIT_COUNT == 64,"bits is not double");

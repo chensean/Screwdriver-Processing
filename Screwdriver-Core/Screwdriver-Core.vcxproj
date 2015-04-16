@@ -175,7 +175,6 @@
     <ClCompile Include="polynomial_conversion.cpp" />
     <ClCompile Include="embedded_message.cpp" />
     <ClCompile Include="embedded_message_position_table.cpp" />
-    <ClCompile Include="tm_parameter.cpp" />
     <ClCompile Include="tm_parameter_manager.cpp" />
   </ItemGroup>
   <ItemGroup>

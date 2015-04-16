@@ -4,7 +4,7 @@
 namespace screwdriver
 {
 	typedef boost::unordered_map<std::string, parameter_ptr> parameter_container_t;
-		
+
 	struct parameter_manager::parameter_manager_imp_t
 	{
 		parameter_container_t parameter_container_;
@@ -38,11 +38,11 @@ namespace screwdriver
 	std::vector<parameter_ptr> parameter_manager::get_all_parameters()
 	{
 		std::vector<parameter_ptr> parameters(imp_->parameter_container_.size());
-		std::transform(imp_->parameter_container_.begin(),imp_->parameter_container_.end(),parameters.begin()
-			,[](const std::pair<std::string, parameter_ptr>& parameter_pair)
-		{
-			return parameter_pair.second;
-		});
+		std::transform(imp_->parameter_container_.begin(), imp_->parameter_container_.end(), parameters.begin()
+		               , [](const std::pair<std::string, parameter_ptr>& parameter_pair)
+		               {
+			               return parameter_pair.second;
+		               });
 		return parameters;
 	}
 }

@@ -1,7 +1,7 @@
 #include "rtr_monitor_client.h"
 #include <SDKDDKVer.h>
-#include <functional>
 #define BOOST_ALL_DYN_LINK
+#include <boost/make_shared.hpp>
 # pragma warning( push )
 # pragma warning(disable:4913)
 #include <boost/thread/thread.hpp>
@@ -12,6 +12,7 @@
 #pragma warning(disable:4244)
 #include <boost/assign.hpp>
 # pragma warning( pop )
+#include <boost/function.hpp>
 using namespace boost::assign;
 
 const uint16_t RTR_MONITOR_PORT = 3000;
@@ -31,7 +32,7 @@ namespace screwdriver
 			  parser_fun_(parser_fun)
 		{
 			cmd_ += 1234567890 , 64 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , -1234567890;
-			std::transform(cmd_.begin(), cmd_.end(), cmd_.begin(), std::ptr_fun(htonl));
+			std::transform(cmd_.begin(), cmd_.end(), cmd_.begin(), boost::function<int(int)>(htonl));
 		}
 
 		boost::asio::io_service ios_;
@@ -79,7 +80,7 @@ namespace screwdriver
 		if (imp_->parser_fun_ == nullptr) return;
 		if (connect_server()) return;
 
-		imp_->thread_ = boost::shared_ptr<boost::thread>(new boost::thread(
+		imp_->thread_ = boost::make_shared<boost::thread>(
 			[=]()
 			{
 				while (!boost::this_thread::interruption_requested())
@@ -107,7 +108,7 @@ namespace screwdriver
 					}
 				}
 			}
-		));
+		);
 	}
 
 	void rtr_monitor_client::stop()

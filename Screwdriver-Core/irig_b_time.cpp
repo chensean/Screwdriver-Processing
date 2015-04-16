@@ -7,9 +7,8 @@ namespace TM
 	{
 		irig_b_time_imp_t()
 			:time_(0),
-			data_buffer_ptr_(new data_buffer)
+			 data_buffer_ptr_(new data_buffer)
 		{
-
 		}
 
 		double time_;

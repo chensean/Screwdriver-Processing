@@ -44,7 +44,6 @@ namespace TM
 		virtual void set_secondary_conversion(secondary_conversion_fun_t secondary_conversion) = 0;
 		virtual void set_text_conversion(text_conversion_fun_t text_conversion) = 0;
 	};
-
 }
 
 #endif // TM_PARAMETER_HPP

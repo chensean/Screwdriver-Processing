@@ -1,5 +1,6 @@
 #include "rtr_data_parser.h"
 #define BOOST_ALL_DYN_LINK
+#include <boost/make_shared.hpp>
 # pragma warning( push )
 # pragma warning(disable:4913)
 #include <boost/thread/thread.hpp>
@@ -57,7 +58,7 @@ namespace screwdriver
 	void rtr_data_parser::start()
 	{
 		imp_->save_file_.start();
-		imp_->thread_ = boost::shared_ptr<boost::thread>(new boost::thread(
+		imp_->thread_ = boost::make_shared<boost::thread>(
 			[=]()
 			{
 				while (!boost::this_thread::interruption_requested() || imp_->tm_data_buffer_.is_not_empty())
@@ -91,7 +92,7 @@ namespace screwdriver
 					}
 					imp_->parser_buffer_.erase(imp_->parser_buffer_.begin(), imp_->parser_buffer_.begin() + index);
 				}
-			}));
+			});
 	}
 
 	void rtr_data_parser::stop()
