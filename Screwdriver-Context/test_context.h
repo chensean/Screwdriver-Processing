@@ -11,6 +11,7 @@
 #include <loki/Singleton.h>
 #include <boost/property_tree/exceptions.hpp>
 #include "parameter.h"
+#include "raw_data.h"
 
 namespace screwdriver
 {
@@ -25,6 +26,8 @@ namespace screwdriver
 		void load_irig_config(const std::string& file_name);
 		parameter_ptr get_parameter(const std::string& name);
 		std::vector<parameter_ptr> get_all_parameters();
+		raw_data_ptr get_raw_data(const std::string& name);
+		std::vector<raw_data_ptr> get_all_raw_datas();
 	private:
 		test_context(void);
 		~test_context(void);

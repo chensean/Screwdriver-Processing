@@ -6,7 +6,6 @@
 #include <boost/make_shared.hpp>
 #include "rtr_tm_client.h"
 #include "rtr_monitor_client.h"
-#include "tm_parameter_manager.h"
 #include "irig_frame.h"
 #include "sfid_minor_frame.h"
 #include "fcc_minor_frame.h"
@@ -17,20 +16,26 @@
 #include "linear_conversion.h"
 #include "polynomial_conversion.h"
 #include "tm_time.h"
-#include "parameter_manager.h"
+#include "object_manager.h"
 
 namespace screwdriver
 {
+	
+	typedef object_manager<parameter> parameter_manager;
+	typedef object_manager<raw_data> raw_data_manager;
+	typedef object_manager<TM::tm_parameter> tm_parameter_manager;
 	struct test_context::test_context_imp_t
 	{
 		test_context_imp_t()
 			:parameter_manager_(new parameter_manager),
-			 tm_parameter_manager_(new TM::tm_parameter_manager)
+			 raw_data_manager_(new raw_data_manager),
+			 tm_parameter_manager_(new tm_parameter_manager)
 		{
 		}
 
 		boost::shared_ptr<parameter_manager> parameter_manager_;
-		boost::shared_ptr<TM::tm_parameter_manager> tm_parameter_manager_;
+		boost::shared_ptr<raw_data_manager> raw_data_manager_;
+		boost::shared_ptr<tm_parameter_manager> tm_parameter_manager_;
 		boost::shared_ptr<rtr_tm_client> rtr_tm_client_;
 		boost::shared_ptr<rtr_monitor_client> rtr_monitor_client_;
 		boost::shared_ptr<irig_frame> irig_frame_;
@@ -157,7 +162,7 @@ namespace screwdriver
 			              if (tm_param_ptr)
 			              {
 				              parameter_ptr param_ptr(new parameter(name));
-				              imp_->parameter_manager_->add_parameter(name, param_ptr);
+				              imp_->parameter_manager_->add_object(name, param_ptr);
 				              tm_param_ptr->connect_val_charged_signal(TM::val_charged_slot_t(
 					              [param_ptr](TM::tm_parameter* tm_param)
 					              {
@@ -257,11 +262,21 @@ namespace screwdriver
 
 	parameter_ptr test_context::get_parameter(const std::string& name)
 	{
-		return imp_->parameter_manager_->get_parameter(name);
+		return imp_->parameter_manager_->get_object(name);
 	}
 
 	std::vector<parameter_ptr> test_context::get_all_parameters()
 	{
-		return imp_->parameter_manager_->get_all_parameters();
+		return imp_->parameter_manager_->get_all_objects();
+	}
+
+	raw_data_ptr test_context::get_raw_data(const std::string& name)
+	{
+		return imp_->raw_data_manager_->get_object(name);
+	}
+
+	std::vector<raw_data_ptr> test_context::get_all_raw_datas()
+	{
+		return imp_->raw_data_manager_->get_all_objects();
 	}
 }

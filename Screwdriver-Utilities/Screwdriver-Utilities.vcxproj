@@ -23,6 +23,7 @@
     <ClInclude Include="bounded_buffer_space_optimized.h" />
     <ClInclude Include="digit_utilities.h" />
     <ClInclude Include="filesystem_utilities.h" />
+    <ClInclude Include="object_manager.h" />
     <ClInclude Include="string_utilities.h" />
   </ItemGroup>
   <ItemGroup>

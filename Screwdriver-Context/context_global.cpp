@@ -32,4 +32,14 @@ namespace screwdriver
 	{
 		return single_test_context::Instance().get_all_parameters();
 	}
+
+	raw_data_ptr get_raw_data(const std::string& name)
+	{
+		return single_test_context::Instance().get_raw_data(name);
+	}
+
+	std::vector<raw_data_ptr> get_all_raw_datas()
+	{
+		return single_test_context::Instance().get_all_raw_datas();
+	}
 }

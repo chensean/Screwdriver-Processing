@@ -23,7 +23,7 @@
     <ClInclude Include="fcc_minor_frame.h" />
     <ClInclude Include="irig_frame.h" />
     <ClInclude Include="parameter.h" />
-    <ClInclude Include="parameter_manager.h" />
+    <ClInclude Include="raw_data.h" />
     <ClInclude Include="rtr_data_parser.h" />
     <ClInclude Include="rtr_monitor_client.h" />
     <ClInclude Include="rtr_tm_client.h" />
@@ -38,7 +38,7 @@
     <ClCompile Include="fcc_minor_frame.cpp" />
     <ClCompile Include="irig_frame.cpp" />
     <ClCompile Include="parameter.cpp" />
-    <ClCompile Include="parameter_manager.cpp" />
+    <ClCompile Include="raw_data.cpp" />
     <ClCompile Include="rtr_data_parser.cpp" />
     <ClCompile Include="rtr_monitor_client.cpp" />
     <ClCompile Include="rtr_tm_client .cpp" />

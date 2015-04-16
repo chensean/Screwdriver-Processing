@@ -30,6 +30,9 @@
     <ClInclude Include="string_utilities.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="object_manager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="filesystem_utilities.cpp">

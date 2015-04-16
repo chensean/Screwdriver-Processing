@@ -175,7 +175,6 @@
     <ClCompile Include="polynomial_conversion.cpp" />
     <ClCompile Include="embedded_message.cpp" />
     <ClCompile Include="embedded_message_position_table.cpp" />
-    <ClCompile Include="tm_parameter_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base_tm_parameter.h" />
@@ -190,7 +189,6 @@
     <ClInclude Include="embedded_message.h" />
     <ClInclude Include="embedded_message_position_table.h" />
     <ClInclude Include="tm_parameter.h" />
-    <ClInclude Include="tm_parameter_manager.h" />
     <ClInclude Include="tm_time.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

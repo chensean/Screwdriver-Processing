@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="tm_parameter_manager.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="data_buffer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -54,9 +51,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="bits_tm_parameter.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="tm_parameter_manager.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="base_tm_parameter.h">
