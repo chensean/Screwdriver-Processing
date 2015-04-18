@@ -25,6 +25,8 @@
     <ClInclude Include="filesystem_utilities.h" />
     <ClInclude Include="object_manager.h" />
     <ClInclude Include="string_utilities.h" />
+    <ClInclude Include="tasks_processor.hpp" />
+    <ClInclude Include="work_queue.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="filesystem_utilities.cpp" />

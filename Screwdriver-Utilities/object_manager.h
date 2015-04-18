@@ -1,6 +1,8 @@
 #ifndef OBJECT_MANAGER_HPP
 #define OBJECT_MANAGER_HPP
 
+#define BOOST_ALL_DYN_LINK
+
 #if defined(_MSC_VER)
 # pragma once
 #endif
@@ -31,9 +33,9 @@ public:
 		return object_container_.find(name) != object_container_.end() ? object_container_[name] : object_ptr(nullptr);
 	}
 
-	void add_object(const std::string& name, const object_ptr& param)
+	void add_object(const std::string& name, const object_ptr& obj)
 	{
-		object_container_[name] = param;
+		object_container_[name] = obj;
 	}
 
 	void remove_object(const std::string& name)

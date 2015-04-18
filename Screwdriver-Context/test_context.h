@@ -10,8 +10,6 @@
 #include <boost/shared_ptr.hpp>
 #include <loki/Singleton.h>
 #include <boost/property_tree/exceptions.hpp>
-#include "parameter.h"
-#include "raw_data.h"
 
 namespace screwdriver
 {
@@ -20,18 +18,17 @@ namespace screwdriver
 	{
 	public:
 		friend Loki::CreateUsingNew<test_context>;
-		void create_rtr_tm_client(const std::string& ip, const std::string& folder);
 		void start_rtr_tm();
 		void stop_rtr_tm();
+		void start_save_file();
+		void stop_save_file();
+		void set_save_folder(const std::string& folder);
 		void load_irig_config(const std::string& file_name);
-		parameter_ptr get_parameter(const std::string& name);
-		std::vector<parameter_ptr> get_all_parameters();
-		raw_data_ptr get_raw_data(const std::string& name);
-		std::vector<raw_data_ptr> get_all_raw_datas();
 	private:
 		test_context(void);
 		~test_context(void);
 		void config_irig_frame(const boost::property_tree::ptree& pt);
+		void create_rtr_tm_client(const std::string& ip);
 	private:
 		struct test_context_imp_t;
 		boost::shared_ptr<test_context_imp_t> imp_;

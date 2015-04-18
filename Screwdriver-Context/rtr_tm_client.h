@@ -11,15 +11,14 @@
 
 namespace screwdriver
 {
-	typedef boost::shared_ptr<std::vector<uint8_t>> data_ptr;
-	typedef std::vector<uint8_t>::iterator iterator_type;
-	typedef std::function<void(iterator_type, iterator_type)> parser_fun_t;
+	typedef boost::shared_ptr<std::vector<uint8_t>> tm_data_ptr;
+	typedef std::function<void(const tm_data_ptr&)> parse_data_fun_t;
 
 	class __declspec(dllexport) rtr_tm_client
 		:private boost::noncopyable
 	{
 	public:
-		rtr_tm_client(const std::string& ip, const std::string& folder);
+		rtr_tm_client(const std::string& ip, const parse_data_fun_t& fun);
 		~rtr_tm_client(void);
 		void start();
 		void stop();

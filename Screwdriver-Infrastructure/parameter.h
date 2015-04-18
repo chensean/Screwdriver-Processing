@@ -9,6 +9,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/signals2/signal.hpp>
+#include "Screwdriver-Infrastructure.h"
 
 
 namespace screwdriver
@@ -18,7 +19,7 @@ namespace screwdriver
 	typedef boost::signals2::signal<void(const parameter_ptr&)> parameter_charged_signal_t;
 	typedef parameter_charged_signal_t::slot_type parameter_charged_slot_t;
 
-	class __declspec(dllexport) parameter
+	class SCREWDRIVER_INFRASTRUCTURE_API parameter
 		:public boost::enable_shared_from_this<parameter>,
 		 private boost::noncopyable
 	{

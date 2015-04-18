@@ -20,6 +20,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Screwdriver-Context", "Screwdriver-Context\Screwdriver-Context.vcxproj", "{9D127F00-7065-4D70-BF48-4171B135A917}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C171A967-F9CD-4DA0-A939-FD3A4EC65B32} = {C171A967-F9CD-4DA0-A939-FD3A4EC65B32}
+		{DB979F86-D248-462D-B311-3B28543B7301} = {DB979F86-D248-462D-B311-3B28543B7301}
+		{86B148C7-66CB-436F-8C7E-760B309D70D5} = {86B148C7-66CB-436F-8C7E-760B309D70D5}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Screwdriver-Utilities", "Screwdriver-Utilities\Screwdriver-Utilities.vcxproj", "{86B148C7-66CB-436F-8C7E-760B309D70D5}"
@@ -28,6 +30,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{235D0C
 	ProjectSection(SolutionItems) = preProject
 		config\cfg.xml = config\cfg.xml
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Screwdriver-Infrastructure", "Screwdriver-Infrastructure\Screwdriver-Infrastructure.vcxproj", "{DB979F86-D248-462D-B311-3B28543B7301}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,6 +80,14 @@ Global
 		{86B148C7-66CB-436F-8C7E-760B309D70D5}.Release|Win32.Build.0 = Release|Win32
 		{86B148C7-66CB-436F-8C7E-760B309D70D5}.Release|x64.ActiveCfg = Release|x64
 		{86B148C7-66CB-436F-8C7E-760B309D70D5}.Release|x64.Build.0 = Release|x64
+		{DB979F86-D248-462D-B311-3B28543B7301}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DB979F86-D248-462D-B311-3B28543B7301}.Debug|Win32.Build.0 = Debug|Win32
+		{DB979F86-D248-462D-B311-3B28543B7301}.Debug|x64.ActiveCfg = Debug|x64
+		{DB979F86-D248-462D-B311-3B28543B7301}.Debug|x64.Build.0 = Debug|x64
+		{DB979F86-D248-462D-B311-3B28543B7301}.Release|Win32.ActiveCfg = Release|Win32
+		{DB979F86-D248-462D-B311-3B28543B7301}.Release|Win32.Build.0 = Release|Win32
+		{DB979F86-D248-462D-B311-3B28543B7301}.Release|x64.ActiveCfg = Release|x64
+		{DB979F86-D248-462D-B311-3B28543B7301}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

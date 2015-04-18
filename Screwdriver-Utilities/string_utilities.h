@@ -39,7 +39,8 @@ namespace utilities
 			auto dataStringList = separate_string_by_separator(str, separator);
 			std::transform(dataStringList.begin(), dataStringList.end(), back_inserter(data),
 			               [](const std::string& data_str)->IntegerType
-			
+
+			               
 			               {
 				               try
 				               {

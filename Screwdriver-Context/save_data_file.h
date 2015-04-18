@@ -1,5 +1,5 @@
-#ifndef SAVE_FILE_HPP
-#define SAVE_FILE_HPP
+#ifndef SAVE_DATA_FILE_HPP
+#define SAVE_DATA_FILE_HPP
 
 #if defined(_MSC_VER)
 # pragma once
@@ -13,12 +13,12 @@ namespace screwdriver
 {
 	typedef boost::shared_ptr<std::vector<uint8_t>> tm_data_ptr;
 
-	class __declspec(dllexport) save_file
+	class save_data_file
 		:private boost::noncopyable
 	{
 	public:
-		save_file(const std::string& folder, const std::string& prefix);
-		~save_file(void);
+		save_data_file(const std::string& folder, const std::string& prefix);
+		~save_data_file(void);
 		void start();
 		void stop();
 		void receive(const tm_data_ptr& data);
@@ -29,9 +29,10 @@ namespace screwdriver
 		void close_file();
 		void save2file(const tm_data_ptr& data);
 	private:
-		struct save_file_imp_t;
-		boost::shared_ptr<save_file_imp_t> imp_;
+		struct save_data_file_imp_t;
+		boost::shared_ptr<save_data_file_imp_t> imp_;
 	};
+	typedef boost::shared_ptr<save_data_file> save_data_file_ptr;
 }
-#endif // SAVE_FILE_HPP
+#endif // SAVE_DATA_FILE_HPP
 

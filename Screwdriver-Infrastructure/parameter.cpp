@@ -1,4 +1,6 @@
+#define SCREWDRIVER_INFRASTRUCTURE_COMPILATION
 #include "parameter.h"
+#include "infrastructure_manager.h"
 
 
 namespace screwdriver
@@ -47,7 +49,12 @@ namespace screwdriver
 	{
 		imp_->time_ = time;
 		imp_->value_ = val;
-		imp_->parameter_charged_(shared_from_this());
+		single_infrastructure_manager::Instance().push_task_to_parameter_work_queue(
+			[=]()
+			{
+				imp_->parameter_charged_(shared_from_this());
+			}
+		);
 	}
 
 	boost::signals2::connection parameter::connect_val_charged_signal(const parameter_charged_slot_t& slot)

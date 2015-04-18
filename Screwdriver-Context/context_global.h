@@ -6,19 +6,15 @@
 #endif
 
 #include <string>
-#include "parameter.h"
-#include "raw_data.h"
 
 namespace screwdriver
 {
-	__declspec(dllexport) void create_rtr_tm_client(const std::string& ip, const std::string& folder);
 	__declspec(dllexport) void start_rtr_tm();
 	__declspec(dllexport) void stop_rtr_tm();
+	__declspec(dllexport) void start_save_file();
+	__declspec(dllexport) void stop_save_file();
+	__declspec(dllexport) void set_save_folder(const std::string& folder);
 	__declspec(dllexport) void load_irig_config(const std::string& file_name);
-	__declspec(dllexport) parameter_ptr get_parameter(const std::string& name);
-	__declspec(dllexport) std::vector<parameter_ptr> get_all_parameters();
-		__declspec(dllexport) raw_data_ptr get_raw_data(const std::string& name);
-		__declspec(dllexport) std::vector<raw_data_ptr> get_all_raw_datas();
 }
 
 #endif // CONTEXT_GLOBAL_HPP

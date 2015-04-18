@@ -1,5 +1,6 @@
 #include "test_context.h"
 #include <iostream>
+#define SCREWDRIVER_INFRASTRUCTURE_LINK_DYNAMIC
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/algorithm/string.hpp>
@@ -17,29 +18,33 @@
 #include "polynomial_conversion.h"
 #include "tm_time.h"
 #include "object_manager.h"
+#include "parameter.h"
+#include "infrastructure_global.h"
+#include "save_data_file.h"
 
 namespace screwdriver
 {
-	
-	typedef object_manager<parameter> parameter_manager;
-	typedef object_manager<raw_data> raw_data_manager;
+	const std::string RTR_DATA_STRING = "rtr_data";
+	const uint32_t RTR_TIME_OFFSET = 3;
+	const uint32_t RTR_FRAME_OFFSET = 14;
 	typedef object_manager<TM::tm_parameter> tm_parameter_manager;
+	typedef object_manager<save_data_file> save_data_file_manager;
+
 	struct test_context::test_context_imp_t
 	{
 		test_context_imp_t()
-			:parameter_manager_(new parameter_manager),
-			 raw_data_manager_(new raw_data_manager),
-			 tm_parameter_manager_(new tm_parameter_manager)
+			:tm_parameter_manager_(new tm_parameter_manager),
+			 save_data_file_manager_(new save_data_file_manager)
 		{
 		}
 
-		boost::shared_ptr<parameter_manager> parameter_manager_;
-		boost::shared_ptr<raw_data_manager> raw_data_manager_;
 		boost::shared_ptr<tm_parameter_manager> tm_parameter_manager_;
+		boost::shared_ptr<save_data_file_manager> save_data_file_manager_;
 		boost::shared_ptr<rtr_tm_client> rtr_tm_client_;
 		boost::shared_ptr<rtr_monitor_client> rtr_monitor_client_;
 		boost::shared_ptr<irig_frame> irig_frame_;
 		TM::tm_time_ptr tm_time_;
+		std::string save_folder_;
 	};
 
 	test_context::test_context(void)
@@ -51,10 +56,14 @@ namespace screwdriver
 	{
 	}
 
-	void test_context::create_rtr_tm_client(const std::string& ip, const std::string& folder)
+	void test_context::create_rtr_tm_client(const std::string& ip)
 	{
-		stop_rtr_tm();
-		imp_->rtr_tm_client_ = boost::make_shared<rtr_tm_client>(ip, folder);
+		raw_data_ptr raw_data_p(new raw_data(RTR_DATA_STRING));
+		add_raw_data(raw_data_p->get_name(), raw_data_p);
+		save_data_file_ptr save_data_file_p(new save_data_file(imp_->save_folder_, RTR_DATA_STRING));
+		imp_->save_data_file_manager_->add_object(RTR_DATA_STRING, save_data_file_p);
+		raw_data_p->connect_data_charged_signal(raw_data_charged_slot_t(&save_data_file::receive, save_data_file_p, _1));
+		imp_->rtr_tm_client_ = boost::make_shared<rtr_tm_client>(ip, boost::bind(&raw_data::set_data, raw_data_p, _1));
 	}
 
 	void test_context::start_rtr_tm()
@@ -71,6 +80,24 @@ namespace screwdriver
 		{
 			imp_->rtr_tm_client_->stop();
 		}
+	}
+
+	void test_context::start_save_file()
+	{
+		auto save_files = imp_->save_data_file_manager_->get_all_objects();
+		std::for_each(save_files.begin(), save_files.end(), boost::bind(&save_data_file::start, _1));
+	}
+
+
+	void test_context::stop_save_file()
+	{
+		auto save_files = imp_->save_data_file_manager_->get_all_objects();
+		std::for_each(save_files.begin(), save_files.end(), boost::bind(&save_data_file::stop, _1));
+	}
+
+	void test_context::set_save_folder(const std::string& folder)
+	{
+		imp_->save_folder_ = folder;
 	}
 
 	void test_context::config_irig_frame(const boost::property_tree::ptree& pt)
@@ -103,6 +130,11 @@ namespace screwdriver
 		}
 
 		imp_->irig_frame_ = boost::make_shared<irig_frame>(bit_rate, minor_frame_words * word_length / std::numeric_limits<uint8_t>::digits, minor_frames, get_minor_frame_id_fun);
+		raw_data_ptr raw_data_p = get_raw_data(RTR_DATA_STRING);
+		if (raw_data_p)
+		{
+			raw_data_p->connect_data_charged_signal(raw_data_charged_slot_t(&irig_frame::parse_frame, imp_->irig_frame_, _1, boost::numeric_cast<uint32_t>(RTR_FRAME_OFFSET * sizeof(int))));
+		}
 	}
 
 	void test_context::load_irig_config(const std::string& file_name)
@@ -162,7 +194,7 @@ namespace screwdriver
 			              if (tm_param_ptr)
 			              {
 				              parameter_ptr param_ptr(new parameter(name));
-				              imp_->parameter_manager_->add_object(name, param_ptr);
+				              add_parameter(name, param_ptr);
 				              tm_param_ptr->connect_val_charged_signal(TM::val_charged_slot_t(
 					              [param_ptr](TM::tm_parameter* tm_param)
 					              {
@@ -258,25 +290,5 @@ namespace screwdriver
 				              }
 			              }
 		              });
-	}
-
-	parameter_ptr test_context::get_parameter(const std::string& name)
-	{
-		return imp_->parameter_manager_->get_object(name);
-	}
-
-	std::vector<parameter_ptr> test_context::get_all_parameters()
-	{
-		return imp_->parameter_manager_->get_all_objects();
-	}
-
-	raw_data_ptr test_context::get_raw_data(const std::string& name)
-	{
-		return imp_->raw_data_manager_->get_object(name);
-	}
-
-	std::vector<raw_data_ptr> test_context::get_all_raw_datas()
-	{
-		return imp_->raw_data_manager_->get_all_objects();
 	}
 }

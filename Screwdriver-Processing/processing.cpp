@@ -2,6 +2,7 @@
 #define BOOST_THREAD_DYN_LINK
 #include "filesystem_utilities.h"
 #include "context_global.h"
+#include "infrastructure_global.h"
 
 void exit_command()
 {

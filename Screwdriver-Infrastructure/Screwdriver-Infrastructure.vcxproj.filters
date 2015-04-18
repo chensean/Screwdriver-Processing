@@ -15,37 +15,34 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="bounded_buffer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="bounded_buffer_space_optimized.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="digit_utilities.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="filesystem_utilities.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="string_utilities.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="object_manager.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="tasks_processor.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="work_queue.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
+    <ClCompile Include="infrastructure_global.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="parameter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="raw_data.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="infrastructure_manager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="filesystem_utilities.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="string_utilities.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
+    <ClInclude Include="infrastructure_global.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="parameter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="raw_data.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Screwdriver-Infrastructure.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="infrastructure_manager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

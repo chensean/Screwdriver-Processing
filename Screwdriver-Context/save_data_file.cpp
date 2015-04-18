@@ -1,4 +1,4 @@
-#include "save_file.h"
+#include "save_data_file.h"
 #define BOOST_ALL_DYN_LINK
 #include <fstream>
 # pragma warning( push )
@@ -23,9 +23,9 @@ const size_t FILE_SIZE_MAX = 100 * 1024 * 1024;
 
 namespace screwdriver
 {
-	struct save_file::save_file_imp_t
+	struct save_data_file::save_data_file_imp_t
 	{
-		explicit save_file_imp_t(const std::string& folder, const std::string& prefix)
+		explicit save_data_file_imp_t(const std::string& folder, const std::string& prefix)
 			: data_folder_(folder),
 			  prefix_(prefix),
 			  tm_data_buffer_(BUFFER_MAX_SIZE)
@@ -41,17 +41,17 @@ namespace screwdriver
 	};
 
 
-	save_file::save_file(const std::string& folder, const std::string& prefix)
-		:imp_(new save_file_imp_t(folder, prefix))
+	save_data_file::save_data_file(const std::string& folder, const std::string& prefix)
+		:imp_(new save_data_file_imp_t(folder, prefix))
 	{
 	}
 
 
-	save_file::~save_file(void)
+	save_data_file::~save_data_file(void)
 	{
 	}
 
-	void save_file::start()
+	void save_data_file::start()
 	{
 		open_file();
 		imp_->thread_ = boost::make_shared<boost::thread>(
@@ -66,7 +66,7 @@ namespace screwdriver
 			});
 	}
 
-	void save_file::stop()
+	void save_data_file::stop()
 	{
 		if (imp_->thread_)
 		{
@@ -77,12 +77,12 @@ namespace screwdriver
 		}
 	}
 
-	void save_file::receive(const tm_data_ptr& data)
+	void save_data_file::receive(const tm_data_ptr& data)
 	{
 		imp_->tm_data_buffer_.push_front(data);
 	}
 
-	void save_file::split_file()
+	void save_data_file::split_file()
 	{
 		try
 		{
@@ -98,7 +98,7 @@ namespace screwdriver
 		}
 	}
 
-	std::string save_file::get_time_file_name()
+	std::string save_data_file::get_time_file_name()
 	{
 		std::string time_string = utilities::get_current_time_string();
 		boost::replace_all(time_string, ":", "-");
@@ -111,7 +111,7 @@ namespace screwdriver
 	}
 
 
-	void save_file::open_file()
+	void save_data_file::open_file()
 	{
 		if (imp_->data_folder_.empty())
 		{
@@ -126,7 +126,7 @@ namespace screwdriver
 		imp_->file_stream_.open(imp_->save_path_.c_str(), std::ios::binary);
 	}
 
-	void save_file::close_file()
+	void save_data_file::close_file()
 	{
 		imp_->file_stream_.clear();
 		imp_->file_stream_.close();
@@ -137,7 +137,7 @@ namespace screwdriver
 		}
 	}
 
-	void save_file::save2file(const tm_data_ptr& data)
+	void save_data_file::save2file(const tm_data_ptr& data)
 	{
 		if (!data->empty() && imp_->file_stream_.is_open())
 		{
