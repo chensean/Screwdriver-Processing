@@ -7,8 +7,14 @@
 #define BOOST_ALL_DYN_LINK
 #include <string>
 #include <vector>
+#include <iomanip>
 #include <boost/numeric/conversion/cast.hpp>
+# pragma warning( push )
+#pragma warning(disable:4819)
+#pragma warning(disable:4996)
 #include <boost/lexical_cast.hpp>
+#include <boost/format.hpp>
+# pragma warning( pop )
 
 const std::string SEPARATOR = "[[:space:]]+|,|£¬|;|£»|¡¢|\r\n";
 
@@ -31,6 +37,15 @@ namespace utilities
 	}
 
 	template <typename IntegerType>
+	std::string to_hex_string(IntegerType val)
+	{
+		boost::format fmter("%1%");
+		fmter.modify_item(1, boost::io::group(std::hex, std::setfill('0'), std::setw(sizeof(IntegerType) * 2)));
+		fmter % val;
+		return fmter.str();
+	}
+
+	template <typename IntegerType>
 	std::vector<IntegerType> string_to_integer_array(const std::string& str, const std::string& separator = SEPARATOR)
 	{
 		std::vector<IntegerType> data;
@@ -39,6 +54,7 @@ namespace utilities
 			auto dataStringList = separate_string_by_separator(str, separator);
 			std::transform(dataStringList.begin(), dataStringList.end(), back_inserter(data),
 			               [](const std::string& data_str)->IntegerType
+
 
 			               
 			               {

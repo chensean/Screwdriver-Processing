@@ -19,13 +19,15 @@ namespace screwdriver
 {
 	struct rtr_tm_client::rtr_tm_client_imp_t
 	{
-		rtr_tm_client_imp_t(const std::string& ip, const parse_data_fun_t& fun)
+		rtr_tm_client_imp_t(const std::string& ip, uint16_t port, int tm_channel, const parse_data_fun_t& fun)
 			:rtr_data_parser_(new rtr_data_parser(fun)),
-			 tcp_client_(new tcp_client(ip, RTR_TM_PORT, boost::bind(&rtr_data_parser::receive, rtr_data_parser_, _1, _2)))
+			 tcp_client_(new tcp_client(ip, port, boost::bind(&rtr_data_parser::receive, rtr_data_parser_, _1, _2)))
 		{
 			start_command_ += 1234567890 , 64 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , -1234567890;
+			start_command_[3] = tm_channel;
 			std::transform(start_command_.begin(), start_command_.end(), start_command_.begin(), std::ptr_fun(utilities::reverse_endian<int32_t>));
 			stop_command_ += 1234567890 , 64 , 0 , 0 , 0 , 0x80 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , -1234567890;
+			stop_command_[3] = tm_channel;
 			std::transform(stop_command_.begin(), stop_command_.end(), stop_command_.begin(), std::ptr_fun(utilities::reverse_endian<int32_t>));
 		}
 
@@ -36,8 +38,8 @@ namespace screwdriver
 	};
 
 
-	rtr_tm_client::rtr_tm_client(const std::string& ip, const parse_data_fun_t& fun)
-		:imp_(new rtr_tm_client_imp_t(ip,fun))
+	rtr_tm_client::rtr_tm_client(const std::string& ip, uint16_t port, int tm_channel, const parse_data_fun_t& fun)
+		:imp_(new rtr_tm_client_imp_t(ip, port, tm_channel, fun))
 
 	{
 	}

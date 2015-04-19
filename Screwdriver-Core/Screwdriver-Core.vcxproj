@@ -168,6 +168,7 @@
   <ItemGroup>
     <ClCompile Include="base_tm_parameter.cpp" />
     <ClCompile Include="bits_tm_parameter.cpp" />
+    <ClCompile Include="code0_time.cpp" />
     <ClCompile Include="data_buffer.cpp" />
     <ClCompile Include="irig_b_time.cpp" />
     <ClCompile Include="linear_conversion.cpp" />
@@ -179,6 +180,7 @@
   <ItemGroup>
     <ClInclude Include="base_tm_parameter.h" />
     <ClInclude Include="bits_tm_parameter.h" />
+    <ClInclude Include="code0_time.h" />
     <ClInclude Include="data_buffer.h" />
     <ClInclude Include="irig_b_time.h" />
     <ClInclude Include="linear_conversion.h" />

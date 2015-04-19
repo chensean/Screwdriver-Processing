@@ -23,9 +23,11 @@ namespace TM
 		data_buffer(void);
 		~data_buffer(void);
 		void add_parameter(const tm_parameter_ptr& param, uint32_t start_idx);
-		void add_sub_buffer(const embedded_message_ptr& sub_buffer, uint32_t start_idx, uint32_t length);
+		void add_embedded_message(const embedded_message_ptr& embedded_message, uint32_t start_idx, uint32_t length);
 		void read_from_buffer(const std::vector<uint8_t>& data);
 		void read_from_buffer(const std::vector<uint8_t>& data, uint32_t offset);
+		void set_delta_time(double delta_time);
+		void set_time(double time);
 	private:
 		struct data_buffer_imp_t;
 		boost::shared_ptr<data_buffer_imp_t> imp_;

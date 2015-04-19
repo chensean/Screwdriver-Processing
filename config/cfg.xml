@@ -61,8 +61,7 @@
           <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0" />
           <Auxiliary Ymax="0" Ymin="0" Unit="" />
           <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int" />
-          <Conversion ConvType="Thermocouple" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0"
-                      A0="0" />
+          <Conversion ConvType="Thermocouple" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
         </ELEMENT>
         <ELEMENT IDENT="H">
           <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="0" />
@@ -71,6 +70,7 @@
           <Conversion ConvType="Boolean" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
         </ELEMENT>
       </Parameters>
+      
       <Embedded>
         <ELEMENT NAME="E1">
           <Pos MajorPos="1" MinorPos="5" Num="1" />

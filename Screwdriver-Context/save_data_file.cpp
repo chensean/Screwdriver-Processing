@@ -79,7 +79,10 @@ namespace screwdriver
 
 	void save_data_file::receive(const tm_data_ptr& data)
 	{
-		imp_->tm_data_buffer_.push_front(data);
+		if (imp_->thread_)
+		{
+			imp_->tm_data_buffer_.push_front(data);
+		}
 	}
 
 	void save_data_file::split_file()

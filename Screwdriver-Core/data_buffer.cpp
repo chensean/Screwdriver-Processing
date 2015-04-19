@@ -31,9 +31,9 @@ namespace TM
 		imp_->parameter_position_table_->add_parameter(param, start_idx);
 	}
 
-	void data_buffer::add_sub_buffer(const embedded_message_ptr& sub_buffer, uint32_t start_idx, uint32_t length)
+	void data_buffer::add_embedded_message(const embedded_message_ptr& embedded_message, uint32_t start_idx, uint32_t length)
 	{
-		imp_->sub_buffer_position_table_->add_sub_buffer(sub_buffer, start_idx, length);
+		imp_->sub_buffer_position_table_->add_sub_buffer(embedded_message, start_idx, length);
 	}
 
 
@@ -46,5 +46,15 @@ namespace TM
 	{
 		imp_->parameter_position_table_->read_from_buffer(data, offset);
 		imp_->sub_buffer_position_table_->read_from_buffer(data, offset);
+	}
+
+	void data_buffer::set_delta_time(double delta_time)
+	{
+		imp_->parameter_position_table_->set_delta_time(delta_time);
+	}
+
+	void data_buffer::set_time(double time)
+	{
+		imp_->parameter_position_table_->set_time(time);
 	}
 }

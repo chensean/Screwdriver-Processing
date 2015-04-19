@@ -1,4 +1,6 @@
 #include "irig_frame.h"
+#include <boost/make_shared.hpp>
+#include <boost/numeric/conversion/cast.hpp>
 
 namespace screwdriver
 {
@@ -7,13 +9,21 @@ namespace screwdriver
 	struct irig_frame::irig_frame_imp_t
 	{
 		irig_frame_imp_t(uint64_t bit_rate, uint32_t minor_frame_bytes, uint32_t minor_frames, get_minor_frame_id_fun_t get_minor_frame_id_fun)
-			:bit_rate_(bit_rate),
+			:minor_frame_time_(0),
+			 bit_rate_(bit_rate),
 			 minor_frame_bytes_(minor_frame_bytes),
 			 minor_frames_(minor_frames),
 			 get_minor_frame_id_fun_(get_minor_frame_id_fun)
 		{
+			double delta_time = std::numeric_limits<uint8_t>::digits / boost::numeric_cast<double>(bit_rate);
+			for (uint32_t i = 0; i < minor_frames; ++i)
+			{
+				data_buffer_map_[i] = boost::make_shared<TM::data_buffer>();
+				data_buffer_map_[i]->set_delta_time(delta_time);
+			}
 		}
 
+		double minor_frame_time_;
 		uint64_t bit_rate_;
 		uint32_t minor_frame_bytes_;
 		uint32_t minor_frames_;
@@ -35,7 +45,9 @@ namespace screwdriver
 	{
 		if (imp_->data_buffer_map_.find(minor_frame_id) != imp_->data_buffer_map_.end())
 		{
-			imp_->data_buffer_map_[minor_frame_id]->read_from_buffer(*data_ptr, offset);
+			auto data_buffer_ptr=imp_->data_buffer_map_[minor_frame_id];
+			data_buffer_ptr->set_time(imp_->minor_frame_time_);
+			data_buffer_ptr->read_from_buffer(*data_ptr, offset);
 		}
 	}
 
@@ -74,11 +86,16 @@ namespace screwdriver
 		}
 	}
 
-	void irig_frame::add_sub_buffer(const TM::embedded_message_ptr& sub_buffer, uint32_t minor_frame_id, uint32_t start_idx, uint32_t length)
+	void irig_frame::add_embedded_message(const TM::embedded_message_ptr& sub_buffer, uint32_t minor_frame_id, uint32_t start_idx, uint32_t length)
 	{
 		if (imp_->data_buffer_map_.find(minor_frame_id) != imp_->data_buffer_map_.end())
 		{
-			imp_->data_buffer_map_[minor_frame_id]->add_sub_buffer(sub_buffer, start_idx, length);
+			imp_->data_buffer_map_[minor_frame_id]->add_embedded_message(sub_buffer, start_idx, length);
 		}
+	}
+
+	void irig_frame::set_minor_frame_time(double time)
+	{
+		imp_->minor_frame_time_=time;
 	}
 }

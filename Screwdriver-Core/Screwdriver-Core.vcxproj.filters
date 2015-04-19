@@ -42,6 +42,9 @@
     <ClCompile Include="irig_b_time.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="code0_time.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tm_parameter.h">
@@ -81,6 +84,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="irig_b_time.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="code0_time.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -42,9 +42,6 @@ int main()
 	{
 		config_path = dir->generic_string() + "/cfg.xml";
 		screwdriver::load_irig_config(config_path);
-		//screwdriver::create_rtr_tm_client("127.0.0.1",dir->generic_string());
-		//screwdriver::start_rtr_tm();
-
 		auto parameters = screwdriver::get_all_parameters();
 		std::for_each(parameters.begin(), parameters.end()
 		              , [](const screwdriver::parameter_ptr& param_ptr)
@@ -52,6 +49,8 @@ int main()
 			              boost::shared_ptr<parameter_display> param_display(new parameter_display);
 			              param_ptr->connect_val_charged_signal(screwdriver::parameter_charged_slot_t(&parameter_display::display, param_display, _1).track(param_display));
 		              });
+		screwdriver::start_save_file();
+		screwdriver::start_rtr_tm();
 		exit_command();
 	}
 	return 0;

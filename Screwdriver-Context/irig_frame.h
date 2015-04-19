@@ -22,7 +22,8 @@ namespace screwdriver
 		~irig_frame(void);
 		void parse_frame(const tm_data_ptr& data_ptr, uint32_t offset);
 		void add_parameter(const TM::tm_parameter_ptr& param, uint32_t minor_frame_id, uint32_t start_idx);
-		void add_sub_buffer(const TM::embedded_message_ptr& sub_buffer, uint32_t minor_frame_id, uint32_t start_idx, uint32_t length);
+		void add_embedded_message(const TM::embedded_message_ptr& embedded_message, uint32_t minor_frame_id, uint32_t start_idx, uint32_t length);
+		void set_minor_frame_time(double time);
 	private:
 		void parse_frame_data(int32_t minor_frame_id, const tm_data_ptr& data_ptr, uint32_t offset);
 	private:
