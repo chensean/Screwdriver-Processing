@@ -29,8 +29,8 @@ namespace screwdriver
 		void add_raw_data(const std::string& name, const raw_data_ptr& obj_ptr);
 		void remove_raw_data(const std::string& name);
 		std::vector<raw_data_ptr> get_all_raw_datas();
-		void start();
-		void stop();
+		void start_task();
+		void stop_task();
 		void push_task_to_parameter_work_queue(const task_type& task);
 		void push_task_to_raw_data_work_queue(const task_type& task);
 	private:

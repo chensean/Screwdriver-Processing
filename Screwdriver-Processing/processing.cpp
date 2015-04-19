@@ -36,6 +36,13 @@ public:
 
 int main()
 {
+	std::string data_path("data");
+	auto data_dir = utilities::get_directorty_path(data_path);
+	if (data_dir)
+	{
+		screwdriver::set_save_folder(data_dir->generic_string());
+	}
+
 	std::string config_path("config");
 	auto dir = utilities::get_directorty_path(config_path);
 	if (dir)

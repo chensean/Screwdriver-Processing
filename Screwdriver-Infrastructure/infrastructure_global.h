@@ -20,6 +20,8 @@ namespace screwdriver
 	SCREWDRIVER_INFRASTRUCTURE_API void add_raw_data(const std::string& name, const raw_data_ptr& obj_ptr);
 	SCREWDRIVER_INFRASTRUCTURE_API void remove_raw_data(const std::string& name);
 	SCREWDRIVER_INFRASTRUCTURE_API std::vector<raw_data_ptr> get_all_raw_datas();
+	SCREWDRIVER_INFRASTRUCTURE_API void start_task();
+	SCREWDRIVER_INFRASTRUCTURE_API void stop_task();
 }
 
 #endif // INFRASTRUCTURE_GLOBAL_HPP

@@ -11,6 +11,7 @@ namespace TM
 	};
 
 	embedded_message_position_table::embedded_message_position_table(void)
+		:imp_(new sub_buffer_position_table_imp_t)
 	{
 	}
 

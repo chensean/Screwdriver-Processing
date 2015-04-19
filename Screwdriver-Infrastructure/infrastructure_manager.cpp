@@ -82,7 +82,7 @@ namespace screwdriver
 		return imp_->raw_data_manager_->get_all_objects();
 	}
 
-	void infrastructure_manager::start()
+	void infrastructure_manager::start_task()
 	{
 		boost::thread raw_data_notify_thread(boost::bind(
 			&run_while_not_stopped, boost::ref(imp_->raw_data_work_queue_)
@@ -92,7 +92,7 @@ namespace screwdriver
 		));
 	}
 
-	void infrastructure_manager::stop()
+	void infrastructure_manager::stop_task()
 	{
 		imp_->raw_data_work_queue_.stop();
 		imp_->parameter_work_queue_.stop();

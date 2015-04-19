@@ -45,7 +45,7 @@ namespace screwdriver
 	{
 		if (imp_->data_buffer_map_.find(minor_frame_id) != imp_->data_buffer_map_.end())
 		{
-			auto data_buffer_ptr=imp_->data_buffer_map_[minor_frame_id];
+			auto data_buffer_ptr = imp_->data_buffer_map_[minor_frame_id];
 			data_buffer_ptr->set_time(imp_->minor_frame_time_);
 			data_buffer_ptr->read_from_buffer(*data_ptr, offset);
 		}
@@ -96,6 +96,6 @@ namespace screwdriver
 
 	void irig_frame::set_minor_frame_time(double time)
 	{
-		imp_->minor_frame_time_=time;
+		imp_->minor_frame_time_ = time;
 	}
 }

@@ -19,7 +19,8 @@ namespace screwdriver
 	typedef boost::signals2::signal<void(const data_ptr&)> raw_data_charged_signal_t;
 	typedef raw_data_charged_signal_t::slot_type raw_data_charged_slot_t;
 
-	class SCREWDRIVER_INFRASTRUCTURE_API raw_data
+	class
+		SCREWDRIVER_INFRASTRUCTURE_API raw_data
 		:public boost::enable_shared_from_this<raw_data>,
 		 private boost::noncopyable
 	{

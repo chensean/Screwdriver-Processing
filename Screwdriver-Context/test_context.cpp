@@ -175,7 +175,11 @@ namespace screwdriver
 		}
 		else
 		{
-			boost::shared_ptr<sfid_minor_frame> sfid_minor_frame_ptr(new sfid_minor_frame(sfid_position, sfid_bits, lsb_bit));
+			if (sync_location != "Begin")
+			{
+				sfid_position -= 1;
+			}
+			boost::shared_ptr<sfid_minor_frame> sfid_minor_frame_ptr(new sfid_minor_frame(sfid_position * bytes, sfid_bits, lsb_bit));
 			get_minor_frame_id_fun = boost::bind(&sfid_minor_frame::get_minor_frame_id, sfid_minor_frame_ptr, _1, _2);
 		}
 		auto minor_frame_bytes = minor_frame_words * bytes;
@@ -211,7 +215,7 @@ namespace screwdriver
 		auto raw_data_p = get_raw_data(RTR_DATA_STRING);
 		if (raw_data_p)
 		{
-			imp_->rtr_tm_client_ = boost::make_shared<rtr_tm_client>(ip, tm_channel, port, boost::bind(&raw_data::set_data, raw_data_p, _1));
+			imp_->rtr_tm_client_ = boost::make_shared<rtr_tm_client>(ip, port, tm_channel, boost::bind(&raw_data::set_data, raw_data_p, _1));
 			if (imp_->tm_time_)
 			{
 				auto time_offset = boost::numeric_cast<uint32_t>(RTR_TIME_OFFSET * sizeof(int));

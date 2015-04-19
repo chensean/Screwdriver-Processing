@@ -40,7 +40,7 @@ namespace TM
 		tm_parameter_ptr hour_parameter_ptr_;
 		tm_parameter_ptr minute_parameter_ptr_;
 		tm_parameter_ptr second_parameter_ptr_;
-		tm_parameter_ptr millisecond_parameter_ptr_;		
+		tm_parameter_ptr millisecond_parameter_ptr_;
 		time_charged_signal_t time_charged_;
 	};
 

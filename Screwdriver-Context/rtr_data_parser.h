@@ -18,7 +18,7 @@ namespace screwdriver
 		:private boost::noncopyable
 	{
 	public:
-		explicit rtr_data_parser(const parse_data_fun_t& fun=nullptr);
+		explicit rtr_data_parser(const parse_data_fun_t& fun = nullptr);
 		~rtr_data_parser(void);
 		void start();
 		void stop();

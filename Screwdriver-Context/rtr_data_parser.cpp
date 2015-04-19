@@ -45,7 +45,7 @@ namespace screwdriver
 	rtr_data_parser::~rtr_data_parser(void)
 	{
 	}
-	
+
 	void rtr_data_parser::start()
 	{
 		imp_->thread_ = boost::make_shared<boost::thread>(
@@ -97,8 +97,6 @@ namespace screwdriver
 
 	void rtr_data_parser::set_parse_data_fun(const parse_data_fun_t& fun)
 	{
-		imp_->parse_data_fun_=fun;
+		imp_->parse_data_fun_ = fun;
 	}
-
-
 }

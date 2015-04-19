@@ -32,6 +32,7 @@ namespace screwdriver
 		struct save_data_file_imp_t;
 		boost::shared_ptr<save_data_file_imp_t> imp_;
 	};
+
 	typedef boost::shared_ptr<save_data_file> save_data_file_ptr;
 }
 #endif // SAVE_DATA_FILE_HPP

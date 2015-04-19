@@ -1,16 +1,19 @@
 #include "context_global.h"
 #include "test_context.h"
+#include "infrastructure_global.h"
 
 namespace screwdriver
 {
 	void start_rtr_tm()
 	{
+		start_task();
 		single_test_context::Instance().start_rtr_tm();
 	}
 
 	void stop_rtr_tm()
 	{
 		single_test_context::Instance().stop_rtr_tm();
+		stop_task();
 	}
 
 	void start_save_file()

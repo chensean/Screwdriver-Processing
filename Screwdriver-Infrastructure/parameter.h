@@ -19,7 +19,8 @@ namespace screwdriver
 	typedef boost::signals2::signal<void(const parameter_ptr&)> parameter_charged_signal_t;
 	typedef parameter_charged_signal_t::slot_type parameter_charged_slot_t;
 
-	class SCREWDRIVER_INFRASTRUCTURE_API parameter
+	class
+		SCREWDRIVER_INFRASTRUCTURE_API parameter
 		:public boost::enable_shared_from_this<parameter>,
 		 private boost::noncopyable
 	{

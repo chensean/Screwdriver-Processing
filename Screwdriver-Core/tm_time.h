@@ -32,7 +32,7 @@ namespace TM
 
 		virtual double get_time() const = 0;
 		virtual void read_form_buffer(const std::vector<uint8_t>& buffer, uint32_t start_idx) = 0;
-		virtual boost::signals2::connection connect_time_charged_signal(const time_charged_slot_t& slot)=0;
+		virtual boost::signals2::connection connect_time_charged_signal(const time_charged_slot_t& slot) =0;
 	};
 }
 

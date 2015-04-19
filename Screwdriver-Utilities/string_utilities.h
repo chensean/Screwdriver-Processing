@@ -56,7 +56,7 @@ namespace utilities
 			               [](const std::string& data_str)->IntegerType
 
 
-			               
+
 			               {
 				               try
 				               {

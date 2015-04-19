@@ -10,13 +10,14 @@ namespace TM
 		parameter_position_table_imp_t()
 			:delta_time_(0)
 		{
-			
 		}
+
 		double delta_time_;
 		parameter_container_t parameters;
 	};
 
 	parameter_position_table::parameter_position_table(void)
+		:imp_(new parameter_position_table_imp_t)
 	{
 	}
 
@@ -46,7 +47,7 @@ namespace TM
 
 	void parameter_position_table::set_delta_time(double delta_time)
 	{
-		imp_->delta_time_=delta_time;
+		imp_->delta_time_ = delta_time;
 	}
 
 	void parameter_position_table::set_time(double time)
@@ -54,8 +55,7 @@ namespace TM
 		std::for_each(imp_->parameters.begin(), imp_->parameters.end()
 		              , [=,&time](const parameter_position_t& param_pos)
 		              {
-			              param_pos.first->set_time(time+param_pos.second*imp_->delta_time_);
+			              param_pos.first->set_time(time + param_pos.second * imp_->delta_time_);
 		              });
-
 	}
 }
