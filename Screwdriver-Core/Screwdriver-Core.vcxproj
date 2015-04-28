@@ -27,13 +27,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -46,7 +46,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -169,20 +169,25 @@
     <ClCompile Include="base_tm_parameter.cpp" />
     <ClCompile Include="bits_tm_parameter.cpp" />
     <ClCompile Include="code0_time.cpp" />
+    <ClCompile Include="code1_time.cpp" />
+    <ClCompile Include="code2_time.cpp" />
+    <ClCompile Include="code3_time.cpp" />
     <ClCompile Include="data_buffer.cpp" />
-    <ClCompile Include="irig_b_time.cpp" />
     <ClCompile Include="linear_conversion.cpp" />
     <ClCompile Include="parameter_position_table.cpp" />
     <ClCompile Include="polynomial_conversion.cpp" />
     <ClCompile Include="embedded_message.cpp" />
     <ClCompile Include="embedded_message_position_table.cpp" />
+    <ClCompile Include="uma_time.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base_tm_parameter.h" />
     <ClInclude Include="bits_tm_parameter.h" />
     <ClInclude Include="code0_time.h" />
+    <ClInclude Include="code1_time.h" />
+    <ClInclude Include="code2_time.h" />
+    <ClInclude Include="code3_time.h" />
     <ClInclude Include="data_buffer.h" />
-    <ClInclude Include="irig_b_time.h" />
     <ClInclude Include="linear_conversion.h" />
     <ClInclude Include="parameter_position_table.h" />
     <ClInclude Include="polynomial_conversion.h" />
@@ -192,6 +197,7 @@
     <ClInclude Include="embedded_message_position_table.h" />
     <ClInclude Include="tm_parameter.h" />
     <ClInclude Include="tm_time.h" />
+    <ClInclude Include="uma_time.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

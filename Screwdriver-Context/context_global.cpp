@@ -4,31 +4,54 @@
 
 namespace screwdriver
 {
+	bool is_running()
+	{
+		return single_test_context::Instance().is_running();
+	}
+
+	bool is_saving()
+	{
+		return single_test_context::Instance().is_saving();
+	}
+
+	bool connect_rtr_tm()
+	{
+		return single_test_context::Instance().connect_rtr_tm();
+	}
+
+	bool disconnect_rtr_tm()
+	{
+		return single_test_context::Instance().disconnect_rtr_tm();
+	}
+
 	void start_rtr_tm()
 	{
-		start_task();
 		single_test_context::Instance().start_rtr_tm();
 	}
 
 	void stop_rtr_tm()
 	{
 		single_test_context::Instance().stop_rtr_tm();
-		stop_task();
 	}
 
-	void start_save_file()
+	void start_rtr_monitor()
 	{
-		single_test_context::Instance().start_save_file();
+		single_test_context::Instance().start_rtr_monitor();
+	}
+
+	void stop_rtr_monitor()
+	{
+		single_test_context::Instance().stop_rtr_monitor();
+	}
+
+	void start_save_file(const std::string& folder)
+	{
+		single_test_context::Instance().start_save_file(folder);
 	}
 
 	void stop_save_file()
 	{
 		single_test_context::Instance().stop_save_file();
-	}
-
-	void set_save_folder(const std::string& folder)
-	{
-		single_test_context::Instance().set_save_folder(folder);
 	}
 
 	void load_irig_config(const std::string& file_name)

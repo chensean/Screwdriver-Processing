@@ -21,9 +21,6 @@
     <ClInclude Include="rtr_data_parser.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="tcp_client.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="rtr_monitor_client.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -48,12 +45,15 @@
     <ClInclude Include="save_data_file.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="save_text_file.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="asynchronous_tcp_client.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="rtr_data_parser.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="tcp_client.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="rtr_monitor_client.cpp">
@@ -78,6 +78,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="save_data_file.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="save_text_file.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="asynchronous_tcp_client.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -22,13 +22,17 @@
 #include "infrastructure_global.h"
 #include "save_data_file.h"
 #include "code0_time.h"
+#include "code2_time.h"
+#include "uma_time.h"
+#include "save_text_file.h"
 
 namespace screwdriver
 {
 	const std::string RTR_DATA_STRING = "rtr_data";
+	const std::string RTR_MONITOR_STRING = "rtr_monitor";
 	const std::string MINOR_FRAME_DATA_STRING = "minor_frame_data";
+	const uint32_t RTR_FRAME_OFFSET = 16;
 	const uint32_t RTR_TIME_OFFSET = 3;
-	const uint32_t RTR_FRAME_OFFSET = 14;
 	typedef object_manager<TM::tm_parameter> tm_parameter_manager;
 	typedef object_manager<TM::embedded_message> embedded_message_manager;
 	typedef object_manager<save_data_file> save_data_file_manager;
@@ -36,13 +40,17 @@ namespace screwdriver
 	struct test_context::test_context_imp_t
 	{
 		test_context_imp_t()
-			:tm_parameter_manager_(new tm_parameter_manager),
-			 embedded_message_manager_(new embedded_message_manager),
-			 save_data_file_manager_(new save_data_file_manager),
-			 tm_time_(new TM::code0_time)
+			: is_running_(false),
+			  is_saveing_(false),
+			  tm_parameter_manager_(new tm_parameter_manager),
+			  embedded_message_manager_(new embedded_message_manager),
+			  save_data_file_manager_(new save_data_file_manager),
+			  tm_time_(new TM::code2_time)
 		{
 		}
 
+		bool is_running_;
+		bool is_saveing_;
 		boost::shared_ptr<tm_parameter_manager> tm_parameter_manager_;
 		boost::shared_ptr<embedded_message_manager> embedded_message_manager_;
 		boost::shared_ptr<save_data_file_manager> save_data_file_manager_;
@@ -51,11 +59,18 @@ namespace screwdriver
 		boost::shared_ptr<irig_frame> irig_frame_;
 		TM::tm_time_ptr tm_time_;
 		std::string save_folder_;
+		boost::shared_ptr<save_text_file> save_text_file_ptr_;
 	};
 
 	test_context::test_context(void)
 		:imp_(new test_context_imp_t)
 	{
+		if (imp_->tm_time_)
+		{
+			parameter_ptr param_ptr(new parameter("TmSystemTime", 0));
+			add_parameter(param_ptr->get_name(), param_ptr);
+			imp_->tm_time_->connect_time_charged_signal(TM::time_charged_slot_t(&parameter::set_value, param_ptr, _1, _1, 0));
+		}
 	}
 
 	test_context::~test_context(void)
@@ -66,9 +81,37 @@ namespace screwdriver
 	{
 		raw_data_ptr raw_data_p(new raw_data(name));
 		add_raw_data(raw_data_p->raw_data::get_name(), raw_data_p);
-		save_data_file_ptr save_data_file_p(new save_data_file(imp_->save_folder_, name));
+		save_data_file_ptr save_data_file_p(new save_data_file(name));
 		imp_->save_data_file_manager_->add_object(name, save_data_file_p);
 		raw_data_p->raw_data::connect_data_charged_signal(raw_data_charged_slot_t(&save_data_file::receive, save_data_file_p, _1));
+	}
+
+	bool test_context::is_running()
+	{
+		return imp_->is_running_;
+	}
+
+	bool test_context::is_saving()
+	{
+		return imp_->is_saveing_;
+	}
+
+	bool test_context::connect_rtr_tm()
+	{
+		if (imp_->rtr_tm_client_)
+		{
+			return imp_->rtr_tm_client_->connect_server();
+		}
+		return false;
+	}
+
+	bool test_context::disconnect_rtr_tm()
+	{
+		if (imp_->rtr_tm_client_)
+		{
+			return imp_->rtr_tm_client_->disconnect_server();
+		}
+		return false;
 	}
 
 	void test_context::start_rtr_tm()
@@ -87,10 +130,30 @@ namespace screwdriver
 		}
 	}
 
-	void test_context::start_save_file()
+	void test_context::start_rtr_monitor()
+	{
+		if (imp_->rtr_monitor_client_)
+		{
+			imp_->rtr_monitor_client_->start();
+			imp_->is_running_ = true;
+		}
+	}
+
+	void test_context::stop_rtr_monitor()
+	{
+		if (imp_->rtr_monitor_client_)
+		{
+			imp_->rtr_monitor_client_->stop();
+			imp_->is_running_ = false;
+		}
+	}
+
+	void test_context::start_save_file(const std::string& folder)
 	{
 		auto save_files = imp_->save_data_file_manager_->get_all_objects();
-		std::for_each(save_files.begin(), save_files.end(), boost::bind(&save_data_file::start, _1));
+		std::for_each(save_files.begin(), save_files.end(), boost::bind(&save_data_file::start, _1, folder));
+		//imp_->save_text_file_ptr_->start(folder);
+		imp_->is_saveing_ = true;
 	}
 
 
@@ -98,11 +161,19 @@ namespace screwdriver
 	{
 		auto save_files = imp_->save_data_file_manager_->get_all_objects();
 		std::for_each(save_files.begin(), save_files.end(), boost::bind(&save_data_file::stop, _1));
+		//imp_->save_text_file_ptr_->stop();
+		imp_->is_saveing_ = false;
 	}
 
-	void test_context::set_save_folder(const std::string& folder)
+
+	void test_context::save_sfid()
 	{
-		imp_->save_folder_ = folder;
+		imp_->save_text_file_ptr_ = boost::make_shared<save_text_file>("SFID");
+		auto sfid_ptr = get_parameter("SFID");
+		if (sfid_ptr)
+		{
+			sfid_ptr->connect_val_charged_signal(parameter_charged_slot_t(&save_text_file::receive, imp_->save_text_file_ptr_, _1));
+		}
 	}
 
 	void test_context::load_irig_config(const std::string& file_name)
@@ -138,6 +209,10 @@ namespace screwdriver
 		create_embedded_messages(pt);
 
 		config_embedded_messages_position(pt, word_length, sync_location);
+
+		start_task();
+
+		save_sfid();
 	}
 
 	std::vector<uint8_t> test_context::get_sync_pattern_array(const std::string& sync_pattern_string, uint32_t sync_pattern_bytes)
@@ -227,6 +302,16 @@ namespace screwdriver
 		}
 	}
 
+	void test_context::create_rtr_monitor_client(const std::string& ip, uint16_t port, int tm_channel)
+	{
+		raw_data_ptr raw_data_p(new raw_data(RTR_MONITOR_STRING));
+		add_raw_data(raw_data_p->raw_data::get_name(), raw_data_p);
+		if (raw_data_p)
+		{
+			imp_->rtr_monitor_client_ = boost::make_shared<rtr_monitor_client>(ip, boost::bind(&raw_data::set_data, raw_data_p, _1));
+		}
+	}
+
 	void test_context::config_data_source(boost::property_tree::ptree& pt)
 	{
 		auto source_pt = pt.get_child("CFG.ACQ_SYS.SOURCE");
@@ -237,6 +322,7 @@ namespace screwdriver
 			auto port = source_pt.get<uint16_t>("<xmlattr>.Port");
 			auto channel = source_pt.get<int>("<xmlattr>.TMChannel");
 			create_rtr_tm_client(ip, port, channel);
+			create_rtr_monitor_client(ip, port, channel);
 		}
 	}
 
@@ -271,12 +357,12 @@ namespace screwdriver
 
 	void test_context::create_parameter_proxy(const TM::tm_parameter_ptr& tm_param_ptr)
 	{
-		parameter_ptr param_ptr(new parameter(tm_param_ptr->get_name()));
+		parameter_ptr param_ptr(new parameter(tm_param_ptr->get_name(), tm_param_ptr->get_bits_count()));
 		add_parameter(param_ptr->get_name(), param_ptr);
 		tm_param_ptr->connect_val_charged_signal(TM::val_charged_slot_t(
 			[param_ptr](TM::tm_parameter* tm_param)
 			{
-				param_ptr->set_value(tm_param->get_time(), tm_param->get_val());
+				param_ptr->set_value(tm_param->get_time(), tm_param->get_val(), tm_param->get_code());
 			}));
 	}
 

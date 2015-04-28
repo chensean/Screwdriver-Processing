@@ -39,12 +39,12 @@ namespace TM
 		{
 		}
 
-		int32_t get_bits_count() const
+		virtual uint32_t get_bits_count() const override
 		{
 			return BIT_COUNT;
 		}
 
-		int32_t get_bytes_count() const
+		uint32_t get_bytes_count() const
 		{
 			return BIT_COUNT / std::numeric_limits<uint8_t>::digits;
 		}
@@ -66,6 +66,14 @@ namespace TM
 				val = secondary_conversion_fun_(val);
 			}
 			return val;
+		}
+
+
+		virtual uint64_t get_code() const override
+		{
+			typedef boost::mpl::int_<BIT_COUNT> i_bits_t;
+			typedef typename boost::mpl::if_<boost::mpl::greater<i_bits_t, i32_t>, uint64_t, typename boost::mpl::if_<boost::mpl::greater<i_bits_t, i16_t>, uint32_t, typename boost::mpl::if_<boost::mpl::greater<i_bits_t, i8_t>, uint16_t, uint8_t>::type>::type>::type code_type;
+			return utilities::array_to_big_endian_val<code_type>(data_, 0);
 		}
 
 		virtual double get_extraction_val() const override

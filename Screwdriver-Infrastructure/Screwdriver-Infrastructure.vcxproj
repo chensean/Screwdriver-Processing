@@ -22,12 +22,14 @@
     <ClCompile Include="infrastructure_global.cpp" />
     <ClCompile Include="infrastructure_manager.cpp" />
     <ClCompile Include="parameter.cpp" />
+    <ClCompile Include="parameter_value.cpp" />
     <ClCompile Include="raw_data.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="infrastructure_global.h" />
     <ClInclude Include="infrastructure_manager.h" />
     <ClInclude Include="parameter.h" />
+    <ClInclude Include="parameter_value.h" />
     <ClInclude Include="raw_data.h" />
     <ClInclude Include="Screwdriver-Infrastructure.h" />
   </ItemGroup>
@@ -40,13 +42,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -59,7 +61,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>

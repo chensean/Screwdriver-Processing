@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Screwdriver-Processing", "Screwdriver-Processing\Screwdriver-Processing.vcxproj", "{AE764FE1-BA9B-4067-87AC-72351B052CDC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9D127F00-7065-4D70-BF48-4171B135A917} = {9D127F00-7065-4D70-BF48-4171B135A917}
@@ -29,9 +31,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{235D0C47-BD6B-4B9B-B750-6A7005FFD031}"
 	ProjectSection(SolutionItems) = preProject
 		config\cfg.xml = config\cfg.xml
+		config\cfg2.xml = config\cfg2.xml
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Screwdriver-Infrastructure", "Screwdriver-Infrastructure\Screwdriver-Infrastructure.vcxproj", "{DB979F86-D248-462D-B311-3B28543B7301}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BSDP_RTDisplay", "BSDP_RTDisplay\BSDP_RTDisplay.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9D127F00-7065-4D70-BF48-4171B135A917} = {9D127F00-7065-4D70-BF48-4171B135A917}
+		{DB979F86-D248-462D-B311-3B28543B7301} = {DB979F86-D248-462D-B311-3B28543B7301}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +57,7 @@ Global
 		{AE764FE1-BA9B-4067-87AC-72351B052CDC}.Release|Win32.ActiveCfg = Release|Win32
 		{AE764FE1-BA9B-4067-87AC-72351B052CDC}.Release|Win32.Build.0 = Release|Win32
 		{AE764FE1-BA9B-4067-87AC-72351B052CDC}.Release|x64.ActiveCfg = Release|x64
+		{AE764FE1-BA9B-4067-87AC-72351B052CDC}.Release|x64.Build.0 = Release|x64
 		{C171A967-F9CD-4DA0-A939-FD3A4EC65B32}.Debug|Win32.ActiveCfg = Debug|Win32
 		{C171A967-F9CD-4DA0-A939-FD3A4EC65B32}.Debug|Win32.Build.0 = Debug|Win32
 		{C171A967-F9CD-4DA0-A939-FD3A4EC65B32}.Debug|x64.ActiveCfg = Debug|x64
@@ -88,8 +98,19 @@ Global
 		{DB979F86-D248-462D-B311-3B28543B7301}.Release|Win32.Build.0 = Release|Win32
 		{DB979F86-D248-462D-B311-3B28543B7301}.Release|x64.ActiveCfg = Release|x64
 		{DB979F86-D248-462D-B311-3B28543B7301}.Release|x64.Build.0 = Release|x64
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|Win32.Build.0 = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x64.ActiveCfg = Debug|x64
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x64.Build.0 = Debug|x64
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Win32.ActiveCfg = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Win32.Build.0 = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x64.ActiveCfg = Release|x64
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		Qt5Version = msvc2013_64
 	EndGlobalSection
 EndGlobal

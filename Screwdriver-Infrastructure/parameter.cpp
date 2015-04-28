@@ -2,27 +2,24 @@
 #include "parameter.h"
 #include "infrastructure_manager.h"
 
-
 namespace screwdriver
 {
 	struct parameter::parameter_imp_t
 	{
-		parameter_imp_t(const std::string& name)
-			:name_(name),
-			 value_(0),
-			 time_(0)
+		parameter_imp_t(const std::string& name, uint32_t bits_count)
+			:name_(name)
+			 , bits_count_(bits_count)
 		{
 		}
 
 		std::string name_;
-		double value_;
-		double time_;
+		uint32_t bits_count_;
 		parameter_charged_signal_t parameter_charged_;
 	};
 
 
-	parameter::parameter(const std::string& name)
-		:imp_(new parameter_imp_t(name))
+	parameter::parameter(const std::string& name, uint32_t bits_count)
+		:imp_(new parameter_imp_t(name, bits_count))
 	{
 	}
 
@@ -35,24 +32,18 @@ namespace screwdriver
 		return imp_->name_;
 	}
 
-	double parameter::get_time() const
+	uint32_t parameter::get_bits_count() const
 	{
-		return imp_->time_;
+		return imp_->bits_count_;
 	}
 
-	double parameter::get_value() const
+	void parameter::set_value(double time, double val, uint64_t code)
 	{
-		return imp_->value_;
-	}
-
-	void parameter::set_value(double time, double val)
-	{
-		imp_->time_ = time;
-		imp_->value_ = val;
+		parameter_value_ptr value_ptr(new parameter_value(imp_->name_, time, val, code));
 		single_infrastructure_manager::Instance().push_task_to_parameter_work_queue(
 			[=]()
 			{
-				imp_->parameter_charged_(shared_from_this());
+				imp_->parameter_charged_(value_ptr);
 			}
 		);
 	}

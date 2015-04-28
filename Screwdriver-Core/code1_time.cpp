@@ -1,13 +1,13 @@
-#include "irig_b_time.h"
+#include "code1_time.h"
 #include "data_buffer.h"
 #include "base_tm_parameter.h"
 #include "string_utilities.h"
 
 namespace TM
 {
-	struct irig_b_time::irig_b_time_imp_t
+	struct code1_time::code1_time_imp_t
 	{
-		irig_b_time_imp_t()
+		code1_time_imp_t()
 			:time_(0),
 			 data_buffer_ptr_(new data_buffer)
 		{
@@ -44,29 +44,29 @@ namespace TM
 		time_charged_signal_t time_charged_;
 	};
 
-	irig_b_time::irig_b_time(void)
-		:imp_(new irig_b_time_imp_t)
+	code1_time::code1_time(void)
+		:imp_(new code1_time_imp_t)
 	{
 	}
 
 
-	irig_b_time::~irig_b_time(void)
+	code1_time::~code1_time(void)
 	{
 	}
 
-	double irig_b_time::get_time() const
+	double code1_time::get_time() const
 	{
 		return imp_->time_;
 	}
 
-	void irig_b_time::read_form_buffer(const std::vector<uint8_t>& buffer, uint32_t start_idx)
+	void code1_time::read_form_buffer(const std::vector<uint8_t>& buffer, uint32_t start_idx)
 	{
 		imp_->data_buffer_ptr_->read_from_buffer(buffer, start_idx);
 		imp_->time_ = imp_->day_parameter_ptr_->get_val() * 24 * 60 * 60 + imp_->hour_parameter_ptr_->get_val() * 60 * 60 + imp_->minute_parameter_ptr_->get_val() * 60 + imp_->second_parameter_ptr_->get_val() + imp_->millisecond_parameter_ptr_->get_val() / 1000;
 		imp_->time_charged_(imp_->time_);
 	}
 
-	boost::signals2::connection irig_b_time::connect_time_charged_signal(const time_charged_slot_t& slot)
+	boost::signals2::connection code1_time::connect_time_charged_signal(const time_charged_slot_t& slot)
 	{
 		return imp_->time_charged_.connect(slot);
 	}

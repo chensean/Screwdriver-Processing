@@ -20,11 +20,17 @@ namespace screwdriver
 	{
 	public:
 		friend Loki::CreateUsingNew<test_context>;
+		bool is_running();
+		bool is_saving();
+		bool connect_rtr_tm();
+		bool disconnect_rtr_tm();
 		void start_rtr_tm();
 		void stop_rtr_tm();
-		void start_save_file();
+		void start_rtr_monitor();
+		void stop_rtr_monitor();
+		void start_save_file(const std::string& folder);
 		void stop_save_file();
-		void set_save_folder(const std::string& folder);
+		void save_sfid();
 		void load_irig_config(const std::string& file_name);
 	private:
 		test_context(void);
@@ -32,6 +38,7 @@ namespace screwdriver
 		void create_raw_data(const std::string& name);
 		void config_irig_frame(const boost::property_tree::ptree& pt);
 		void create_rtr_tm_client(const std::string& ip, uint16_t port, int tm_channel);
+		void create_rtr_monitor_client(const std::string& ip, uint16_t port, int tm_channel);
 		void config_data_source(boost::property_tree::ptree& pt);
 		TM::tm_parameter_ptr create_tm_parameter(const boost::property_tree::ptree::value_type& parameter_pt, uint32_t word_length);
 		void create_parameter_proxy(const TM::tm_parameter_ptr& tm_param_ptr);

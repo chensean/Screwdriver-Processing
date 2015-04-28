@@ -20,8 +20,11 @@ namespace screwdriver
 	public:
 		rtr_tm_client(const std::string& ip, uint16_t port, int tm_channel, const parse_data_fun_t& fun);
 		~rtr_tm_client(void);
+		bool connect_server();
+		bool disconnect_server();
 		void start();
 		void stop();
+		void send_data(const std::vector<int32_t>& data);
 	private:
 		struct rtr_tm_client_imp_t;
 		boost::shared_ptr<rtr_tm_client_imp_t> imp_;

@@ -1,5 +1,5 @@
-#ifndef TCP_CLIENT_HPP
-#define TCP_CLIENT_HPP
+#ifndef ASYNCHRONOUS_TCP_CLIENT_HPP
+#define ASYNCHRONOUS_TCP_CLIENT_HPP
 
 #if defined(_MSC_VER)
 # pragma once
@@ -16,12 +16,12 @@ namespace screwdriver
 	typedef std::vector<uint8_t>::iterator iterator_type;
 	typedef std::function<void(iterator_type, iterator_type)> parser_fun_t;
 
-	class __declspec(dllexport) tcp_client
+	class __declspec(dllexport) asynchronous_tcp_client
 		:private boost::noncopyable
 	{
 	public:
-		tcp_client(const std::string& ip, uint16_t port, parser_fun_t parser_fun);
-		~tcp_client(void);
+		asynchronous_tcp_client(const std::string& ip, uint16_t port, parser_fun_t parser_fun);
+		~asynchronous_tcp_client(void);
 		void start();
 		void stop();
 		void send_data(const std::vector<int32_t>& data);
@@ -33,9 +33,9 @@ namespace screwdriver
 		void handle_receive(const boost::system::error_code& e, std::size_t bytes_transferred);
 		void handle_send(const data_ptr& data, const boost::system::error_code& e, std::size_t bytes_transferred);
 	private:
-		struct tcp_client_imp_t;
-		boost::shared_ptr<tcp_client_imp_t> imp_;
+		struct asynchronous_tcp_client_imp_t;
+		boost::shared_ptr<asynchronous_tcp_client_imp_t> imp_;
 	};
 }
-#endif // TCP_CLIENT_HPP
+#endif // ASYNCHRONOUS_TCP_CLIENT_HPP
 

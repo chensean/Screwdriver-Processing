@@ -1,4 +1,4 @@
-#include "tcp_client.h"
+#include "asynchronous_tcp_client.h"
 #include <SDKDDKVer.h>
 #define BOOST_ALL_DYN_LINK
 # pragma warning( push )
@@ -8,7 +8,7 @@
 #include <boost/asio.hpp>
 #include <boost/make_shared.hpp>
 
-class tcp_client;
+class asynchronous_tcp_client;
 const size_t BUFFER_MAX_SIZE = 8 * 1024 * 1024;
 using boost::asio::ip::tcp;
 
@@ -16,9 +16,9 @@ namespace screwdriver
 {
 	typedef boost::shared_ptr<tcp::socket> sock_ptr;
 
-	struct tcp_client::tcp_client_imp_t
+	struct asynchronous_tcp_client::asynchronous_tcp_client_imp_t
 	{
-		tcp_client_imp_t(const std::string& ip, uint16_t port, parser_fun_t parser_fun)
+		asynchronous_tcp_client_imp_t(const std::string& ip, uint16_t port, parser_fun_t parser_fun)
 			: ep_(boost::asio::ip::address::from_string(ip), port),
 			  sp_(new tcp::socket(ios_)),
 			  read_buffer_(BUFFER_MAX_SIZE),
@@ -35,25 +35,25 @@ namespace screwdriver
 	};
 
 
-	tcp_client::tcp_client(const std::string& ip, uint16_t port, parser_fun_t parser_fun)
-		:imp_(new tcp_client_imp_t(ip, port, parser_fun))
+	asynchronous_tcp_client::asynchronous_tcp_client(const std::string& ip, uint16_t port, parser_fun_t parser_fun)
+		:imp_(new asynchronous_tcp_client_imp_t(ip, port, parser_fun))
 
 	{
 	}
 
-	tcp_client::~tcp_client(void)
+	asynchronous_tcp_client::~asynchronous_tcp_client(void)
 	{
 	}
 
-	void tcp_client::start_receive()
+	void asynchronous_tcp_client::start_receive()
 	{
 		imp_->sp_->async_read_some(boost::asio::buffer(imp_->read_buffer_),
-		                           boost::bind(&tcp_client::handle_receive, this,
+		                           boost::bind(&asynchronous_tcp_client::handle_receive, this,
 		                                       boost::asio::placeholders::error,
 		                                       boost::asio::placeholders::bytes_transferred));
 	}
 
-	bool tcp_client::connect_server()
+	bool asynchronous_tcp_client::connect_server()
 	{
 		try
 		{
@@ -73,20 +73,22 @@ namespace screwdriver
 		return true;
 	}
 
-	void tcp_client::start()
+	void asynchronous_tcp_client::start()
 	{
+		imp_->sp_ = boost::make_shared<tcp::socket>(imp_->ios_);
 		if (!connect_server()) return;
 		start_receive();
 		imp_->thread_ = boost::make_shared<boost::thread>(boost::bind(&boost::asio::io_service::run, &imp_->ios_));
 	}
 
-	void tcp_client::stop()
+	void asynchronous_tcp_client::stop()
 	{
-		if (imp_->sp_->is_open())
+		if (imp_->sp_ && imp_->sp_->is_open())
 		{
 			boost::system::error_code ignored_ec;
 			imp_->sp_->shutdown(tcp::socket::shutdown_both, ignored_ec);
 			imp_->sp_->close();
+			imp_->sp_.reset();
 		}
 		if (!imp_->ios_.stopped())
 		{
@@ -95,7 +97,7 @@ namespace screwdriver
 		}
 	}
 
-	void tcp_client::send_data(const std::vector<int32_t>& data)
+	void asynchronous_tcp_client::send_data(const std::vector<int32_t>& data)
 	{
 		if (imp_->sp_->is_open())
 		{
@@ -109,7 +111,7 @@ namespace screwdriver
 		}
 	}
 
-	void tcp_client::send_data(const std::vector<uint8_t>& data)
+	void asynchronous_tcp_client::send_data(const std::vector<uint8_t>& data)
 	{
 		if (imp_->sp_->is_open())
 		{
@@ -123,19 +125,19 @@ namespace screwdriver
 		}
 	}
 
-	void tcp_client::async_send_data(const data_ptr& data)
+	void asynchronous_tcp_client::async_send_data(const data_ptr& data)
 	{
 		if (imp_->sp_->is_open())
 		{
 			imp_->sp_->async_write_some(boost::asio::buffer(*data),
-			                            boost::bind(&tcp_client::handle_send, this,
+			                            boost::bind(&asynchronous_tcp_client::handle_send, this,
 			                                        data,
 			                                        boost::asio::placeholders::error,
 			                                        boost::asio::placeholders::bytes_transferred));
 		}
 	}
 
-	void tcp_client::handle_receive(const boost::system::error_code& e, std::size_t bytes_transferred)
+	void asynchronous_tcp_client::handle_receive(const boost::system::error_code& e, std::size_t bytes_transferred)
 	{
 		if (!e)
 		{
@@ -147,15 +149,15 @@ namespace screwdriver
 		}
 		else
 		{
-			stop();
+			//stop();
 		}
 	}
 
-	void tcp_client::handle_send(const data_ptr& data, const boost::system::error_code& e, std::size_t bytes_transferred)
+	void asynchronous_tcp_client::handle_send(const data_ptr& data, const boost::system::error_code& e, std::size_t bytes_transferred)
 	{
 		if (e)
 		{
-			stop();
+			//stop();
 		}
 	}
 }

@@ -41,13 +41,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -60,7 +60,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -135,12 +135,12 @@ copy  "$(BOOST)\lib32-msvc-11.0\boost_regex-vc110-mt-gd-1_57.dll"  "$(OutDir)"</
       <AdditionalDependencies />
     </Link>
     <PostBuildEvent>
-      <Command>copy  "$(BOOST)\lib64-msvc-11.0\boost_thread-vc110-mt-gd-1_57.dll" "$(OutDir)"
-copy  "$(BOOST)\lib64-msvc-11.0\boost_filesystem-vc110-mt-gd-1_57.dll" "$(OutDir)"
-copy  "$(BOOST)\lib64-msvc-11.0\boost_system-vc110-mt-gd-1_57.dll" "$(OutDir)"
-copy  "$(BOOST)\lib64-msvc-11.0\boost_date_time-vc110-mt-gd-1_57.dll" "$(OutDir)"
-copy  "$(BOOST)\lib64-msvc-11.0\boost_chrono-vc110-mt-gd-1_57.dll" "$(OutDir)"
-copy  "$(BOOST)\lib64-msvc-11.0\boost_regex-vc110-mt-gd-1_57.dll"  "$(OutDir)"</Command>
+      <Command>copy  "$(BOOST)\lib64-msvc-12.0\boost_thread-vc120-mt-gd-1_57.dll" "$(OutDir)"
+copy  "$(BOOST)\lib64-msvc-12.0\boost_filesystem-vc120-mt-gd-1_57.dll" "$(OutDir)"
+copy  "$(BOOST)\lib64-msvc-12.0\boost_system-vc120-mt-gd-1_57.dll" "$(OutDir)"
+copy  "$(BOOST)\lib64-msvc-12.0\boost_date_time-vc120-mt-gd-1_57.dll" "$(OutDir)"
+copy  "$(BOOST)\lib64-msvc-12.0\boost_chrono-vc120-mt-gd-1_57.dll" "$(OutDir)"
+copy  "$(BOOST)\lib64-msvc-12.0\boost_regex-vc120-mt-gd-1_57.dll"  "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -193,12 +193,12 @@ copy  "$(BOOST)\lib32-msvc-11.0\boost_regex-vc110-mt-1_57.dll"  "$(OutDir)"</Com
       <AdditionalDependencies />
     </Link>
     <PostBuildEvent>
-      <Command>copy  "$(BOOST)\lib64-msvc-11.0\boost_thread-vc110-mt-1_57.dll" "$(OutDir)"
-copy  "$(BOOST)\lib64-msvc-11.0\boost_filesystem-vc110-mt-1_57.dll" "$(OutDir)"
-copy  "$(BOOST)\lib64-msvc-11.0\boost_system-vc110-mt-1_57.dll" "$(OutDir)"
-copy  "$(BOOST)\lib64-msvc-11.0\boost_date_time-vc110-mt-1_57.dll" "$(OutDir)"
-copy  "$(BOOST)\lib64-msvc-11.0\boost_chrono-vc110-mt-1_57.dll" "$(OutDir)"
-copy  "$(BOOST)\lib64-msvc-11.0\boost_regex-vc110-mt-1_57.dll"  "$(OutDir)"</Command>
+      <Command>copy  "$(BOOST)\lib64-msvc-12.0\boost_thread-vc120-mt-1_57.dll" "$(OutDir)"
+copy  "$(BOOST)\lib64-msvc-12.0\boost_filesystem-vc120-mt-1_57.dll" "$(OutDir)"
+copy  "$(BOOST)\lib64-msvc-12.0\boost_system-vc120-mt-1_57.dll" "$(OutDir)"
+copy  "$(BOOST)\lib64-msvc-12.0\boost_date_time-vc120-mt-1_57.dll" "$(OutDir)"
+copy  "$(BOOST)\lib64-msvc-12.0\boost_chrono-vc120-mt-1_57.dll" "$(OutDir)"
+copy  "$(BOOST)\lib64-msvc-12.0\boost_regex-vc120-mt-1_57.dll"  "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

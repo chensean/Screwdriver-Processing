@@ -17,9 +17,9 @@ namespace screwdriver
 		:private boost::noncopyable
 	{
 	public:
-		save_data_file(const std::string& folder, const std::string& prefix);
+		explicit save_data_file(const std::string& prefix);
 		~save_data_file(void);
-		void start();
+		void start(const std::string& folder);
 		void stop();
 		void receive(const tm_data_ptr& data);
 	private:

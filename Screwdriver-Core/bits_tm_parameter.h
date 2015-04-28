@@ -27,7 +27,7 @@ namespace TM
 			 ,bit_start_idx_(bit_start_idx)
 			 ,time_(0)
 			 , data_(sizeof(container_type))
-			 , extraction_val_(0)
+			 , code_(0)
 			 ,primary_conversion_fun_(fun1)
 			 ,secondary_conversion_fun_(fun2)
 			 ,text_conversion_fun_(fun3)
@@ -39,7 +39,7 @@ namespace TM
 		{
 		}
 
-		int32_t get_bits_count() const
+		virtual uint32_t get_bits_count() const override
 		{
 			return BIT_COUNT;
 		}
@@ -51,7 +51,7 @@ namespace TM
 
 		virtual double get_val() const override
 		{
-			double val = extraction_val_;
+			double val = boost::numeric_cast<double>(code_);
 			if (primary_conversion_fun_ != nullptr)
 			{
 				val = primary_conversion_fun_(val);
@@ -73,9 +73,14 @@ namespace TM
 			time_ = time;
 		}
 
+		virtual uint64_t get_code() const override
+		{
+			return code_;
+		}
+
 		virtual double get_extraction_val() const override
 		{
-			return extraction_val_;
+			return boost::numeric_cast<double>(code_);
 		}
 
 		virtual std::vector<uint8_t> get_data() const override
@@ -86,7 +91,7 @@ namespace TM
 		virtual void read_form_buffer(const std::vector<uint8_t>& buffer, uint32_t start_idx) override
 		{
 			container_type code = extract_val(buffer, start_idx);
-			extraction_val_ = utilities::get_bits_value<BIT_COUNT, code_type>(code, bit_start_idx_);
+			code_ = utilities::get_bits_value<BIT_COUNT, code_type>(code, bit_start_idx_);
 			std::copy(buffer.begin() + start_idx, buffer.begin() + start_idx + sizeof(container_type), data_.begin());
 			val_charged_(this);
 		}
@@ -126,7 +131,7 @@ namespace TM
 		uint32_t bit_start_idx_;
 		double time_;
 		std::vector<uint8_t> data_;
-		double extraction_val_;
+		uint64_t code_;
 		primary_conversion_fun_t primary_conversion_fun_;
 		secondary_conversion_fun_t secondary_conversion_fun_;
 		text_conversion_fun_t text_conversion_fun_;

@@ -1,18 +1,18 @@
-#include "save_data_file.h"
+#include "save_text_file.h"
 #define BOOST_ALL_DYN_LINK
 #include <fstream>
 # pragma warning( push )
 # pragma warning(disable:4913)
 #include <boost/thread/thread.hpp>
 # pragma warning( pop )
-#include <boost/config/warning_disable.hpp>
 # pragma warning( push )
 #pragma warning(disable:4005)
 #define BOOST_FILESYSTEM_NO_DEPRECATED
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/operations.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/date_time/gregorian/gregorian.hpp>
 # pragma warning( pop )
-#include <boost/algorithm/string.hpp>
 #include <boost/make_shared.hpp>
 #include "bounded_buffer_space_optimized.h"
 #include "string_utilities.h"
@@ -21,13 +21,17 @@ namespace fs = boost::filesystem;
 const size_t BUFFER_MAX_SIZE = 1000;
 const size_t FILE_SIZE_MAX = 100 * 1024 * 1024;
 
+using namespace boost::posix_time;
+using namespace boost::gregorian;
+
 namespace screwdriver
 {
-	struct save_data_file::save_data_file_imp_t
+	struct save_text_file::save_text_file_imp_t
 	{
-		explicit save_data_file_imp_t(const std::string& prefix)
+		explicit save_text_file_imp_t(const std::string& prefix)
 			: prefix_(prefix),
-			  tm_data_buffer_(BUFFER_MAX_SIZE)
+			  tm_param_buffer_(BUFFER_MAX_SIZE),
+			  start_time_((time_from_string("2015-01-01 00:00:00.000")))
 		{
 		}
 
@@ -36,36 +40,37 @@ namespace screwdriver
 		std::string prefix_;
 		std::string save_path_;
 		boost::shared_ptr<boost::thread> thread_;
-		bounded_buffer_space_optimized<tm_data_ptr> tm_data_buffer_;
+		bounded_buffer_space_optimized<parameter_value_ptr> tm_param_buffer_;
+		ptime start_time_;
 	};
 
 
-	save_data_file::save_data_file(const std::string& prefix)
-		:imp_(new save_data_file_imp_t(prefix))
+	save_text_file::save_text_file(const std::string& prefix)
+		:imp_(new save_text_file_imp_t(prefix))
 	{
 	}
 
-	save_data_file::~save_data_file(void)
+	save_text_file::~save_text_file(void)
 	{
 	}
 
-	void save_data_file::start(const std::string& folder)
+	void save_text_file::start(const std::string& folder)
 	{
 		imp_->data_folder_ = folder;
 		open_file();
 		imp_->thread_ = boost::make_shared<boost::thread>(
 			[=]()
 			{
-				while (!boost::this_thread::interruption_requested() || imp_->tm_data_buffer_.is_not_empty())
+				while (!boost::this_thread::interruption_requested() || imp_->tm_param_buffer_.is_not_empty())
 				{
-					tm_data_ptr data;
-					imp_->tm_data_buffer_.pop_back(&data);
-					save2file(data);
+					parameter_value_ptr parameter_value;
+					imp_->tm_param_buffer_.pop_back(&parameter_value);
+					save2file(parameter_value);
 				}
 			});
 	}
 
-	void save_data_file::stop()
+	void save_text_file::stop()
 	{
 		if (imp_->thread_)
 		{
@@ -76,15 +81,16 @@ namespace screwdriver
 		}
 	}
 
-	void save_data_file::receive(const tm_data_ptr& data)
+	void save_text_file::receive(const parameter_value_ptr& param_val)
 	{
 		if (imp_->thread_)
 		{
-			imp_->tm_data_buffer_.push_front(data);
+			imp_->tm_param_buffer_.push_front(param_val);
 		}
 	}
 
-	void save_data_file::split_file()
+
+	void save_text_file::split_file()
 	{
 		try
 		{
@@ -100,7 +106,7 @@ namespace screwdriver
 		}
 	}
 
-	std::string save_data_file::get_time_file_name()
+	std::string save_text_file::get_time_file_name()
 	{
 		std::string time_string = utilities::get_current_time_string();
 		boost::replace_all(time_string, ":", "-");
@@ -108,12 +114,12 @@ namespace screwdriver
 		file_name += "(";
 		file_name += time_string;
 		file_name += ")";
-		file_name += ".dat";
+		file_name += ".txt";
 		return file_name;
 	}
 
 
-	void save_data_file::open_file()
+	void save_text_file::open_file()
 	{
 		if (imp_->data_folder_.empty())
 		{
@@ -128,7 +134,7 @@ namespace screwdriver
 		imp_->file_stream_.open(imp_->save_path_.c_str(), std::ios::binary);
 	}
 
-	void save_data_file::close_file()
+	void save_text_file::close_file()
 	{
 		imp_->file_stream_.clear();
 		imp_->file_stream_.close();
@@ -139,14 +145,14 @@ namespace screwdriver
 		}
 	}
 
-	void save_data_file::save2file(const tm_data_ptr& data)
+	void save_text_file::save2file(const parameter_value_ptr& param)
 	{
-		if (!data->empty() && imp_->file_stream_.is_open())
+		if (imp_->file_stream_.is_open())
 		{
-			imp_->file_stream_.write(reinterpret_cast<const char*>(data->data()), data->size());
-			auto current_time = utilities::get_current_time_string();
-			imp_->file_stream_ << current_time;
-			imp_->file_stream_.flush();
+			time_duration td = microseconds(boost::numeric_cast<uint64_t>(param->get_time() * 1e6));
+			ptime time = imp_->start_time_ + td;
+			auto time_string = to_iso_extended_string(time);
+			imp_->file_stream_ << time_string << ": " << param->get_value() << ": " << utilities::to_hex_string(param->get_code()) << "\r\n";
 			split_file();
 		}
 	}

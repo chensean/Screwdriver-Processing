@@ -35,6 +35,8 @@ namespace TM
 		virtual double get_time() const = 0;
 		virtual void set_time(double time) = 0;
 		virtual double get_val() const = 0;
+		virtual uint32_t get_bits_count() const = 0;
+		virtual uint64_t get_code() const = 0;
 		virtual double get_extraction_val() const = 0;
 		virtual std::string get_val_text() const =0;
 		virtual std::vector<uint8_t> get_data() const = 0;

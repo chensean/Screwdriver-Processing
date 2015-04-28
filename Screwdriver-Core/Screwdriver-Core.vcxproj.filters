@@ -39,10 +39,19 @@
     <ClCompile Include="linear_conversion.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="irig_b_time.cpp">
+    <ClCompile Include="code0_time.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="code0_time.cpp">
+    <ClCompile Include="uma_time.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="code2_time.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="code3_time.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="code1_time.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -83,10 +92,19 @@
     <ClInclude Include="tm_time.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="irig_b_time.h">
+    <ClInclude Include="code0_time.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="code0_time.h">
+    <ClInclude Include="uma_time.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="code2_time.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="code3_time.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="code1_time.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

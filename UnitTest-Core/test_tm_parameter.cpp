@@ -122,6 +122,8 @@ namespace UnitTestCore
 			tm->read_form_buffer(buf, 0);
 			int extraction_val = boost::numeric_cast<uint16_t>(tm->get_extraction_val());
 			Assert::AreEqual(extraction_val, 0xbbaa);
+			uint64_t code = 0xaabb;
+			Assert::AreEqual(code, tm->get_code());
 			Assert::AreEqual(2398.9, tm->get_val());
 		}
 

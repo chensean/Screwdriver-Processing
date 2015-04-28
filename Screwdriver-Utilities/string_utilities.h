@@ -55,8 +55,7 @@ namespace utilities
 			std::transform(dataStringList.begin(), dataStringList.end(), back_inserter(data),
 			               [](const std::string& data_str)->IntegerType
 
-
-
+			               
 			               {
 				               try
 				               {

@@ -2,7 +2,7 @@
 
 <CFG>
   <ACQ_SYS>
-    <SOURCE Port="3070" SoftSync="No" DataSource="RTR_Network" TMChannel="2" IPAddr="127.0.0.1" BitRate="1024000"
+    <SOURCE Port="3070" SoftSync="No" DataSource="RTR_Network" TMChannel="2" IPAddr="192.9.200.123" BitRate="1024000"
             TYPE="CORTEX_TM" IPType="TCP" NAME="CORTEX RTR_1">
       <IRIG>
         <IRIGFrameStruc SFIDPosition="1" SyncLength="16" WordLength="16" MinorFrameWords="128" SFIDBits="16"
@@ -16,11 +16,11 @@
           <Extraction NbBits="16" Lsbposbit="0" NbWords="1" FormatType="UInt" />
           <Conversion ConvType="Liner" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
         </ELEMENT>
-        <ELEMENT IDENT="B">
-          <Gernal Recurence="2" RTenable="1" MajorPos="1" CommType="SubCom" Position="1" />
+        <ELEMENT IDENT="SFID">
+          <Gernal Recurence="0" RTenable="1" MajorPos="0" CommType="Com" Position="1" />
           <Auxiliary Ymax="0" Ymin="0" Unit="" />
-          <Extraction NbBits="32" Lsbposbit="0" NbWords="2" FormatType="Float" />
-          <Conversion ConvType="Polynomial" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
+          <Extraction NbBits="16" Lsbposbit="0" NbWords="2" FormatType="UInt" />
+          <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
         </ELEMENT>
         <ELEMENT IDENT="C">
           <Gernal Recurence="8" RTenable="1" MajorPos="0" CommType="SuperCom" Position="2" />
@@ -41,7 +41,8 @@
           </Gernal>
           <Auxiliary Ymax="0" Ymin="0" Unit="" />
           <Extraction NbBits="16" Lsbposbit="0" NbWords="1" FormatType="Int" />
-          <Conversion ConvType="Hyperbolic" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
+          <Conversion ConvType="Hyperbolic" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0"
+                      A0="0" />
         </ELEMENT>
       </Parameters>
 
@@ -83,7 +84,7 @@
           <ELEMENT IDENT="E1_TM1">
             <Gernal Recurence="0" RTenable="1" MajorPos="0" CommType="Com" Position="5" />
             <Auxiliary Ymax="0" Ymin="0" Unit="" />
-            <Extraction NbBits="0" Lsbposbit="0" NbWords="1" FormatType="Int" />
+            <Extraction NbBits="8" Lsbposbit="0" NbWords="1" FormatType="Int" />
             <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
           </ELEMENT>
         </Parameters>
@@ -100,7 +101,7 @@
           <ELEMENT IDENT="E2_TM2">
             <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="4" />
             <Auxiliary Ymax="0" Ymin="0" Unit="" />
-            <Extraction NbBits="64" Lsbposbit="0" NbWords="1" FormatType="Double" />
+            <Extraction NbBits="64" Lsbposbit="0" NbWords="8" FormatType="Double" />
             <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
           </ELEMENT>
         </Parameters>
@@ -111,31 +112,31 @@
           <ELEMENT IDENT="Param1">
             <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="4" />
             <Auxiliary Ymax="0" Ymin="0" Unit="" />
-            <Extraction NbBits="16" Lsbposbit="0" NbWords="1" FormatType="Int" />
+            <Extraction NbBits="16" Lsbposbit="0" NbWords="2" FormatType="Int" />
             <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
           </ELEMENT>
           <ELEMENT IDENT="Param2">
             <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="6" />
             <Auxiliary Ymax="0" Ymin="0" Unit="" />
-            <Extraction NbBits="16" Lsbposbit="0" NbWords="1" FormatType="Int" />
+            <Extraction NbBits="16" Lsbposbit="0" NbWords="2" FormatType="Int" />
             <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
           </ELEMENT>
           <ELEMENT IDENT="Param3">
             <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="8" />
             <Auxiliary Ymax="0" Ymin="0" Unit="" />
-            <Extraction NbBits="16" Lsbposbit="0" NbWords="1" FormatType="Int" />
+            <Extraction NbBits="16" Lsbposbit="0" NbWords="2" FormatType="Int" />
             <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
           </ELEMENT>
           <ELEMENT IDENT="Param4">
             <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="10" />
             <Auxiliary Ymax="0" Ymin="0" Unit="" />
-            <Extraction NbBits="16" Lsbposbit="0" NbWords="1" FormatType="Int" />
+            <Extraction NbBits="16" Lsbposbit="0" NbWords="2" FormatType="Int" />
             <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
           </ELEMENT>
           <ELEMENT IDENT="Param5">
             <Gernal Recurence="0" RTenable="0" MajorPos="0" CommType="Com" Position="12" />
             <Auxiliary Ymax="0" Ymin="0" Unit="" />
-            <Extraction NbBits="16" Lsbposbit="0" NbWords="1" FormatType="Int" />
+            <Extraction NbBits="16" Lsbposbit="0" NbWords="2" FormatType="Int" />
             <Conversion ConvType="None" B3="0" B0="0" B7="0" B5="0" B2="0" B8="0" A1="1" B4="0" B1="1" B6="0" A0="0" />
           </ELEMENT>
         </Parameters>
